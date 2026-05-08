@@ -1,0 +1,41 @@
+# Dossiers Visual Studio
+.vs/
+.vscode/
+
+# Build
+bin/
+obj/
+
+# Fichiers utilisateur
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# Packages NuGet
+packages/
+
+# Rider / Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# Publish
+publish/
+
+# Tests
+TestResults/
+
+# Base de données locale
+*.mdf
+*.ldf
+
+# OS
+.DS_Store
+Thumbs.db
