@@ -16,5 +16,10 @@ namespace SAE24
         {
             InitializeComponent();
         }
+
+        private void ConnexionAdmin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
