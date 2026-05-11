@@ -33,9 +33,10 @@
             // 
             // btnAjouterMission
             // 
-            this.btnAjouterMission.Location = new System.Drawing.Point(109, 104);
+            this.btnAjouterMission.Location = new System.Drawing.Point(73, 68);
+            this.btnAjouterMission.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAjouterMission.Name = "btnAjouterMission";
-            this.btnAjouterMission.Size = new System.Drawing.Size(621, 262);
+            this.btnAjouterMission.Size = new System.Drawing.Size(414, 170);
             this.btnAjouterMission.TabIndex = 0;
             this.btnAjouterMission.Text = "Ajouter une nouvelle mission";
             this.btnAjouterMission.UseVisualStyleBackColor = true;
@@ -43,12 +44,12 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(533, 292);
             this.Controls.Add(this.btnAjouterMission);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
-            this.Text = "Form1";
             this.ResumeLayout(false);
 
         }
