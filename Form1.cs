@@ -16,11 +16,5 @@ namespace SAE24
         {
             InitializeComponent();
         }
-
-        private void btnAjouterMission_Click(object sender, EventArgs e)
-        {
-            Form PageConnexionAdmin = new PageConnexionAdmin();
-            PageConnexionAdmin.ShowDialog();
-        }
     }
 }

@@ -28,35 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAjouterMission = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // 
-            // btnAjouterMission
-            // 
-            this.btnAjouterMission.Location = new System.Drawing.Point(73, 68);
-            this.btnAjouterMission.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnAjouterMission.Name = "btnAjouterMission";
-            this.btnAjouterMission.Size = new System.Drawing.Size(414, 170);
-            this.btnAjouterMission.TabIndex = 0;
-            this.btnAjouterMission.Text = "Ajouter une nouvelle mission";
-            this.btnAjouterMission.UseVisualStyleBackColor = true;
-            this.btnAjouterMission.Click += new System.EventHandler(this.btnAjouterMission_Click);
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 292);
-            this.Controls.Add(this.btnAjouterMission);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "Form1";
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "Form1";
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnAjouterMission;
     }
 }
 
