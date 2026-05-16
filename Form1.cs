@@ -19,7 +19,7 @@ namespace SAE24
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form ConnexionAdmin = new ConnexionAdmin();
+            Form ConnexionAdmin = new ConnexionAdmin(this);
             ConnexionAdmin.ShowDialog();
         }
     }
