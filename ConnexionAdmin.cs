@@ -40,23 +40,32 @@ namespace SAE24
         {
             if (string.IsNullOrWhiteSpace(txtLogin.Text) && string.IsNullOrWhiteSpace(txtMotDePasse.Text))
             {
-                MessageBox.Show("Veuillez remplir les champs requis.");
+                errorProvider1.SetError(txtLogin, "Veuillez remplir les champs nécesssaires");
+                errorProvider1.SetError(txtMotDePasse, "Veuillez remplir les champs nécesssaires");
                 txtLogin.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtLogin.Text))
             {
-                MessageBox.Show("Veuillez remplir votre login.");
+                errorProvider1.SetError(txtLogin, "Veuillez remplir votre login.");
                 txtLogin.Focus();
                 return;
+            }
+            else
+            {
+                errorProvider1.Clear();
             }
 
             if (string.IsNullOrWhiteSpace(txtMotDePasse.Text))
             {
-                MessageBox.Show("Veuillez remplir votre mot de passe.");
+                errorProvider1.SetError(txtMotDePasse, "Veuillez remplir votre mot de passe.");
                 txtMotDePasse.Focus();
                 return;
+            }
+            else
+            {
+                errorProvider1.Clear();
             }
 
             try
@@ -66,6 +75,8 @@ namespace SAE24
                 SQLiteDataReader dr = cmd.ExecuteReader();
 
                 bool authentifie = false;
+
+                
 
                 while (dr.Read())
                 {
@@ -79,6 +90,9 @@ namespace SAE24
                 if (authentifie)
                 {
                     MessageBox.Show("Authentification réussie !\nBienvenue à bord Commandant !", "Authentification réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Form CreationMission = new CreationMission();
+                    CreationMission.ShowDialog();
+                    this.Close();
                 }
                 else
                 {
