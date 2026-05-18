@@ -55,8 +55,21 @@
             this.CboChoisirPlanete = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.CboChoisirMembre = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.BtnAjouterMembre = new System.Windows.Forms.Button();
+            this.LstAfficherMembre = new System.Windows.Forms.ListBox();
+            this.BtnValiderMembre = new System.Windows.Forms.Button();
+            this.BtnValiderObjectifs = new System.Windows.Forms.Button();
+            this.LstAfficherAliens = new System.Windows.Forms.ListBox();
+            this.BtnAjouterAliens = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.CboAliens = new System.Windows.Forms.ComboBox();
+            this.TxtNombreCapture = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -87,13 +100,14 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(22, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(830, 711);
+            this.groupBox1.Size = new System.Drawing.Size(759, 711);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nouvelle mission";
             // 
             // BtnValider
             // 
+            this.BtnValider.Enabled = false;
             this.BtnValider.Location = new System.Drawing.Point(584, 652);
             this.BtnValider.Name = "BtnValider";
             this.BtnValider.Size = new System.Drawing.Size(156, 44);
@@ -196,6 +210,7 @@
             this.RtbFeuilleRoute.Size = new System.Drawing.Size(483, 127);
             this.RtbFeuilleRoute.TabIndex = 12;
             this.RtbFeuilleRoute.Text = "";
+            this.RtbFeuilleRoute.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RtbFeuilleRoute_KeyPress);
             // 
             // label6
             // 
@@ -208,6 +223,7 @@
             // 
             // DtpRetour
             // 
+            this.DtpRetour.CustomFormat = "";
             this.DtpRetour.Location = new System.Drawing.Point(257, 319);
             this.DtpRetour.Name = "DtpRetour";
             this.DtpRetour.Size = new System.Drawing.Size(292, 26);
@@ -224,6 +240,7 @@
             // 
             // DtpDepart
             // 
+            this.DtpDepart.CustomFormat = "";
             this.DtpDepart.Location = new System.Drawing.Point(257, 280);
             this.DtpDepart.Name = "DtpDepart";
             this.DtpDepart.Size = new System.Drawing.Size(292, 26);
@@ -305,11 +322,130 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.TxtNombreCapture);
+            this.groupBox2.Controls.Add(this.BtnValiderObjectifs);
+            this.groupBox2.Controls.Add(this.LstAfficherAliens);
+            this.groupBox2.Controls.Add(this.BtnAjouterAliens);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.CboAliens);
+            this.groupBox2.Controls.Add(this.BtnValiderMembre);
+            this.groupBox2.Controls.Add(this.LstAfficherMembre);
+            this.groupBox2.Controls.Add(this.BtnAjouterMembre);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.CboChoisirMembre);
+            this.groupBox2.Enabled = false;
+            this.groupBox2.Location = new System.Drawing.Point(805, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(871, 711);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Affectation et objectif(s) de captures";
+            // 
+            // CboChoisirMembre
+            // 
+            this.CboChoisirMembre.FormattingEnabled = true;
+            this.CboChoisirMembre.Location = new System.Drawing.Point(80, 86);
+            this.CboChoisirMembre.Name = "CboChoisirMembre";
+            this.CboChoisirMembre.Size = new System.Drawing.Size(444, 28);
+            this.CboChoisirMembre.TabIndex = 0;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(18, 41);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(342, 20);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "4 - Affectation des membres - reste à affecter : ";
+            // 
+            // BtnAjouterMembre
+            // 
+            this.BtnAjouterMembre.Location = new System.Drawing.Point(590, 86);
+            this.BtnAjouterMembre.Name = "BtnAjouterMembre";
+            this.BtnAjouterMembre.Size = new System.Drawing.Size(154, 40);
+            this.BtnAjouterMembre.TabIndex = 2;
+            this.BtnAjouterMembre.Text = "Ajouter le membre";
+            this.BtnAjouterMembre.UseVisualStyleBackColor = true;
+            // 
+            // LstAfficherMembre
+            // 
+            this.LstAfficherMembre.FormattingEnabled = true;
+            this.LstAfficherMembre.HorizontalScrollbar = true;
+            this.LstAfficherMembre.ItemHeight = 20;
+            this.LstAfficherMembre.Location = new System.Drawing.Point(80, 158);
+            this.LstAfficherMembre.Name = "LstAfficherMembre";
+            this.LstAfficherMembre.Size = new System.Drawing.Size(664, 124);
+            this.LstAfficherMembre.TabIndex = 3;
+            // 
+            // BtnValiderMembre
+            // 
+            this.BtnValiderMembre.Location = new System.Drawing.Point(574, 288);
+            this.BtnValiderMembre.Name = "BtnValiderMembre";
+            this.BtnValiderMembre.Size = new System.Drawing.Size(170, 40);
+            this.BtnValiderMembre.TabIndex = 4;
+            this.BtnValiderMembre.Text = "Valider les membres";
+            this.BtnValiderMembre.UseVisualStyleBackColor = true;
+            // 
+            // BtnValiderObjectifs
+            // 
+            this.BtnValiderObjectifs.Location = new System.Drawing.Point(574, 609);
+            this.BtnValiderObjectifs.Name = "BtnValiderObjectifs";
+            this.BtnValiderObjectifs.Size = new System.Drawing.Size(170, 40);
+            this.BtnValiderObjectifs.TabIndex = 9;
+            this.BtnValiderObjectifs.Text = "Valider les objectifs";
+            this.BtnValiderObjectifs.UseVisualStyleBackColor = true;
+            // 
+            // LstAfficherAliens
+            // 
+            this.LstAfficherAliens.FormattingEnabled = true;
+            this.LstAfficherAliens.HorizontalScrollbar = true;
+            this.LstAfficherAliens.ItemHeight = 20;
+            this.LstAfficherAliens.Location = new System.Drawing.Point(80, 479);
+            this.LstAfficherAliens.Name = "LstAfficherAliens";
+            this.LstAfficherAliens.Size = new System.Drawing.Size(664, 124);
+            this.LstAfficherAliens.TabIndex = 8;
+            // 
+            // BtnAjouterAliens
+            // 
+            this.BtnAjouterAliens.Location = new System.Drawing.Point(590, 407);
+            this.BtnAjouterAliens.Name = "BtnAjouterAliens";
+            this.BtnAjouterAliens.Size = new System.Drawing.Size(154, 40);
+            this.BtnAjouterAliens.TabIndex = 7;
+            this.BtnAjouterAliens.Text = "Ajouter";
+            this.BtnAjouterAliens.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(18, 362);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(203, 20);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "5 - Objectif(s) de captures : ";
+            // 
+            // CboAliens
+            // 
+            this.CboAliens.FormattingEnabled = true;
+            this.CboAliens.Location = new System.Drawing.Point(80, 407);
+            this.CboAliens.Name = "CboAliens";
+            this.CboAliens.Size = new System.Drawing.Size(343, 28);
+            this.CboAliens.TabIndex = 5;
+            // 
+            // TxtNombreCapture
+            // 
+            this.TxtNombreCapture.Location = new System.Drawing.Point(456, 407);
+            this.TxtNombreCapture.Name = "TxtNombreCapture";
+            this.TxtNombreCapture.Size = new System.Drawing.Size(68, 26);
+            this.TxtNombreCapture.TabIndex = 10;
+            // 
             // CreationMission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 735);
+            this.ClientSize = new System.Drawing.Size(1702, 735);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CreationMission";
             this.Text = "Création d\'une nouvelle mission";
@@ -317,6 +453,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -349,5 +487,17 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button BtnValider;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox CboChoisirMembre;
+        private System.Windows.Forms.Button BtnAjouterMembre;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ListBox LstAfficherMembre;
+        private System.Windows.Forms.Button BtnValiderObjectifs;
+        private System.Windows.Forms.ListBox LstAfficherAliens;
+        private System.Windows.Forms.Button BtnAjouterAliens;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox CboAliens;
+        private System.Windows.Forms.Button BtnValiderMembre;
+        private System.Windows.Forms.TextBox TxtNombreCapture;
     }
 }

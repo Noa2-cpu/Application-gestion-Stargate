@@ -23,6 +23,7 @@ namespace SAE24
 
         private void CreationMission_Load(object sender, EventArgs e)
         {
+            //remplir la combobox avec les planètes
             string remplirCombo1 = "SELECT nom FROM Planete";
 
             try
@@ -40,28 +41,57 @@ namespace SAE24
                 MessageBox.Show(err.Message);
             }
 
-            string remplirCombo2 = @"SELECT m.nom || ' ' || m.prenom || ' - ' || mi.grade, mi.matriculeMembre
+
+            //remplir la combobox du chef de mission
+            string remplirCombo2 = @"SELECT m.nom || ' ' || m.prenom || ' - ' || mi.grade AS prenomcomplet, mi.matriculeMembre AS matricule
                                      FROM Membre m 
                                      Join Militaire mi ON mi.matriculeMembre = m.matricule 
                                      WHERE mi.grade = 'Capitaine'";
             try
             {
                 SQLiteCommand cmd = new SQLiteCommand(remplirCombo2, Connexion.Connec);
-                SQLiteDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
 
-                while (dr.Read())
-                {
-                    CboChefMission.Items.Add(dr.GetString(0));
-                }
+                dt.Load(cmd.ExecuteReader());
+
+                CboChefMission.DataSource = dt;
+                CboChefMission.DisplayMember = "prenomcomplet";
+                CboChefMission.ValueMember = "matricule";
+
             }
             catch (SQLiteException err)
             {
                 MessageBox.Show(err.Message);
             }
 
-            
+            //remplir la combobox pour choisir les membres de la mission en deux temps : d'abord avec les civils puis avec les militaires.
+            string remplirCivils = @"SELECT m.nom || ' ' || m.prenom || ' - Civil : ' || c.Specialite AS nomcomplet, m.matricule AS matricule
+                                     FROM Membre m
+                                     JOIN Civil c ON m.matricule = c.matriculeMembre;";
 
-            BtnValider.Enabled = false;
+            string remplirMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - Militaire : ' || mi.grade AS nomcomplet, m.matricule as matricule
+                                         FROM Membre m
+                                         JOIN Militaire mi ON m.matricule = mi.matriculeMembre;";
+
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(remplirCivils, Connexion.Connec);
+                SQLiteCommand cmd2 = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
+                DataTable dt = new DataTable();
+
+                dt.Load(cmd.ExecuteReader());
+                dt.Load(cmd2.ExecuteReader());
+
+                CboChoisirMembre.DataSource = dt;
+                CboChoisirMembre.DisplayMember = "nomcomplet";
+                CboChoisirMembre.ValueMember = "matricule";
+
+            }
+            catch (SQLiteException err)
+            {
+                MessageBox.Show(err.Message);
+            }
+
         }
 
         private void BtnPlanete_Click(object sender, EventArgs e)
@@ -155,6 +185,13 @@ namespace SAE24
                 valide = false;
             }
 
+            if (string.IsNullOrWhiteSpace(RtbFeuilleRoute.Text))
+            {
+                errorProvider1.SetError(RtbFeuilleRoute, "Veuillez saisir quelques informations pour la feuille de route..");
+
+                valide = false;
+            }
+
             // Nombre de personnes
             if (string.IsNullOrWhiteSpace(TxtNbPersonne.Text))
             {
@@ -200,8 +237,6 @@ namespace SAE24
 
                     numeroMission++;
 
-                    CboChefMission.ValueMember = "mi.matriculeMember";
-
                     string ajouterMission = @"
                     INSERT INTO Mission 
                     (nomPlanete, numero, nbMembreRequis, dateDepart, dateRetour, matriculeChef, feuilleDeRoute, objectifDatabaz, budget)
@@ -212,16 +247,19 @@ namespace SAE24
                     SQLiteCommand cmd2 = new SQLiteCommand(ajouterMission, Connexion.Connec);
 
                     cmd2.Parameters.AddWithValue("@planete", CboChoisirPlanete.Text);
-                    cmd2.Parameters.AddWithValue("@numero", numeroMission);
+                    cmd2.Parameters.AddWithValue("@numero", numeroMission.ToString());
                     cmd2.Parameters.AddWithValue("@nb", TxtNbPersonne.Text);
-                    cmd2.Parameters.AddWithValue("@depart", DtpDepart.Value);
-                    cmd2.Parameters.AddWithValue("@retour", DtpRetour.Value);
-                    cmd2.Parameters.AddWithValue("@chef", CboChefMission.SelectedValue);
+                    cmd2.Parameters.AddWithValue("@depart", DtpDepart.Value.ToString("yyyy/MM/dd"));
+                    cmd2.Parameters.AddWithValue("@retour", DtpRetour.Value.ToString("yyyy/MM/dd"));
+                    cmd2.Parameters.AddWithValue("@chef", CboChefMission.SelectedValue.ToString());
                     cmd2.Parameters.AddWithValue("@feuille", RtbFeuilleRoute.Text);
                     cmd2.Parameters.AddWithValue("@databaz", TxtObjDatabaz.Text);
                     cmd2.Parameters.AddWithValue("@budget", TxtBudget.Text);
 
                     cmd2.ExecuteNonQuery();
+                    LstAfficherMembre.Items.Add(CboChefMission.Text);
+                    groupBox1.Enabled = false;
+                    groupBox2.Enabled = true;
                 }
                 catch(SQLiteException err)
                 {
@@ -241,6 +279,11 @@ namespace SAE24
             {
                 BtnValider_Click(sender, e);
             }
+        }
+
+        private void RtbFeuilleRoute_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
         }
     }
 }
