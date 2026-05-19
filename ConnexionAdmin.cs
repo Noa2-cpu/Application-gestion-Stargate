@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SAE24
@@ -76,7 +69,7 @@ namespace SAE24
 
                 bool authentifie = false;
 
-                
+
 
                 while (dr.Read())
                 {
@@ -107,11 +100,11 @@ namespace SAE24
 
         private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == 13)
+            if (e.KeyChar == 13)
             {
                 txtMotDePasse.Focus();
             }
-            
+
         }
 
         private void label4_Click(object sender, EventArgs e)

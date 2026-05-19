@@ -70,6 +70,13 @@
     <Compile Include="CreationMission.Designer.cs">
       <DependentUpon>CreationMission.cs</DependentUpon>
     </Compile>
+    <Compile Include="dll\ListeMission\listeMission.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dll\ListeMission\listeMission.Designer.cs">
+      <DependentUpon>listeMission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dll\ListeMission\Properties\AssemblyInfo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CreationMission.resx">
       <DependentUpon>CreationMission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dll\ListeMission\listeMission.resx">
+      <DependentUpon>listeMission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -102,6 +112,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="bin\Debug\SAE24.exe.config" />
+    <None Include="dll\ListeMission\ListeMission.csproj" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\SAE24.csproj.AssemblyReference.cache" />
@@ -154,6 +165,9 @@
     <Content Include="bin\Debug\System.Data.SQLite.xml" />
     <Content Include="bin\Debug\x64\SQLite.Interop.dll" />
     <Content Include="bin\Debug\x86\SQLite.Interop.dll" />
+    <Content Include="dll\ListeMission\ListeMission.slnx" />
+    <Content Include="img\Mercure.jpg" />
+    <Content Include="img\oeil.jpg" />
     <Content Include="obj\Debug\SAE24.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\SAE24.exe" />
     <Content Include="obj\Debug\SAE24.pdb" />

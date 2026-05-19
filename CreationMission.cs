@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SAE24
 {
     public partial class CreationMission : Form
     {
-        
+
         public CreationMission()
         {
             InitializeComponent();
         }
 
-        
+
 
         private void CreationMission_Load(object sender, EventArgs e)
         {
@@ -36,7 +30,7 @@ namespace SAE24
                     CboChoisirPlanete.Items.Add(dr.GetString(0));
                 }
             }
-            catch(SQLiteException err)
+            catch (SQLiteException err)
             {
                 MessageBox.Show(err.Message);
             }
@@ -140,7 +134,7 @@ namespace SAE24
         private void TxtNbPersonne_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
-            if(char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == 8)
             {
                 e.Handled = false;
             }
@@ -263,7 +257,7 @@ namespace SAE24
 
                     LblNbPersonnes.Text = TxtNbPersonne.Text;
                 }
-                catch(SQLiteException err)
+                catch (SQLiteException err)
                 {
                     MessageBox.Show(err.Message);
                 }
@@ -285,7 +279,7 @@ namespace SAE24
 
         private void RtbFeuilleRoute_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
         }
 
         private void BtnAjouterMembre_Click(object sender, EventArgs e)

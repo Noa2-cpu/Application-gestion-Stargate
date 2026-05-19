@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace ListeMission
 {
-    public partial class listeMission: UserControl
+    public partial class listeMission : UserControl
     {
         //attributs
         private string budget, nomPlanete, depart, retour, chef, nomImage;
 
-       //Constructeur de base
+        //Constructeur de base
         public listeMission()
         {
             InitializeComponent();
