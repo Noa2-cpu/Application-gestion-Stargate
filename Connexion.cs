@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace appliPandora
+namespace SAE24
 {
 	// Classe basée sur le pattern Singleton pour s'assurer que la connexion n'est ouverte qu'une seule fois
     internal class Connexion
@@ -27,8 +27,8 @@ namespace appliPandora
                     try
                     {
                         // Chaîne de connexion à votre base de données
-                        //string chaine = @"Data Source = ..\..\..\Stargate.db";
-                        string chaine = @"Data Source = Stargate.db";
+                        string chaine = @"Data Source = ..\..\Stargate.db";
+                        //string chaine = @"Data Source = Stargate.db";
                         connec = new SQLiteConnection(chaine);
                         connec.Open();
                         //MessageBox.Show(connec.State.ToString());
