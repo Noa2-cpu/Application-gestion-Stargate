@@ -256,10 +256,12 @@ namespace SAE24
                     cmd2.Parameters.AddWithValue("@databaz", TxtObjDatabaz.Text);
                     cmd2.Parameters.AddWithValue("@budget", TxtBudget.Text);
 
-                    cmd2.ExecuteNonQuery();
+                    /*cmd2.ExecuteNonQuery();*/
                     LstAfficherMembre.Items.Add(CboChefMission.Text);
                     groupBox1.Enabled = false;
                     groupBox2.Enabled = true;
+
+                    LblNbPersonnes.Text = TxtNbPersonne.Text;
                 }
                 catch(SQLiteException err)
                 {
@@ -284,6 +286,55 @@ namespace SAE24
         private void RtbFeuilleRoute_KeyPress(object sender, KeyPressEventArgs e)
         {
             
+        }
+
+        private void BtnAjouterMembre_Click(object sender, EventArgs e)
+        {
+            string membre = CboChoisirMembre.GetItemText(CboChoisirMembre.SelectedItem);
+
+            errorProvider1.Clear();
+
+            if (!LstAfficherMembre.Items.Contains(membre))
+            {
+                LstAfficherMembre.Items.Add(membre);
+
+                int nbMaximum;
+
+                if (int.TryParse(TxtNbPersonne.Text, out nbMaximum))
+                {
+                    int nbActuel = LstAfficherMembre.Items.Count;
+
+                    int restant = nbMaximum - nbActuel;
+
+                    LblNbPersonnes.Text = "" + restant;
+
+                    if (restant <= 0)
+                    {
+                        CboChoisirMembre.Enabled = false;
+                        BtnAjouterMembre.Enabled = false;
+                        BtnValiderMembre.Enabled = true;
+                    }
+                    else
+                    {
+                        CboChoisirMembre.Enabled = true;
+                        BtnAjouterMembre.Enabled = true;
+                        BtnValiderMembre.Enabled = false;
+                    }
+                }
+                else
+                {
+                    LblNbPersonnes.Text = "Veuillez saisir un nombre valide.";
+                }
+            }
+            else
+            {
+                errorProvider1.SetError(LstAfficherMembre, "Le membre est déjà sélectionné.");
+            }
+        }
+
+        private void BtnValiderMembre_Click(object sender, EventArgs e)
+        {
+            string ajouterMembreSQL = @"";
         }
     }
 }
