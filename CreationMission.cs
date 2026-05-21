@@ -51,10 +51,18 @@ namespace SAE24
             string remplirCombo2 = @"SELECT m.nom || ' ' || m.prenom || ' - ' || mi.grade AS prenomcomplet, mi.matriculeMembre AS matricule
                                      FROM Membre m 
                                      Join Militaire mi ON mi.matriculeMembre = m.matricule 
-                                     WHERE mi.grade = 'Capitaine'";
+                                     WHERE mi.grade = 'Capitaine' AND m.matricule NOT IN (SELECT co.matriculeMembre
+						                                                                  FROM Composer co
+						                                                                  JOIN Mission mis ON co.numeroMission = mis.numero
+						                                                                  WHERE @dateDepart <= mis.dateRetour
+						                                                                  AND @dateRetour >= mis.dateDepart);";
             try
             {
                 SQLiteCommand cmd = new SQLiteCommand(remplirCombo2, Connexion.Connec);
+
+                cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
                 DataTable dt = new DataTable();
 
                 dt.Load(cmd.ExecuteReader());
@@ -71,17 +79,32 @@ namespace SAE24
 
             //remplir la combobox pour choisir les membres de la mission en deux temps : d'abord avec les civils puis avec les militaires.
             string remplirCivils = @"SELECT m.nom || ' ' || m.prenom || ' - Civil : ' || c.Specialite AS nomcomplet, m.matricule AS matricule
-                                     FROM Membre m
-                                     JOIN Civil c ON m.matricule = c.matriculeMembre;";
+                                         FROM Membre m
+                                         JOIN Civil c ON m.matricule = c.matriculeMembre
+                                         WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                           FROM Composer co
+						                                           JOIN Mission mi ON  co.numeroMission = mi.numero
+						                                           WHERE @dateDepart <= mi.dateRetour
+						                                           AND @dateRetour >= mi.dateDepart);";
 
             string remplirMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - Militaire : ' || mi.grade AS nomcomplet, m.matricule as matricule
-                                         FROM Membre m
-                                         JOIN Militaire mi ON m.matricule = mi.matriculeMembre;";
+                                             FROM Membre m
+                                             JOIN Militaire mi ON m.matricule = mi.matriculeMembre
+                                             WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                               FROM Composer co
+						                                               JOIN Mission mi ON co.numeroMission = mi.numero
+						                                               WHERE @dateDepart <= mi.dateRetour
+						                                               AND @dateRetour >= mi.dateDepart);";
 
             try
             {
                 SQLiteCommand cmd = new SQLiteCommand(remplirCivils, Connexion.Connec);
                 SQLiteCommand cmd2 = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
+
+                cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+                cmd2.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                cmd2.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
 
                 dtMembres = new DataTable();
 
@@ -278,8 +301,8 @@ namespace SAE24
                     cmd2.Parameters.AddWithValue("@planete", CboChoisirPlanete.Text);
                     cmd2.Parameters.AddWithValue("@numero", numeroMission.ToString());
                     cmd2.Parameters.AddWithValue("@nb", TxtNbPersonne.Text);
-                    cmd2.Parameters.AddWithValue("@depart", DtpDepart.Value.ToString("yyyy/MM/dd"));
-                    cmd2.Parameters.AddWithValue("@retour", DtpRetour.Value.ToString("yyyy/MM/dd"));
+                    cmd2.Parameters.AddWithValue("@depart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                    cmd2.Parameters.AddWithValue("@retour", DtpRetour.Value.ToString("yyyy-MM-dd"));
                     cmd2.Parameters.AddWithValue("@chef", CboChefMission.SelectedValue.ToString());
                     cmd2.Parameters.AddWithValue("@feuille", RtbFeuilleRoute.Text);
                     cmd2.Parameters.AddWithValue("@databaz", TxtObjDatabaz.Text);
@@ -296,6 +319,8 @@ namespace SAE24
                 {
                     MessageBox.Show(err.Message);
                 }
+
+                
             }
         }
 
