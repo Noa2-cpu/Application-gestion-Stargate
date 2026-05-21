@@ -1,4 +1,5 @@
-﻿using ListeMission;
+﻿using appliPandora;
+using ListeMission;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,8 +36,6 @@ namespace SAE24
 
                 int x = 337;
                 int y = 26;
-                int x2 = 630;
-                int y2 = 75;
                 int i = 0;
                 while (dr.Read())
                 {
@@ -46,32 +45,25 @@ namespace SAE24
                     string depart = dr.GetString(2);
                     string retour = dr.GetString(3);
                     string budget = dr.GetInt32(4).ToString();
-                    string img = @"..\..\img\Mercure.jpg";
+                    string img = @"..\..\img\" + nom +".jpg";
 
                     listeMission lstMission = new listeMission(budget, nom, depart, retour, chef, img);
                     lstMission.Location = new System.Drawing.Point(x, y);
-                   
+                    flowLayoutPanel1.Controls.Add(lstMission);
+                    lstMission.afficheur = detailMission;
 
-                    Button btnMission = new Button();
-
-                    btnMission.Location = new System.Drawing.Point(x2, y2);
-                    btnMission.Name = "btn" + i;
-                    btnMission.Size = new System.Drawing.Size(27, 27);
-                    btnMission.TabIndex = i;
-                    btnMission.UseVisualStyleBackColor = true;
-                    btnMission.BackgroundImage = Image.FromFile(@"..\..\img\oeil.jpg");
-                    btnMission.BackgroundImageLayout = ImageLayout.Zoom;
-
-
-                    this.Controls.Add(lstMission);
-                    this.Controls.Add(btnMission);
-
-                    btnMission.BringToFront();
-
-                    y2 += 100;
                     y += 100;
                     i++;
+
                 }
+
+                InitialiserDataSet();
+
+                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
+
+                MesDatas.DsGlobal.Tables["Mission"].Clear();
+
+                da.Fill(MesDatas.DsGlobal, "Mission");
 
             }
             catch(SQLiteException err)
@@ -80,10 +72,45 @@ namespace SAE24
             }
         }
 
+        private void InitialiserDataSet()
+        {
+            if (!MesDatas.DsGlobal.Tables.Contains("Mission"))
+            {
+                DataTable dtMission = new DataTable("Mission");
+                dtMission.Columns.Add("nomPlanete", typeof(string));
+                dtMission.Columns.Add("chef", typeof(string));
+                dtMission.Columns.Add("dateDepart", typeof(string));
+                dtMission.Columns.Add("dateRetour", typeof(string));
+                dtMission.Columns.Add("budget", typeof(int));
+
+                MesDatas.DsGlobal.Tables.Add(dtMission);
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            Form ConnexionAdmin = new ConnexionAdmin(this);
-            ConnexionAdmin.ShowDialog();
+            //Form ConnexionAdmin = new ConnexionAdmin(this);
+            //ConnexionAdmin.ShowDialog();
+        }
+
+        private void detailMission(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            ListeMission.listeMission uc = (ListeMission.listeMission)btn.Parent;
+
+            Form form = new Form();
+            form.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Form frmStat = new frmStatistiques();
+            frmStat.ShowDialog();
+        }
+
+        private void btnQuitter_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
