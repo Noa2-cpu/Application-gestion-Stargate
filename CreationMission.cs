@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Drawing.Text;
 
 namespace SAE24
 {
@@ -13,7 +15,16 @@ namespace SAE24
             InitializeComponent();
         }
 
+        // Table contenant les membres disponibles (source liée à la ComboBox)
+        private DataTable dtMembres;
 
+        //Table contenant les aliens disponibles (source liée à la ComboBox)
+        private DataTable dtAliens;
+
+        // Liste des matricules sélectionnés (ce que l'on souhaite conserver sans créer de classe)
+        private List<string> selectedMatricules = new List<string>();
+
+        private int currentNumeroMission;
 
         private void CreationMission_Load(object sender, EventArgs e)
         {
@@ -71,12 +82,13 @@ namespace SAE24
             {
                 SQLiteCommand cmd = new SQLiteCommand(remplirCivils, Connexion.Connec);
                 SQLiteCommand cmd2 = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
-                DataTable dt = new DataTable();
 
-                dt.Load(cmd.ExecuteReader());
-                dt.Load(cmd2.ExecuteReader());
+                dtMembres = new DataTable();
 
-                CboChoisirMembre.DataSource = dt;
+                dtMembres.Load(cmd.ExecuteReader());
+                dtMembres.Load(cmd2.ExecuteReader());
+
+                CboChoisirMembre.DataSource = dtMembres;
                 CboChoisirMembre.DisplayMember = "nomcomplet";
                 CboChoisirMembre.ValueMember = "matricule";
 
@@ -86,6 +98,28 @@ namespace SAE24
                 MessageBox.Show(err.Message);
             }
 
+
+            //remplir la combobox des aliens
+            string remplirAliens = @"SELECT es.nom || ' - ' || es.couleur AS nomcomplet, e.idEspece AS ID
+                                    FROM Ennemi e
+                                    JOIN Espece es ON e.idEspece = es.id;";
+            
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(remplirAliens, Connexion.Connec);
+
+                dtAliens = new DataTable();
+
+                dtAliens.Load(cmd.ExecuteReader());
+
+                CboAliens.DataSource = dtAliens;
+                CboAliens.DisplayMember = "nomcomplet";
+                CboAliens.ValueMember = "ID";
+            }
+            catch (SQLiteException err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
 
         private void BtnPlanete_Click(object sender, EventArgs e)
@@ -230,6 +264,7 @@ namespace SAE24
                     }
 
                     numeroMission++;
+                    currentNumeroMission = numeroMission;
 
                     string ajouterMission = @"
                     INSERT INTO Mission 
@@ -292,6 +327,19 @@ namespace SAE24
             {
                 LstAfficherMembre.Items.Add(membre);
 
+                // Récupérer le matricule depuis l'élément sélectionné
+                string matricule = CboChoisirMembre.SelectedValue?.ToString();
+                if (!string.IsNullOrEmpty(matricule))
+                {
+                    selectedMatricules.Add(matricule);
+                }
+
+                // Supprimer la ligne correspondante du DataTable lié pour mettre à jour la ComboBox
+                if (dtMembres != null && CboChoisirMembre.SelectedItem is DataRowView drv)
+                {
+                    dtMembres.Rows.Remove(drv.Row);
+                }
+
                 int nbMaximum;
 
                 if (int.TryParse(TxtNbPersonne.Text, out nbMaximum))
@@ -328,7 +376,49 @@ namespace SAE24
 
         private void BtnValiderMembre_Click(object sender, EventArgs e)
         {
-            string ajouterMembreSQL = @"";
+
+            string ajouterMembreSQL = @"INSERT INTO Composer 
+                                        (nomPlanete, numeroMission, matriculeMembre)
+                                        VALUES
+                                        (@planete, @numero, @matricule)";
+
+
+            // Insérer chaque matricule sélectionné précédemment
+            foreach (var matricule in selectedMatricules)
+            {
+                SQLiteCommand cmd2 = new SQLiteCommand(ajouterMembreSQL, Connexion.Connec);
+
+                cmd2.Parameters.AddWithValue("@planete", CboChoisirPlanete.Text);
+                cmd2.Parameters.AddWithValue("@numero", currentNumeroMission.ToString());
+                cmd2.Parameters.AddWithValue("@matricule", matricule);
+                
+                try
+                {
+                    cmd2.ExecuteNonQuery();
+                }
+                catch (SQLiteException err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
+        }
+
+        private void TxtNombreCapture_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+            {
+                e.Handled = false;
+            }
+            if (e.KeyChar == 13)
+            {
+                BtnAjouterAliens_Click(sender, e);
+            }
+        }
+
+        private void BtnAjouterAliens_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

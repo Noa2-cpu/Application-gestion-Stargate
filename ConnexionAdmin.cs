@@ -100,7 +100,7 @@ namespace SAE24
 
         private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13)
+            if (e.KeyChar == 13 || e.KeyChar == 9)
             {
                 txtMotDePasse.Focus();
             }
@@ -117,6 +117,11 @@ namespace SAE24
             if (e.KeyChar == 13)
             {
                 btnValider_Click(sender, e);
+            }
+
+            if(e.KeyChar == 38)
+            {
+                txtLogin.Focus();
             }
         }
     }

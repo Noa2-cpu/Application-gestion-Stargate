@@ -75,6 +75,7 @@
             // 
             // btnValider
             // 
+            this.btnValider.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnValider.Location = new System.Drawing.Point(426, 276);
             this.btnValider.Name = "btnValider";
             this.btnValider.Size = new System.Drawing.Size(201, 38);
@@ -85,6 +86,7 @@
             // 
             // btnAnnuler
             // 
+            this.btnAnnuler.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAnnuler.Location = new System.Drawing.Point(24, 276);
             this.btnAnnuler.Name = "btnAnnuler";
             this.btnAnnuler.Size = new System.Drawing.Size(201, 38);

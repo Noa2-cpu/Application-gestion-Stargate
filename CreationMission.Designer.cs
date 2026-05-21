@@ -56,6 +56,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.LblNbPersonnes = new System.Windows.Forms.Label();
             this.TxtNombreCapture = new System.Windows.Forms.TextBox();
             this.BtnValiderObjectifs = new System.Windows.Forms.Button();
             this.LstAfficherAliens = new System.Windows.Forms.ListBox();
@@ -67,7 +68,6 @@
             this.BtnAjouterMembre = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.CboChoisirMembre = new System.Windows.Forms.ComboBox();
-            this.LblNbPersonnes = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -344,12 +344,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Affectation et objectif(s) de captures";
             // 
+            // LblNbPersonnes
+            // 
+            this.LblNbPersonnes.AutoSize = true;
+            this.LblNbPersonnes.Location = new System.Drawing.Point(357, 41);
+            this.LblNbPersonnes.Name = "LblNbPersonnes";
+            this.LblNbPersonnes.Size = new System.Drawing.Size(116, 20);
+            this.LblNbPersonnes.TabIndex = 11;
+            this.LblNbPersonnes.Text = "Texte à enlever";
+            // 
             // TxtNombreCapture
             // 
             this.TxtNombreCapture.Location = new System.Drawing.Point(456, 407);
             this.TxtNombreCapture.Name = "TxtNombreCapture";
             this.TxtNombreCapture.Size = new System.Drawing.Size(68, 26);
             this.TxtNombreCapture.TabIndex = 10;
+            this.TxtNombreCapture.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNombreCapture_KeyPress);
             // 
             // BtnValiderObjectifs
             // 
@@ -378,6 +388,7 @@
             this.BtnAjouterAliens.TabIndex = 7;
             this.BtnAjouterAliens.Text = "Ajouter";
             this.BtnAjouterAliens.UseVisualStyleBackColor = true;
+            this.BtnAjouterAliens.Click += new System.EventHandler(this.BtnAjouterAliens_Click);
             // 
             // label15
             // 
@@ -443,15 +454,6 @@
             this.CboChoisirMembre.Name = "CboChoisirMembre";
             this.CboChoisirMembre.Size = new System.Drawing.Size(444, 28);
             this.CboChoisirMembre.TabIndex = 0;
-            // 
-            // LblNbPersonnes
-            // 
-            this.LblNbPersonnes.AutoSize = true;
-            this.LblNbPersonnes.Location = new System.Drawing.Point(357, 41);
-            this.LblNbPersonnes.Name = "LblNbPersonnes";
-            this.LblNbPersonnes.Size = new System.Drawing.Size(116, 20);
-            this.LblNbPersonnes.TabIndex = 11;
-            this.LblNbPersonnes.Text = "Texte à enlever";
             // 
             // CreationMission
             // 
