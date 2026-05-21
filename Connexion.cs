@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SAE24
 {
-	// Classe basée sur le pattern Singleton pour s'assurer que la connexion n'est ouverte qu'une seule fois
+    // Classe basée sur le pattern Singleton pour s'assurer que la connexion n'est ouverte qu'une seule fois
     internal class Connexion
     {
-		// Objet Connection
+        // Objet Connection
         private static SQLiteConnection connec;
 
         // Constructeur privé pour empêcher l'instanciation directe depuis l'extérieur.
@@ -33,17 +29,17 @@ namespace SAE24
                         connec.Open();
                         //MessageBox.Show(connec.State.ToString());
                     }
-                    catch (SQLiteException err) 
+                    catch (SQLiteException err)
                     {
                         Console.WriteLine($"Erreur lors de l'ouverture de la connexion : {err.Message}");
                     }
                 }
-				//Dans tous les cas on renvoie la connexion
+                //Dans tous les cas on renvoie la connexion
                 return connec;
             }
         }
 
-		// Méthode pour fermer proprement la connexion
+        // Méthode pour fermer proprement la connexion
         public static void FermerConnexion()
         {
             if (connec != null)

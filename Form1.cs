@@ -1,15 +1,10 @@
 ﻿using SAE24;
 using ListeMission;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data;
 
 namespace SAE24
 {
@@ -66,7 +61,7 @@ namespace SAE24
                 da.Fill(MesDatas.DsGlobal, "Mission");
 
             }
-            catch(SQLiteException err)
+            catch (SQLiteException err)
             {
                 MessageBox.Show(err.Message);
             }
@@ -89,8 +84,8 @@ namespace SAE24
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //Form ConnexionAdmin = new ConnexionAdmin(this);
-            //ConnexionAdmin.ShowDialog();
+            Form ConnexionAdmin = new ConnexionAdmin(this);
+            ConnexionAdmin.ShowDialog();
         }
 
         private void detailMission(object sender, EventArgs e)
