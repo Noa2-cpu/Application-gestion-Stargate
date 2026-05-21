@@ -38,8 +38,9 @@
     <Reference Include="BCrypt.Net-Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=4d63bfbfdfd3c6e4, processorArchitecture=MSIL">
       <HintPath>packages\BCrypt.Net-Core.1.6.0\lib\net452\BCrypt.Net-Core.dll</HintPath>
     </Reference>
-    <Reference Include="ListeMission">
-      <HintPath>dll\ListeMission\bin\Debug\ListeMission.dll</HintPath>
+    <Reference Include="ListeMission, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\ListeMission\ListeMission.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,8 +77,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmStatistiques.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStatistiques.Designer.cs">
+      <DependentUpon>frmStatistiques.cs</DependentUpon>
+    </Compile>
     <Compile Include="mesDatas.cs" />
-    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ConnexionAdmin.resx">

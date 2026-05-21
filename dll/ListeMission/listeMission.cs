@@ -3,7 +3,8 @@ using System.Windows.Forms;
 
 namespace ListeMission
 {
-    public partial class listeMission : UserControl
+    public delegate void afficherDetails(object sender, EventArgs e);
+    public partial class listeMission: UserControl
     {
         //attributs
         private string budget, nomPlanete, depart, retour, chef, nomImage;
@@ -31,7 +32,7 @@ namespace ListeMission
 
             chargerInterface();
 
-
+            
         }
 
         public string Budget { get => budget; set => budget = value; }
@@ -40,6 +41,18 @@ namespace ListeMission
         public string Retour { get => retour; set => retour = value; }
         public string Chef { get => chef; set => chef = value; }
         public string NomImage { get => nomImage; set => nomImage = value; }
+
+
+        public afficherDetails afficheur;
+
+        private void btnDetail_Click(object sender, EventArgs e)
+        {
+            if (this.afficheur != null)
+            {
+                this.afficheur(sender, e);
+            }
+        }
+
 
         public void chargerInterface()
         {
