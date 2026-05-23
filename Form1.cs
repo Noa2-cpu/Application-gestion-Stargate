@@ -17,54 +17,58 @@ namespace SAE24
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Déléguer au rafraîchissement public pour permettre réutilisation
             try
             {
-                string sql = @"SELECT m.nomPlanete, mi.nom || ' ' || mi.prenom, dateDepart, dateRetour, budget FROM Mission m
-                                JOIN Composer c ON m.numero = c.numeroMission
-                                JOIN Membre mi ON mi.matricule = c.matriculeMembre 
-                                WHERE m.matriculeChef = matricule
-                                ORDER BY 1;";
-
-                SQLiteDataReader dr;
-                SQLiteCommand cmd = new SQLiteCommand(sql, Connexion.Connec);
-                dr = cmd.ExecuteReader();
-
-                int x = 337;
-                int y = 26;
-                int i = 0;
-                while (dr.Read())
-                {
-
-                    string nom = dr.GetString(0);
-                    string chef = dr.GetString(1);
-                    string depart = dr.GetString(2);
-                    string retour = dr.GetString(3);
-                    string budget = dr.GetInt32(4).ToString();
-                    string img = @"..\..\img\" + nom +".jpg";
-
-                    listeMission lstMission = new listeMission(budget, nom, depart, retour, chef, img);
-                    lstMission.Location = new System.Drawing.Point(x, y);
-                    flowLayoutPanel1.Controls.Add(lstMission);
-                    lstMission.afficheur = detailMission;
-
-                    y += 100;
-                    i++;
-
-                }
-
-                InitialiserDataSet();
-
-                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
-
-                MesDatas.DsGlobal.Tables["Mission"].Clear();
-
-                da.Fill(MesDatas.DsGlobal, "Mission");
-
+                RefreshMissions();
             }
             catch (SQLiteException err)
             {
                 MessageBox.Show(err.Message);
             }
+        }
+
+        // Méthode publique pour recharger l'affichage des missions
+        public void RefreshMissions()
+        {
+            string sql = @"SELECT m.nomPlanete, mi.nom || ' ' || mi.prenom, dateDepart, dateRetour, budget FROM Mission m
+                                JOIN Composer c ON m.numero = c.numeroMission
+                                JOIN Membre mi ON mi.matricule = c.matriculeMembre 
+                                WHERE m.matriculeChef = matricule
+                                ORDER BY 1;";
+
+            SQLiteDataReader dr;
+            SQLiteCommand cmd = new SQLiteCommand(sql, Connexion.Connec);
+            dr = cmd.ExecuteReader();
+
+            flowLayoutPanel1.Controls.Clear();
+
+            int x = 337;
+            int y = 26;
+            while (dr.Read())
+            {
+                string nom = dr.GetString(0);
+                string chef = dr.GetString(1);
+                string depart = dr.GetString(2);
+                string retour = dr.GetString(3);
+                string budget = dr.GetInt32(4).ToString();
+                string img = @"..\..\img\" + nom + ".jpg";
+
+                listeMission lstMission = new listeMission(budget, nom, depart, retour, chef, img);
+                lstMission.Location = new System.Drawing.Point(x, y);
+                flowLayoutPanel1.Controls.Add(lstMission);
+                lstMission.afficheur = detailMission;
+
+                y += 100;
+            }
+
+            InitialiserDataSet();
+
+            SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
+
+            MesDatas.DsGlobal.Tables["Mission"].Clear();
+
+            da.Fill(MesDatas.DsGlobal, "Mission");
         }
 
         private void InitialiserDataSet()

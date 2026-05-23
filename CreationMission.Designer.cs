@@ -56,6 +56,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BtnFinirMission = new System.Windows.Forms.Button();
             this.LblNbPersonnes = new System.Windows.Forms.Label();
             this.TxtNombreCapture = new System.Windows.Forms.TextBox();
             this.BtnValiderObjectifs = new System.Windows.Forms.Button();
@@ -325,6 +326,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.BtnFinirMission);
             this.groupBox2.Controls.Add(this.LblNbPersonnes);
             this.groupBox2.Controls.Add(this.TxtNombreCapture);
             this.groupBox2.Controls.Add(this.BtnValiderObjectifs);
@@ -337,21 +339,32 @@
             this.groupBox2.Controls.Add(this.BtnAjouterMembre);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.CboChoisirMembre);
+            this.groupBox2.Enabled = false;
             this.groupBox2.Location = new System.Drawing.Point(805, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(871, 711);
+            this.groupBox2.Size = new System.Drawing.Size(758, 711);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Affectation et objectif(s) de captures";
+            // 
+            // BtnFinirMission
+            // 
+            this.BtnFinirMission.Location = new System.Drawing.Point(561, 667);
+            this.BtnFinirMission.Name = "BtnFinirMission";
+            this.BtnFinirMission.Size = new System.Drawing.Size(183, 38);
+            this.BtnFinirMission.TabIndex = 2;
+            this.BtnFinirMission.Text = "Finir la mission";
+            this.BtnFinirMission.UseVisualStyleBackColor = true;
+            this.BtnFinirMission.Click += new System.EventHandler(this.BtnFinirMission_Click);
             // 
             // LblNbPersonnes
             // 
             this.LblNbPersonnes.AutoSize = true;
             this.LblNbPersonnes.Location = new System.Drawing.Point(357, 41);
             this.LblNbPersonnes.Name = "LblNbPersonnes";
-            this.LblNbPersonnes.Size = new System.Drawing.Size(116, 20);
+            this.LblNbPersonnes.Size = new System.Drawing.Size(13, 20);
             this.LblNbPersonnes.TabIndex = 11;
-            this.LblNbPersonnes.Text = "Texte à enlever";
+            this.LblNbPersonnes.Text = " ";
             // 
             // TxtNombreCapture
             // 
@@ -369,6 +382,7 @@
             this.BtnValiderObjectifs.TabIndex = 9;
             this.BtnValiderObjectifs.Text = "Valider les objectifs";
             this.BtnValiderObjectifs.UseVisualStyleBackColor = true;
+            this.BtnValiderObjectifs.Click += new System.EventHandler(this.BtnValiderObjectifs_Click);
             // 
             // LstAfficherAliens
             // 
@@ -459,7 +473,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1702, 735);
+            this.ClientSize = new System.Drawing.Size(1583, 737);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CreationMission";
@@ -515,5 +529,6 @@
         private System.Windows.Forms.Button BtnValiderMembre;
         private System.Windows.Forms.TextBox TxtNombreCapture;
         private System.Windows.Forms.Label LblNbPersonnes;
+        private System.Windows.Forms.Button BtnFinirMission;
     }
 }
