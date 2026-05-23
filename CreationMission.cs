@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing.Text;
+using System.Linq;
 using System.Data.SqlClient;
 
 namespace SAE24
@@ -610,7 +611,21 @@ namespace SAE24
                 }
 
                 transaction.Commit();
-                MessageBox.Show("Mission finalisée et données insérées avec succès.");
+                    MessageBox.Show("Mission finalisée et données insérées avec succès.");
+
+                    // Demander à Form1 de se rafraîchir si présent
+                    var mainForm = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+                    if (mainForm != null)
+                    {
+                        try
+                        {
+                            mainForm.RefreshMissions();
+                        }
+                        catch { }
+                    }
+
+                    // Fermer ce formulaire pour revenir à l'application principale
+                    this.Close();
             }
             catch (Exception ex)
             {
