@@ -8,6 +8,7 @@ namespace ListeMission
     {
         //attributs
         private string budget, nomPlanete, depart, retour, chef, nomImage;
+        int numero;
 
         //Constructeur de base
         public listeMission()
@@ -16,7 +17,7 @@ namespace ListeMission
         }
 
         //Constructeur complet
-        public listeMission(string budget, string nomPlanete, string depart, string retour, string chef, string nomImage)
+        public listeMission(string budget, string nomPlanete, string depart, string retour, string chef, int numero, string nomImage)
         {
             InitializeComponent();
 
@@ -29,6 +30,7 @@ namespace ListeMission
             this.retour = "Retour : " + retour;
             this.chef = "Chef : " + chef;
             this.nomImage = nomImage;
+            this.numero = numero;
 
             chargerInterface();
 
@@ -41,6 +43,7 @@ namespace ListeMission
         public string Retour { get => retour; set => retour = value; }
         public string Chef { get => chef; set => chef = value; }
         public string NomImage { get => nomImage; set => nomImage = value; }
+        public int Numero { get => numero; set => numero = value; }
 
 
         public afficherDetails afficheur;

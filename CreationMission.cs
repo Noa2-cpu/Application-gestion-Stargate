@@ -59,8 +59,8 @@ namespace SAE24
                                              WHERE m.matricule NOT IN (SELECT co.matriculeMembre
 						                                               FROM Composer co
 						                                               JOIN Mission mi ON co.numeroMission = mi.numero
-						                                               WHERE @dateDepart <= mi.dateRetour
-						                                               AND @dateRetour >= mi.dateDepart);";
+						                                               WHERE '@dateDepart' <= mi.dateRetour
+						                                               AND '@dateRetour' >= mi.dateDepart);";
             try
             {
                 SQLiteCommand cmd = new SQLiteCommand(remplirMilitaires1, Connexion.Connec);
@@ -264,6 +264,7 @@ namespace SAE24
                 valide = false;
             }
 
+            //feuille de route
             if (string.IsNullOrWhiteSpace(RtbFeuilleRoute.Text))
             {
                 errorProvider1.SetError(RtbFeuilleRoute, "Veuillez saisir quelques informations pour la feuille de route..");
@@ -276,6 +277,15 @@ namespace SAE24
             {
                 errorProvider1.SetError(TxtNbPersonne, "Veuillez saisir le nombre de personnes.");
 
+                valide = false;
+            }
+
+            if(TxtNbPersonne.Text == "0" || TxtNbPersonne.Text == "1")
+            {
+                MessageBox.Show("Capitaine, pour mener à bien votre mission, le nombre de personnes doit être supérieur à 1.", "Contrôle Centrale Stargate", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider1.SetError(TxtNbPersonne, "Veuillez saisir un nombre de personnes supérieur à 1.");
+                TxtNbPersonne.Focus();
+                TxtNbPersonne.Clear();
                 valide = false;
             }
 
@@ -488,43 +498,50 @@ namespace SAE24
 
         private void BtnAjouterAliens_Click(object sender, EventArgs e)
         {
-            string alien = CboAliens.GetItemText(CboAliens.SelectedItem);
-
-            errorProvider1.Clear();
-
-            // Vérifier que l'espèce n'a pas déjà été ajoutée dans la liste des objectifs
-            string quantite = TxtNombreCapture.Text;
-            string affichage = alien + " --> Objectif de captures : " + quantite;
-
-            if (LstAfficherAliens.Items.Contains(affichage))
+            if (TxtNombreCapture.Text.Trim() == "")
             {
-                errorProvider1.SetError(LstAfficherAliens, "Cette espèce d'alien est déjà sélectionnée.");
-                return;
+                errorProvider1.SetError(TxtNombreCapture, "Veuillez saisir une quantité de captures.");
             }
-
-            // Ajouter l'affichage
-            LstAfficherAliens.Items.Add(affichage);
-
-            // Récupérer l'ID de l'alien et le stocker
-            string idAlien = CboAliens.SelectedValue?.ToString();
-            if (!string.IsNullOrEmpty(idAlien))
+            else
             {
-                selectedAliens.Add(idAlien);
-            }
+                string alien = CboAliens.GetItemText(CboAliens.SelectedItem);
 
-            // Supprimer la ligne correspondante du DataTable lié pour mettre à jour la ComboBox
-            if (dtAliens != null && CboAliens.SelectedItem is DataRowView drv)
-            {
-                dtAliens.Rows.Remove(drv.Row);
+                errorProvider1.Clear();
 
-                // Si plus d'aliens disponibles, désactiver les contrôles liés
-                if (dtAliens.Rows.Count == 0)
+                // Vérifier que l'espèce n'a pas déjà été ajoutée dans la liste des objectifs
+                string quantite = TxtNombreCapture.Text;
+                string affichage = alien + " --> Objectif de captures : " + quantite;
+
+                if (LstAfficherAliens.Items.Contains(affichage))
                 {
-                    CboAliens.DataSource = null;
-                    CboAliens.Items.Clear();
-                    CboAliens.Enabled = false;
-                    BtnAjouterAliens.Enabled = false;
-                    TxtNombreCapture.Enabled = false;
+                    errorProvider1.SetError(LstAfficherAliens, "Cette espèce d'alien est déjà sélectionnée.");
+                    return;
+                }
+
+                // Ajouter l'affichage
+                LstAfficherAliens.Items.Add(affichage);
+
+                // Récupérer l'ID de l'alien et le stocker
+                string idAlien = CboAliens.SelectedValue?.ToString();
+                if (!string.IsNullOrEmpty(idAlien))
+                {
+                    selectedAliens.Add(idAlien);
+                }
+
+                // Supprimer la ligne correspondante du DataTable lié pour mettre à jour la ComboBox
+                if (dtAliens != null && CboAliens.SelectedItem is DataRowView drv)
+                {
+                    dtAliens.Rows.Remove(drv.Row);
+
+                    // Si plus d'aliens disponibles, désactiver les contrôles liés
+                    if (dtAliens.Rows.Count == 0)
+                    {
+                        CboAliens.DataSource = null;
+                        CboAliens.Items.Clear();
+                        CboAliens.Enabled = false;
+                        BtnAjouterAliens.Enabled = false;
+                        TxtNombreCapture.Enabled = false;
+                    }
                 }
             }
         }
@@ -535,6 +552,7 @@ namespace SAE24
             TxtNombreCapture.Enabled = false;
             BtnAjouterAliens.Enabled = false;
             LstAfficherAliens.Enabled = false;
+            BtnValiderObjectifs.Enabled = false;
         }
 
         private void BtnFinirMission_Click(object sender, EventArgs e)
@@ -642,7 +660,10 @@ namespace SAE24
             }
             finally
             {
-                if (transaction != null) transaction.Dispose();
+                if (transaction != null)
+                {
+                    transaction.Dispose();
+                }
             }
         }
     }

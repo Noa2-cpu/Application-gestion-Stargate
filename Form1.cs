@@ -31,7 +31,7 @@ namespace SAE24
         // Méthode publique pour recharger l'affichage des missions
         public void RefreshMissions()
         {
-            string sql = @"SELECT m.nomPlanete, mi.nom || ' ' || mi.prenom, dateDepart, dateRetour, budget FROM Mission m
+            string sql = @"SELECT m.nomPlanete, mi.nom || ' ' || mi.prenom, dateDepart, dateRetour, budget, m.numero FROM Mission m
                                 JOIN Composer c ON m.numero = c.numeroMission
                                 JOIN Membre mi ON mi.matricule = c.matriculeMembre 
                                 WHERE m.matriculeChef = matricule
@@ -52,10 +52,13 @@ namespace SAE24
                 string depart = dr.GetString(2);
                 string retour = dr.GetString(3);
                 string budget = dr.GetInt32(4).ToString();
+                int numero = dr.GetInt32(5);
                 string img = @"..\..\img\" + nom + ".jpg";
 
                 listeMission lstMission = new listeMission(budget, nom, depart, retour, chef, img);
                 lstMission.Location = new System.Drawing.Point(x, y);
+                // stocker les informations essentielles dans le Tag pour pouvoir les récupérer
+                lstMission.Tag = Tuple.Create(nom, numero);
                 flowLayoutPanel1.Controls.Add(lstMission);
                 lstMission.afficheur = detailMission;
 
@@ -77,6 +80,7 @@ namespace SAE24
             {
                 DataTable dtMission = new DataTable("Mission");
                 dtMission.Columns.Add("nomPlanete", typeof(string));
+                dtMission.Columns.Add("numero", typeof(int));
                 dtMission.Columns.Add("chef", typeof(string));
                 dtMission.Columns.Add("dateDepart", typeof(string));
                 dtMission.Columns.Add("dateRetour", typeof(string));
@@ -97,8 +101,21 @@ namespace SAE24
             Button btn = (Button)sender;
             ListeMission.listeMission uc = (ListeMission.listeMission)btn.Parent;
 
-            Form form = new Form();
-            form.ShowDialog();
+            // récupérer les informations stockées dans le Tag (nomPlanete, numero)
+            if (uc.Tag is Tuple<string, int> info)
+            {
+                string nomPlanete = info.Item1;
+                int numero = info.Item2;
+
+                Form detailMission = new DetailMissions(nomPlanete, numero);
+                detailMission.ShowDialog();
+            }
+            else
+            {
+                // fallback si pas d'info
+                Form detailMission = new DetailMissions();
+                detailMission.ShowDialog();
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)

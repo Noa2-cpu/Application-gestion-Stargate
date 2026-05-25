@@ -71,6 +71,12 @@
     <Compile Include="CreationMission.Designer.cs">
       <DependentUpon>CreationMission.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetailMissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailMissions.Designer.cs">
+      <DependentUpon>DetailMissions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,12 @@
       <DependentUpon>frmStatistiques.cs</DependentUpon>
     </Compile>
     <Compile Include="mesDatas.cs" />
+    <Compile Include="MilitaireCivil.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MilitaireCivil.Designer.cs">
+      <DependentUpon>MilitaireCivil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ConnexionAdmin.resx">
@@ -92,8 +104,14 @@
     <EmbeddedResource Include="CreationMission.resx">
       <DependentUpon>CreationMission.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DetailMissions.resx">
+      <DependentUpon>DetailMissions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MilitaireCivil.resx">
+      <DependentUpon>MilitaireCivil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\SAE24.ConnexionAdmin.resources" />
     <EmbeddedResource Include="obj\Debug\SAE24.Form1.resources" />
@@ -106,6 +124,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="bin\Debug\SAE24.exe.config" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
@@ -160,6 +179,8 @@
     <Content Include="bin\Debug\System.Data.SQLite.xml" />
     <Content Include="bin\Debug\x64\SQLite.Interop.dll" />
     <Content Include="bin\Debug\x86\SQLite.Interop.dll" />
+    <Content Include="img\Civil.png" />
+    <Content Include="img\Militaire.png" />
     <Content Include="img\Mercure.jpg" />
     <Content Include="img\oeil.jpg" />
     <Content Include="obj\Debug\SAE24.csproj.FileListAbsolute.txt" />
@@ -199,6 +220,7 @@
     <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="dll\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

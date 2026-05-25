@@ -90,6 +90,9 @@ namespace SAE24
                 else
                 {
                     MessageBox.Show("Votre login ou mot de passe ne correspond pas !\nAccès refusé.", "Accès non-autorisé", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtLogin.Clear();
+                    txtMotDePasse.Clear();
+                    txtLogin.Focus();
                 }
             }
             catch (SQLiteException err)

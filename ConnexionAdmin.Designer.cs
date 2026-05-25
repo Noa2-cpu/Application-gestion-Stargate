@@ -153,6 +153,7 @@
             this.ClientSize = new System.Drawing.Size(676, 354);
             this.Controls.Add(this.groupBox1);
             this.Name = "ConnexionAdmin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConnexionAdmin";
             this.Load += new System.EventHandler(this.ConnexionAdmin_Load);
             this.groupBox1.ResumeLayout(false);
