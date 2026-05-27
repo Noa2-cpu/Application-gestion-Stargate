@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace SAE24
 {
@@ -11,7 +12,7 @@ namespace SAE24
     {
         PrivateFontCollection pfc = new PrivateFontCollection();
         string nomPlanete;
-        int numero;
+        int numero, resultat;
         public DetailMissions()
         {
             InitializeComponent();
@@ -76,6 +77,20 @@ namespace SAE24
             LblBudget.Text += dt.Rows[0]["budget"].ToString() + " €";
 
             RtbFeuilleRoute.Text = dt.Rows[0]["feuilleDeRoute"].ToString();
+
+
+            string chargerDepense = @"SELECT sum(montant)
+                                      FROM Depense
+                                      WHERE nomPlanete = @planete AND numeroMission = @numero;";
+
+            SQLiteDataAdapter daDepense = new SQLiteDataAdapter(chargerDepense, Connexion.Connec);
+            daDepense.SelectCommand.Parameters.AddWithValue("@planete", nomPlanete);
+            daDepense.SelectCommand.Parameters.AddWithValue("@numero", numero);
+
+            int depense = Convert.ToInt32(daDepense.SelectCommand.ExecuteScalar());
+            int budget = Convert.ToInt32(dt.Rows[0]["budget"].ToString()); 
+            resultat = budget - depense;
+            LblDépenses.Text += resultat.ToString() + " €";
 
 
             string chargerAstro = @"SELECT m.nom, m.prenom, c.matriculeMembre
@@ -391,6 +406,13 @@ namespace SAE24
             if (DtpDepense.Value.Date > DateTime.Now.Date)
             {
                 errorProvider1.SetError(DtpDepense, "La date de la dépense ne peut pas être dans le futur.");
+                valide = false;
+            }
+
+            if(Convert.ToInt32(TxtMontant.Text) > resultat)
+            {
+                MessageBox.Show("Attention, le montant de la dépense ne peut pas être supérieur au budget restant.", "Erreur de budget", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider1.SetError(TxtMontant, "Le montant de la dépense ne peut pas être supérieur au budget restant.");
                 valide = false;
             }
 
