@@ -17,6 +17,8 @@ namespace SAE24
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            UIStyle.LoadFont("Orbitron-Regular.ttf", 10f);
+            UIStyle.Apply(this);
             // Déléguer au rafraîchissement public pour permettre réutilisation
             try
             {
@@ -112,7 +114,7 @@ namespace SAE24
             }
             else
             {
-                // fallback si pas d'info
+                //si pas d'info
                 Form detailMission = new DetailMissions();
                 detailMission.ShowDialog();
             }

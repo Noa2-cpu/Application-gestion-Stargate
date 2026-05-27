@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIStyle.cs" />
     <EmbeddedResource Include="ConnexionAdmin.resx">
       <DependentUpon>ConnexionAdmin.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,6 +134,9 @@
     <None Include="obj\Debug\SAE24.csproj.CoreCompileInputs.cache" />
     <None Include="obj\Debug\SAE24.csproj.GenerateResource.cache" />
     <None Include="obj\Debug\SAE24.csproj.Up2Date" />
+    <Content Include="Orbitron-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="packages\BCrypt.Net-Core.1.6.0\.signature.p7s" />
     <None Include="packages\BCrypt.Net-Core.1.6.0\BCrypt.Net-Core.1.6.0.nupkg" />
@@ -180,6 +184,7 @@
     <Content Include="bin\Debug\x64\SQLite.Interop.dll" />
     <Content Include="bin\Debug\x86\SQLite.Interop.dll" />
     <Content Include="img\Civil.png" />
+    <None Include="img\journal.png" />
     <Content Include="img\Militaire.png" />
     <Content Include="img\Mercure.jpg" />
     <Content Include="img\oeil.jpg" />
