@@ -33,6 +33,8 @@ namespace SAE24
 
         private void CreationMission_Load(object sender, EventArgs e)
         {
+            UIStyle.LoadFont("Orbitron-Regular.ttf");
+            UIStyle.Apply(this);
             //remplir la combobox avec les planètes
             string remplirCombo1 = "SELECT nom FROM Planete";
 
@@ -132,6 +134,7 @@ namespace SAE24
 
         private void BtnPlanete_Click(object sender, EventArgs e)
         {
+            LblAfficherPlanete.Text = "";
             string sql = "SELECT MAX(numero) FROM Mission WHERE nomPlanete = @planete";
 
             try
@@ -203,11 +206,6 @@ namespace SAE24
                     }
 
                     errorProvider1.Clear();
-                    label1.Enabled = false;
-                    CboChoisirPlanete.Enabled = false;
-                    BtnPlanete.Enabled = false;
-                    LblAfficherPlanete.Enabled = false;
-                    BtnValider.Enabled = true;
                 }
             }
             catch (SQLiteException err)
@@ -378,8 +376,8 @@ namespace SAE24
                         LstAfficherMembre.Items.Add(chefAffichage);
                     }
 
-                    groupBox1.Enabled = false;
-                    groupBox2.Enabled = true;
+                    groupBox1.Visible = false;
+                    groupBox2.Visible = true;
 
                     // Mettre à jour le nombre restant en tenant compte du chef déjà ajouté
                     int nbTotal;
@@ -665,6 +663,11 @@ namespace SAE24
                     transaction.Dispose();
                 }
             }
+        }
+
+        private void LblAfficherPlanete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -10,7 +10,6 @@ namespace SAE24
 {
     public partial class DetailMissions : Form
     {
-        PrivateFontCollection pfc = new PrivateFontCollection();
         string nomPlanete;
         int numero, resultat;
         public DetailMissions()
@@ -26,27 +25,10 @@ namespace SAE24
             
         }
 
-        private void AppliquerPolice(Control parent, Font font)
-        {
-            foreach (Control c in parent.Controls)
-            {
-                c.Font = font;
-
-                if (c.Controls.Count > 0)
-                {
-                    AppliquerPolice(c, font);
-                }
-            }
-        }
-
         private void DetailMissions_Load(object sender, EventArgs e)
         {
-            pfc.AddFontFile("Orbitron-Regular.ttf");
-
-            Font maPolice = new Font(pfc.Families[0], 10f);
-
-            AppliquerPolice(this, maPolice);
-        
+            UIStyle.LoadFont("Orbitron-Regular.ttf");
+            UIStyle.Apply(this);
             PcbJournal.SizeMode = PictureBoxSizeMode.CenterImage;
             PcbJournal.SizeMode = PictureBoxSizeMode.Zoom;
             PcbJournal.Image = Image.FromFile(@"..\..\img\Journal.png");
@@ -173,7 +155,7 @@ namespace SAE24
             SQLiteDataAdapter da3 = new SQLiteDataAdapter(chargerCaptures, Connexion.Connec);
             da3.SelectCommand.Parameters.AddWithValue("@planete", nomPlanete);
             da3.SelectCommand.Parameters.AddWithValue("@numero", numero);
-
+            
             DataTable dt3 = new DataTable();
             da3.Fill(dt3);
 

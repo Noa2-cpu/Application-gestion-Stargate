@@ -17,7 +17,7 @@ namespace SAE24
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            UIStyle.LoadFont("Orbitron-Regular.ttf", 10f);
+            UIStyle.LoadFont("Orbitron-Regular.ttf");
             UIStyle.Apply(this);
             // Déléguer au rafraîchissement public pour permettre réutilisation
             try
