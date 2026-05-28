@@ -35,6 +35,8 @@ namespace SAE24
 
         private void GrpContact_Load(object sender, EventArgs e)
         {
+            UIStyle.LoadFont("Orbitron-Regular.ttf");
+            UIStyle.Apply(this);
             string sql = @"SELECT dateJ, commentaires
                            FROM JournalDeBord
                            WHERE nomplanete = @planete AND numero = @numero;";

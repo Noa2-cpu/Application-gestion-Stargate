@@ -20,7 +20,8 @@ namespace SAE24
 
         private void ConnexionAdmin_Load(object sender, EventArgs e)
         {
-
+            UIStyle.LoadFont("Orbitron-Regular.ttf");
+            UIStyle.Apply(this);
         }
 
         private void btnAnnuler_Click(object sender, EventArgs e)
