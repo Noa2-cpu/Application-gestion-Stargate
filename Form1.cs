@@ -130,5 +130,17 @@ namespace SAE24
         {
             Application.Exit();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form RepertoireRaces = new RepertoireRaces();
+            RepertoireRaces.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form RepertoirePlanete = new RepertoirePlanete();
+            RepertoirePlanete.ShowDialog();
+        }
     }
 }

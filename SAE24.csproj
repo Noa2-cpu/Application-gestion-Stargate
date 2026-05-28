@@ -38,9 +38,6 @@
     <Reference Include="BCrypt.Net-Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=4d63bfbfdfd3c6e4, processorArchitecture=MSIL">
       <HintPath>packages\BCrypt.Net-Core.1.6.0\lib\net452\BCrypt.Net-Core.dll</HintPath>
     </Reference>
-    <Reference Include="RepertoirRaces">
-      <HintPath>..\RepertoirRaces\RepertoirRaces\bin\Debug\RepertoirRaces.dll</HintPath>
-    </Reference>
     <Reference Include="ListeMission, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dll\ListeMission\ListeMission.dll</HintPath>
@@ -176,6 +173,7 @@
     <None Include="obj\Debug\SAE24.csproj.CoreCompileInputs.cache" />
     <None Include="obj\Debug\SAE24.csproj.GenerateResource.cache" />
     <None Include="obj\Debug\SAE24.csproj.Up2Date" />
+    <Content Include="bin\Debug\Logo Loupe.png.txt" />
     <Content Include="Orbitron-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
