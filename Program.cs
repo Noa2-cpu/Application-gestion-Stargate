@@ -13,7 +13,7 @@ namespace SAE24
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RepertoireRaces());
+            Application.Run(new Form1());
         }
     }
 }

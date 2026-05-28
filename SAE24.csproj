@@ -69,7 +69,6 @@
       <DependentUpon>CaracteristiquesRaces.cs</DependentUpon>
     </Compile>
     <Compile Include="Connexion.cs" />
-    <Compile Include="Connexion.cs" />
     <Compile Include="ConnexionAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
