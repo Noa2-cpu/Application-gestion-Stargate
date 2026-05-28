@@ -53,9 +53,11 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(16, 15);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(656, 336);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(875, 420);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Authentification";
@@ -66,7 +68,8 @@
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.LightSeaGreen;
-            this.label4.Location = new System.Drawing.Point(299, 246);
+            this.label4.Location = new System.Drawing.Point(399, 308);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(180, 20);
             this.label4.TabIndex = 7;
@@ -76,9 +79,10 @@
             // btnValider
             // 
             this.btnValider.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnValider.Location = new System.Drawing.Point(426, 276);
+            this.btnValider.Location = new System.Drawing.Point(568, 345);
+            this.btnValider.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnValider.Name = "btnValider";
-            this.btnValider.Size = new System.Drawing.Size(201, 38);
+            this.btnValider.Size = new System.Drawing.Size(268, 48);
             this.btnValider.TabIndex = 6;
             this.btnValider.Text = "Valider";
             this.btnValider.UseVisualStyleBackColor = true;
@@ -87,9 +91,10 @@
             // btnAnnuler
             // 
             this.btnAnnuler.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAnnuler.Location = new System.Drawing.Point(24, 276);
+            this.btnAnnuler.Location = new System.Drawing.Point(32, 345);
+            this.btnAnnuler.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAnnuler.Name = "btnAnnuler";
-            this.btnAnnuler.Size = new System.Drawing.Size(201, 38);
+            this.btnAnnuler.Size = new System.Drawing.Size(268, 48);
             this.btnAnnuler.TabIndex = 5;
             this.btnAnnuler.Text = "Annuler";
             this.btnAnnuler.UseVisualStyleBackColor = true;
@@ -97,36 +102,40 @@
             // 
             // txtMotDePasse
             // 
-            this.txtMotDePasse.Location = new System.Drawing.Point(158, 207);
+            this.txtMotDePasse.Location = new System.Drawing.Point(211, 259);
+            this.txtMotDePasse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMotDePasse.Name = "txtMotDePasse";
-            this.txtMotDePasse.Size = new System.Drawing.Size(321, 26);
+            this.txtMotDePasse.Size = new System.Drawing.Size(427, 30);
             this.txtMotDePasse.TabIndex = 4;
             this.txtMotDePasse.UseSystemPasswordChar = true;
             this.txtMotDePasse.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMotDePasse_KeyPress);
             // 
             // txtLogin
             // 
-            this.txtLogin.Location = new System.Drawing.Point(158, 119);
+            this.txtLogin.Location = new System.Drawing.Point(211, 149);
+            this.txtLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(321, 26);
+            this.txtLogin.Size = new System.Drawing.Size(427, 30);
             this.txtLogin.TabIndex = 3;
             this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 213);
+            this.label3.Location = new System.Drawing.Point(48, 266);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 20);
+            this.label3.Size = new System.Drawing.Size(130, 25);
             this.label3.TabIndex = 2;
             this.label3.Text = "Mot de passe";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(36, 122);
+            this.label2.Location = new System.Drawing.Point(48, 152);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 20);
+            this.label2.Size = new System.Drawing.Size(60, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Login";
             // 
@@ -136,7 +145,8 @@
             this.label1.Cursor = System.Windows.Forms.Cursors.Default;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(247, 59);
+            this.label1.Location = new System.Drawing.Point(329, 74);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(141, 25);
             this.label1.TabIndex = 0;
@@ -148,10 +158,12 @@
             // 
             // ConnexionAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 354);
+            this.ClientSize = new System.Drawing.Size(901, 442);
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ConnexionAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConnexionAdmin";

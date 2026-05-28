@@ -87,9 +87,33 @@ namespace SAE24
             daDepense.SelectCommand.Parameters.AddWithValue("@planete", nomPlanete);
             daDepense.SelectCommand.Parameters.AddWithValue("@numero", numero);
 
-            int depense = Convert.ToInt32(daDepense.SelectCommand.ExecuteScalar());
-            int budget = Convert.ToInt32(dt.Rows[0]["budget"].ToString()); 
-            resultat = budget - depense;
+            // ExecuteScalar peut retourner null ou DBNull si aucune dépense n'existe encore
+            object depenseObj = daDepense.SelectCommand.ExecuteScalar();
+            int depense = 0;
+            if (depenseObj != null && depenseObj != DBNull.Value)
+            {
+                int.TryParse(depenseObj.ToString(), out depense);
+            }
+
+            int budget = 0;
+            int.TryParse(dt.Rows[0]["budget"].ToString(), out budget);
+
+            string chargerMontantContact = @"SELECT sum(sommeVersee)
+                                             FROM Contact
+                                             WHERE nomPlanete = @planete AND numeroMission = @numero;";
+
+            SQLiteDataAdapter daMontantContact = new SQLiteDataAdapter(chargerMontantContact, Connexion.Connec);
+            daMontantContact.SelectCommand.Parameters.AddWithValue("@planete", nomPlanete);
+            daMontantContact.SelectCommand.Parameters.AddWithValue("@numero", numero);
+
+            object contactObj = daMontantContact.SelectCommand.ExecuteScalar();
+            int contact = 0;
+            if (contactObj != null && contactObj != DBNull.Value)
+            {
+                int.TryParse(contactObj.ToString(), out contact);
+            }
+
+            resultat = budget - depense - contact;
             LblDépenses.Text += resultat.ToString() + " €";
 
 
@@ -197,12 +221,24 @@ namespace SAE24
             DataTable dt4 = new DataTable();
             da4.Fill(dt4);
 
-            foreach (DataRow dr in dt4.Rows)
+            if (dt4.Rows.Count == 0)
             {
-                CboInformateur.DataSource = dt4;
-                CboInformateur.DisplayMember = "nom";
-                CboInformateur.ValueMember = "nomCode";
+                CboInformateur.DataSource = null;
+                CboInformateur.Items.Clear();
+                CboInformateur.Text = "Aucun informateur";
+                GrpContact.Enabled = false;
             }
+            else
+            {
+                foreach (DataRow dr in dt4.Rows)
+                {
+                    CboInformateur.DataSource = dt4;
+                    CboInformateur.DisplayMember = "nom";
+                    CboInformateur.ValueMember = "nomCode";
+                }
+            }
+            
+
 
             string chargerTypesDepenses = @"SELECT libelle, id FROM TypeDepense;";
 
@@ -228,8 +264,8 @@ namespace SAE24
 
         private void PcbJournal_Click(object sender, EventArgs e)
         {
-            Form nomForm = new Form();
-            nomForm.ShowDialog();
+            Form JournalDeBord = new GrpContact(this.nomPlanete, this.numero);
+            JournalDeBord.ShowDialog();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -342,7 +378,7 @@ namespace SAE24
                 ligne[3] = TxtSomme.Text.ToString();
                 ligne[4] = RtbAppreciation.Text.ToString();
                 ligne[5] = CboInformateur.SelectedValue.ToString();
-
+                
                 try
                 {
                     MesDatas.DsGlobal.Tables["Contact"].Rows.Add(ligne);
@@ -355,6 +391,8 @@ namespace SAE24
 
                     SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
                     da.Update(MesDatas.DsGlobal, "Contact");
+                    string tab = LblDépenses.Text.Split(':')[1];
+                    
                 }
                 catch (SQLiteException err) 
                 { 
@@ -474,6 +512,8 @@ namespace SAE24
 
                     SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
                     da.Update(MesDatas.DsGlobal, "Depense");
+
+                    DetailMissions_Load(sender, e);
                 }
                 catch (SQLiteException err)
                 {
