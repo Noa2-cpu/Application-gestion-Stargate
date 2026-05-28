@@ -16,7 +16,7 @@ namespace SAE24
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RepertoirRace());
+            Application.Run(new RepertoireRaces());
         }
     }
 }

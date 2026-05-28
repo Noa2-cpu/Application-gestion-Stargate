@@ -38,11 +38,15 @@
     <Reference Include="BCrypt.Net-Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=4d63bfbfdfd3c6e4, processorArchitecture=MSIL">
       <HintPath>packages\BCrypt.Net-Core.1.6.0\lib\net452\BCrypt.Net-Core.dll</HintPath>
     </Reference>
+    <Reference Include="RepertoirRaces">
+      <HintPath>..\RepertoirRaces\RepertoirRaces\bin\Debug\RepertoirRaces.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +58,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaracteristiquesRaces.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CaracteristiquesRaces.Designer.cs">
+      <DependentUpon>CaracteristiquesRaces.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Connexion.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,14 +73,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepertoirePlanete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RepertoirePlanete.Designer.cs">
+      <DependentUpon>RepertoirePlanete.cs</DependentUpon>
+    </Compile>
     <Compile Include="RepertoireRaces.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RepertoireRaces.Designer.cs">
       <DependentUpon>RepertoireRaces.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CaracteristiquesRaces.resx">
+      <DependentUpon>CaracteristiquesRaces.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -78,6 +98,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RepertoirePlanete.resx">
+      <DependentUpon>RepertoirePlanete.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RepertoireRaces.resx">
       <DependentUpon>RepertoireRaces.cs</DependentUpon>
     </EmbeddedResource>
