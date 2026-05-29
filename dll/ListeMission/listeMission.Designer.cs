@@ -94,11 +94,11 @@
             // 
             // btnDetail
             // 
-            this.btnDetail.Location = new System.Drawing.Point(403, 51);
+            this.btnDetail.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnDetail.Location = new System.Drawing.Point(409, 63);
             this.btnDetail.Name = "btnDetail";
-            this.btnDetail.Size = new System.Drawing.Size(45, 43);
-            this.btnDetail.TabIndex = 6;
-            this.btnDetail.UseVisualStyleBackColor = true;
+            this.btnDetail.Size = new System.Drawing.Size(37, 37);
+            this.btnDetail.TabIndex = 0;
             this.btnDetail.Click += new System.EventHandler(this.btnDetail_Click);
             // 
             // listeMission

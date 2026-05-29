@@ -48,6 +48,7 @@
     <Compile Include="listeMission.Designer.cs">
       <DependentUpon>listeMission.cs</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
@@ -55,6 +56,68 @@
     <EmbeddedResource Include="listeMission.resx">
       <DependentUpon>listeMission.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\ListeMission.dll" />
+    <Content Include="bin\Debug\ListeMission.pdb" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\net40\BCrypt.Net-Core.dll" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\net40\BCrypt.Net-Core.pdb" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\net451\BCrypt.Net-Core.dll" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\net451\BCrypt.Net-Core.pdb" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\net452\BCrypt.Net-Core.dll" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\net452\BCrypt.Net-Core.pdb" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\net45\BCrypt.Net-Core.dll" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\net45\BCrypt.Net-Core.pdb" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\netstandard1.3\BCrypt.Net-Core.dll" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\netstandard1.3\BCrypt.Net-Core.pdb" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\netstandard2.0\BCrypt.Net-Core.dll" />
+    <Content Include="packages\BCrypt.Net-Core.1.6.0\lib\netstandard2.0\BCrypt.Net-Core.pdb" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net20\x64\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net20\x86\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net40\x64\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net40\x86\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net451\x64\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net451\x86\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net45\x64\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net45\x86\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\x64\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\x86\SQLite.Interop.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net20\System.Data.SQLite.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net20\System.Data.SQLite.xml" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net40\System.Data.SQLite.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net40\System.Data.SQLite.xml" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net451\System.Data.SQLite.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net451\System.Data.SQLite.xml" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net45\System.Data.SQLite.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net45\System.Data.SQLite.xml" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.dll" />
+    <Content Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages\BCrypt.Net-Core.1.6.0\.signature.p7s" />
+    <None Include="packages\BCrypt.Net-Core.1.6.0\BCrypt.Net-Core.1.6.0.nupkg" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\.signature.p7s" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\buildTransitive\net20\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\buildTransitive\net40\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\buildTransitive\net451\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\buildTransitive\net45\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\buildTransitive\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net20\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net40\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net451\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net45\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net20\System.Data.SQLite.dll.altconfig" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net40\System.Data.SQLite.dll.altconfig" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net451\System.Data.SQLite.dll.altconfig" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net45\System.Data.SQLite.dll.altconfig" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.dll.altconfig" />
+    <None Include="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0.nupkg" />
+    <None Include="packages\System.Data.SQLite.Core.1.0.119.0\.signature.p7s" />
+    <None Include="packages\System.Data.SQLite.Core.1.0.119.0\System.Data.SQLite.Core.1.0.119.0.nupkg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
