@@ -20,7 +20,8 @@ namespace SAE24
 
         private void ConnexionAdmin_Load(object sender, EventArgs e)
         {
-
+            UIStyle.LoadFont("Orbitron-Regular.ttf");
+            UIStyle.Apply(this);
         }
 
         private void btnAnnuler_Click(object sender, EventArgs e)
@@ -90,6 +91,9 @@ namespace SAE24
                 else
                 {
                     MessageBox.Show("Votre login ou mot de passe ne correspond pas !\nAccès refusé.", "Accès non-autorisé", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtLogin.Clear();
+                    txtMotDePasse.Clear();
+                    txtLogin.Focus();
                 }
             }
             catch (SQLiteException err)
