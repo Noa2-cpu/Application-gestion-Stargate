@@ -56,6 +56,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="trombiMilitaire">
+      <HintPath>dll\trombiMilitaire\trombiMilitaire.dll</HintPath>
+    </Reference>
+    <Reference Include="trombinoscope">
+      <HintPath>dll\trombinoscope\trombinoscope.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connexion.cs" />
