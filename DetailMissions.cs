@@ -12,6 +12,7 @@ namespace SAE24
     {
         string nomPlanete;
         int numero, resultat;
+        private SQLiteDataAdapter daCapturer;
         public DetailMissions()
         {
             InitializeComponent();
@@ -61,6 +62,20 @@ namespace SAE24
             RtbFeuilleRoute.Text = dt.Rows[0]["feuilleDeRoute"].ToString();
 
 
+            DateTime dateRetour = Convert.ToDateTime(dt.Rows[0]["dateRetour"]);
+
+            if (dateRetour < DateTime.Now)
+            {
+                MessageBox.Show("Cette mission est terminée, vous ne pouvez plus ajouter de contact, de dépense ou d'évènement.", "Mission terminée", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                groupBox2.Enabled = false;
+                GrpContact.Enabled = false;
+                CboCapturer.Enabled = false;
+                BtnCapturer.Enabled = false;
+                GrpDepense.Enabled = false;
+                GrpEvenement.Enabled = false;
+                textBox1.Enabled = false;
+            }
+
             string chargerDepense = @"SELECT sum(montant)
                                       FROM Depense
                                       WHERE nomPlanete = @planete AND numeroMission = @numero;";
@@ -96,7 +111,7 @@ namespace SAE24
             }
 
             resultat = budget - depense - contact;
-            LblDépenses.Text += resultat.ToString() + " €";
+            LblResultat.Text = resultat.ToString() + " €";
 
 
             string chargerAstro = @"SELECT m.nom, m.prenom, c.matriculeMembre
@@ -191,10 +206,11 @@ namespace SAE24
             PcbEvenement.Image = Image.FromFile(@"..\..\img\evenement.jpg");
 
 
-            string chargerInformateur = @"SELECT DISTINCT i.nom AS nom, i.nomCode as nomCode
-                                          FROM Informateur i 
-                                          JOIN Contact c ON i.nomCode = c.nomCodeInformateur
-                                          WHERE nomPlanete = @planete AND numeroMission = @numero;";
+            string chargerInformateur = @"SELECT DISTINCT i.nomCode, i.nom
+                                          FROM Informateur i
+                                          JOIN Ennemi e ON i.idEspeceEnnemi = e.idEspece
+                                          JOIN Habiter h ON e.idEspece = h.idEspece
+                                          WHERE h.nomPlanete = @planete;";
 
             SQLiteDataAdapter da4 = new SQLiteDataAdapter(chargerInformateur, Connexion.Connec);
             da4.SelectCommand.Parameters.AddWithValue("@planete", nomPlanete);
@@ -222,7 +238,13 @@ namespace SAE24
             
 
 
-            string chargerTypesDepenses = @"SELECT libelle, id FROM TypeDepense;";
+            string chargerTypesDepenses = @"SELECT libelle, id FROM TypeDepense";
+
+            if(dt4.Rows.Count == 0)
+            {
+                chargerTypesDepenses += " WHERE libelle != 'Informateur';";
+            }
+            
 
             SQLiteDataAdapter da5 = new SQLiteDataAdapter(chargerTypesDepenses, Connexion.Connec);
             da5.SelectCommand.Parameters.AddWithValue("@planete", nomPlanete);
@@ -236,6 +258,58 @@ namespace SAE24
                 CboMotif.DataSource = dt5;
                 CboMotif.DisplayMember = "libelle";
                 CboMotif.ValueMember = "id";
+            }
+
+
+
+            string chargerAliens = @"SELECT e.nom, en.idEspece 
+                                        FROM Ennemi en
+                                        JOIN Espece e ON en.idEspece = e.id
+                                        JOIN Habiter h ON e.id = h.idEspece
+                                        WHERE nomPlanete = @planete;";
+
+            SQLiteDataAdapter da6 = new SQLiteDataAdapter(chargerAliens, Connexion.Connec);
+            da6.SelectCommand.Parameters.AddWithValue("@planete", nomPlanete);
+
+            DataTable dt6 = new DataTable();
+            da6.Fill(dt6);
+
+            CboCapturer.DataSource = dt6;
+            CboCapturer.DisplayMember = "nom";
+            CboCapturer.ValueMember = "idEspece";
+
+            if(dt6.Rows.Count == 0)
+            {
+                CboCapturer.DataSource = null;
+                CboCapturer.Items.Clear();
+                CboCapturer.Text = "Aucun alien à capturer";
+                textBox1.Enabled = false;
+                BtnCapturer.Enabled = false;
+            }
+
+
+            string capture = @"SELECT * FROM Capturer WHERE nomPlanete = @planete AND numeroMission = @numero;";
+            daCapturer = new SQLiteDataAdapter(capture, Connexion.Connec);
+            daCapturer.SelectCommand.Parameters.AddWithValue("@planete", nomPlanete);
+            daCapturer.SelectCommand.Parameters.AddWithValue("@numero", numero);
+
+
+            if (MesDatas.DsGlobal.Tables.Contains("Capturer"))
+            {
+                MesDatas.DsGlobal.Tables["Capturer"].Clear();
+            }
+            daCapturer.Fill(MesDatas.DsGlobal, "Capturer");
+
+            try
+            {
+                DataColumn pkAlien1 = MesDatas.DsGlobal.Tables["Capturer"].Columns["nomPlanete"];
+                DataColumn pkAlien2 = MesDatas.DsGlobal.Tables["Capturer"].Columns["numeroMission"];
+                DataColumn pkAlien3 = MesDatas.DsGlobal.Tables["Capturer"].Columns["idEspeceEnnemi"];
+                MesDatas.DsGlobal.Tables["Capturer"].PrimaryKey = new DataColumn[] { pkAlien1, pkAlien2, pkAlien3 };
+            }
+            catch (SQLiteException err)
+            {
+                MessageBox.Show(err.Message);
             }
         }
 
@@ -360,30 +434,43 @@ namespace SAE24
                 ligne[3] = TxtSomme.Text.ToString();
                 ligne[4] = RtbAppreciation.Text.ToString();
                 ligne[5] = CboInformateur.SelectedValue.ToString();
-                
-                try
+
+
+                if (int.TryParse(TxtSomme.Text, out int montant) && int.TryParse(LblResultat.Text.Split(' ')[0], out int valeur))
                 {
-                    MesDatas.DsGlobal.Tables["Contact"].Rows.Add(ligne);
+                    if (montant > valeur)
+                    {
+                        errorProvider1.SetError(TxtSomme, "Le montant du contact ne peut pas être supérieur au budget restant.");
+                    }
+                    else
+                    {
+                        try
+                        {
+                            MesDatas.DsGlobal.Tables["Contact"].Rows.Add(ligne);
 
-                    MessageBox.Show("Contact ajouté avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Contact ajouté avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    TxtSomme.Clear();
-                    RtbAppreciation.Clear();
-                    DtpContact.Value = DateTime.Now;
+                            TxtSomme.Clear();
+                            RtbAppreciation.Clear();
+                            DtpContact.Value = DateTime.Now;
 
-                    SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
-                    da.Update(MesDatas.DsGlobal, "Contact");
-                    string tab = LblDépenses.Text.Split(':')[1];
-                    
+                            SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
+                            da.Update(MesDatas.DsGlobal, "Contact");
+
+                            valeur -= montant;
+                            LblResultat.Text = valeur.ToString() + " €";
+                        }
+                        catch (SQLiteException err)
+                        {
+                            MessageBox.Show(err.Message);
+                        }
+                        catch (ConstraintException err)
+                        {
+                            MessageBox.Show("Attention, vous ne pouvez contacter un alien qu'une seule fois par jour.\n", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                 }
-                catch (SQLiteException err) 
-                { 
-                    MessageBox.Show(err.Message);
-                }
-                catch (ConstraintException err)
-                {
-                    MessageBox.Show("Attention, vous ne pouvez contacter un alien qu'une seule fois par jour.\n(" + err + ").", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                else { MessageBox.Show("Veuillez entrer un montant valide pour le contact.", "Erreur de saisie", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
         }
 
@@ -429,12 +516,6 @@ namespace SAE24
                 valide = false;
             }
 
-            if(Convert.ToInt32(TxtMontant.Text) > resultat)
-            {
-                MessageBox.Show("Attention, le montant de la dépense ne peut pas être supérieur au budget restant.", "Erreur de budget", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                errorProvider1.SetError(TxtMontant, "Le montant de la dépense ne peut pas être supérieur au budget restant.");
-                valide = false;
-            }
 
             string sql = "SELECT * FROM Depense WHERE nomPlanete = @planete AND numeroMission = @numMission;";
             SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
@@ -482,20 +563,125 @@ namespace SAE24
                 ligne[5] = RtbExplication.Text.ToString();
                 ligne[6] = CboMotif.SelectedValue.ToString();
 
+
+                if (int.TryParse(TxtMontant.Text, out int montant) && int.TryParse(LblResultat.Text.Split(' ')[0], out int valeur))
+                {
+                    if (montant > valeur)
+                    {
+                        errorProvider1.SetError(TxtMontant, "Le montant de la dépense ne peut pas être supérieur au budget restant.");
+                    }
+                    else
+                    {
+                        try
+                        {
+                            MesDatas.DsGlobal.Tables["Depense"].Rows.Add(ligne);
+
+                            MessageBox.Show("Dépense ajoutée avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            TxtMontant.Clear();
+                            RtbExplication.Clear();
+                            DtpDepense.Value = DateTime.Now;
+
+                            SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
+                            da.Update(MesDatas.DsGlobal, "Depense");
+
+                            valeur -= montant;
+                            LblResultat.Text = valeur.ToString() + " €";
+                        }
+                        catch (SQLiteException err)
+                        {
+                            MessageBox.Show(err.Message);
+                        }
+                        catch (ConstraintException err)
+                        {
+                            MessageBox.Show("Attention, vous ne pouvez ajouter un événement qu'une seule fois par jour.\n", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void BtnAnnulerDepense_Click(object sender, EventArgs e)
+        {
+            DtpDepense.Value = DateTime.Now;
+            TxtMontant.Text = "";
+            RtbExplication.Text = "";
+            GrpDepense.Visible = false;
+            GrpContact.Visible = true;
+        }
+
+        private void BtnAnnulerEvenement_Click(object sender, EventArgs e)
+        {
+            DtpEvenement.Value = DateTime.Now;
+            RtbCommentaire.Text = "";
+            GrpEvenement.Visible = false;
+            GrpContact.Visible = true;
+        }
+
+        private void BtnMenu_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+            {
+                e.Handled = false;
+            }
+            if (e.KeyChar == 13)
+            {
+                BtnCapturer.Focus();
+            }
+        }
+
+        private void BtnCapturer_Click(object sender, EventArgs e)
+        {
+            bool valide = true;
+
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                errorProvider1.SetError(textBox1, "Veuillez entrer une capture");
+                valide = false;
+            }
+
+            if (valide)
+            {
+                
+
+                DataTable dt = MesDatas.DsGlobal.Tables["Capturer"];
+                DataRow ligneExistante = dt.Rows.Find(new object[]
+                {
+                    nomPlanete, numero, Convert.ToInt32(CboCapturer.SelectedValue)
+                });
+
                 try
                 {
-                    MesDatas.DsGlobal.Tables["Depense"].Rows.Add(ligne);
+                    if (ligneExistante != null)
+                    {
+                        ligneExistante["nombre"] =
+                            Convert.ToInt32(
+                                ligneExistante["nombre"])
+                            +
+                            Convert.ToInt32(
+                                textBox1.Text);
+                    }
+                    else
+                    {
+                        DataRow ligne = dt.NewRow();
+                        ligne = MesDatas.DsGlobal.Tables["Capturer"].NewRow();
+                        ligne["nomPlanete"] = LblTitre.Text.Split(' ')[1];
+                        ligne["numeroMission"] = Convert.ToInt64(LblTitre.Text.Split(' ')[2]);
+                        ligne["idEspeceEnnemi"] = CboCapturer.SelectedValue.ToString();
+                        ligne["nombre"] = Convert.ToInt32(textBox1.Text);
 
-                    MessageBox.Show("Dépense ajoutée avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        dt.Rows.Add(ligne);
+                    }
+                    SQLiteCommandBuilder cb = new SQLiteCommandBuilder(daCapturer);
 
-                    TxtMontant.Clear();
-                    RtbExplication.Clear();
-                    DtpDepense.Value = DateTime.Now;
-
-                    SQLiteCommandBuilder cb = new SQLiteCommandBuilder(da);
-                    da.Update(MesDatas.DsGlobal, "Depense");
-
-                    DetailMissions_Load(sender, e);
+                    daCapturer.Update(dt);
+                    MessageBox.Show("Capture ajoutée avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SQLiteException err)
                 {
@@ -559,9 +745,10 @@ namespace SAE24
                 DataRow ligne;
                 ligne = MesDatas.DsGlobal.Tables["JournalDeBord"].NewRow();
                 ligne[0] = LblTitre.Text.Split(' ')[1];
-                ligne[1] = Convert.ToInt64(LblTitre.Text.Split(' ')[2]);              
-                ligne[2] = DtpDepense.Value.ToString("yyyy-MM-dd");
-                ligne[3] = RtbExplication.Text.ToString();
+                ligne[1] = Convert.ToInt64(LblTitre.Text.Split(' ')[2]);
+                ligne[2] = DtpEvenement.Value.ToString("yyyy-MM-dd");
+                ligne[3] = RtbCommentaire.Text;
+
 
                 try
                 {
@@ -578,6 +765,10 @@ namespace SAE24
                 catch (SQLiteException err)
                 {
                     MessageBox.Show(err.Message);
+                }
+                catch (ConstraintException err)
+                {
+                    MessageBox.Show("Attention, vous ne pouvez ajouter un événement qu'une seule fois par jour.\n", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

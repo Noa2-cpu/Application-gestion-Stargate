@@ -22,6 +22,9 @@ namespace SAE24
 
         private void RepertoirePlanetes_Load(object sender, EventArgs e)
         {
+            UIStyle.LoadFont("Orbitron-Regular.ttf");
+            UIStyle.Apply(this);
+
             string sql = @" SELECT 
                                 P.nom AS NomPlanete,
                                 P.temperature,
