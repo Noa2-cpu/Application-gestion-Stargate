@@ -58,7 +58,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.grpRepertoirePlanete);
             this.Name = "RepertoirePlanetes";
-            this.Text = "RepertoirePlanete";
+            this.Text = "Répertoire des planetes";
             this.Load += new System.EventHandler(this.RepertoirePlanetes_Load);
             this.grpRepertoirePlanete.ResumeLayout(false);
             this.ResumeLayout(false);
