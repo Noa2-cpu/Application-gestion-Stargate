@@ -1,5 +1,4 @@
-﻿using RepertoirRaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +17,6 @@ namespace SAE24
     {
         private SQLiteDataAdapter da;
         private DataTable dt;
-        private DataSet ds;
         public RepertoireRaces()
         {
             InitializeComponent();
