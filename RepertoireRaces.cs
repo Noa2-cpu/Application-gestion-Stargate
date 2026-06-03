@@ -24,6 +24,8 @@ namespace SAE24
 
         private void RepertoireRaces_Load(object sender, EventArgs e)
         {
+            UIStyle.LoadFont("Orbitron-Regular.ttf");
+            UIStyle.Apply(this);
             string sql = @" SELECT
                                 E.id,
                                 E.nom,

@@ -101,8 +101,10 @@
             this.groupBox1.Controls.Add(this.CboChoisirPlanete);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(22, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(759, 711);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(567, 549);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nouvelle mission";
@@ -110,7 +112,8 @@
             // BtnValider
             // 
             this.BtnValider.Enabled = false;
-            this.BtnValider.Location = new System.Drawing.Point(584, 652);
+            this.BtnValider.Location = new System.Drawing.Point(404, 492);
+            this.BtnValider.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnValider.Name = "BtnValider";
             this.BtnValider.Size = new System.Drawing.Size(156, 44);
             this.BtnValider.TabIndex = 23;
@@ -121,7 +124,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(348, 598);
+            this.label12.Location = new System.Drawing.Point(252, 517);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(18, 20);
             this.label12.TabIndex = 22;
@@ -129,7 +132,8 @@
             // 
             // TxtBudget
             // 
-            this.TxtBudget.Location = new System.Drawing.Point(257, 592);
+            this.TxtBudget.Location = new System.Drawing.Point(149, 511);
+            this.TxtBudget.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtBudget.Name = "TxtBudget";
             this.TxtBudget.Size = new System.Drawing.Size(85, 26);
             this.TxtBudget.TabIndex = 21;
@@ -138,7 +142,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(94, 595);
+            this.label13.Location = new System.Drawing.Point(19, 515);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(61, 20);
             this.label13.TabIndex = 20;
@@ -147,7 +151,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(326, 556);
+            this.label11.Location = new System.Drawing.Point(234, 475);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(58, 20);
             this.label11.TabIndex = 19;
@@ -155,7 +159,8 @@
             // 
             // TxtObjDatabaz
             // 
-            this.TxtObjDatabaz.Location = new System.Drawing.Point(257, 553);
+            this.TxtObjDatabaz.Location = new System.Drawing.Point(149, 472);
+            this.TxtObjDatabaz.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtObjDatabaz.Name = "TxtObjDatabaz";
             this.TxtObjDatabaz.Size = new System.Drawing.Size(63, 26);
             this.TxtObjDatabaz.TabIndex = 18;
@@ -164,7 +169,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(94, 556);
+            this.label10.Location = new System.Drawing.Point(19, 476);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(128, 20);
             this.label10.TabIndex = 17;
@@ -173,7 +178,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(326, 513);
+            this.label9.Location = new System.Drawing.Point(234, 435);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(84, 20);
             this.label9.TabIndex = 16;
@@ -181,7 +186,8 @@
             // 
             // TxtNbPersonne
             // 
-            this.TxtNbPersonne.Location = new System.Drawing.Point(257, 510);
+            this.TxtNbPersonne.Location = new System.Drawing.Point(149, 432);
+            this.TxtNbPersonne.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtNbPersonne.Name = "TxtNbPersonne";
             this.TxtNbPersonne.Size = new System.Drawing.Size(63, 26);
             this.TxtNbPersonne.TabIndex = 15;
@@ -190,7 +196,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(94, 513);
+            this.label8.Location = new System.Drawing.Point(19, 435);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(157, 20);
             this.label8.TabIndex = 14;
@@ -199,7 +205,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(596, 324);
+            this.label7.Location = new System.Drawing.Point(469, 246);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 20);
             this.label7.TabIndex = 13;
@@ -207,9 +213,10 @@
             // 
             // RtbFeuilleRoute
             // 
-            this.RtbFeuilleRoute.Location = new System.Drawing.Point(257, 361);
+            this.RtbFeuilleRoute.Location = new System.Drawing.Point(149, 283);
+            this.RtbFeuilleRoute.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.RtbFeuilleRoute.Name = "RtbFeuilleRoute";
-            this.RtbFeuilleRoute.Size = new System.Drawing.Size(483, 127);
+            this.RtbFeuilleRoute.Size = new System.Drawing.Size(411, 128);
             this.RtbFeuilleRoute.TabIndex = 12;
             this.RtbFeuilleRoute.Text = "";
             this.RtbFeuilleRoute.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RtbFeuilleRoute_KeyPress);
@@ -217,7 +224,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(94, 364);
+            this.label6.Location = new System.Drawing.Point(19, 286);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(118, 20);
             this.label6.TabIndex = 11;
@@ -226,7 +233,8 @@
             // DtpRetour
             // 
             this.DtpRetour.CustomFormat = "";
-            this.DtpRetour.Location = new System.Drawing.Point(257, 319);
+            this.DtpRetour.Location = new System.Drawing.Point(149, 241);
+            this.DtpRetour.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DtpRetour.Name = "DtpRetour";
             this.DtpRetour.Size = new System.Drawing.Size(292, 26);
             this.DtpRetour.TabIndex = 10;
@@ -234,7 +242,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(94, 324);
+            this.label5.Location = new System.Drawing.Point(19, 246);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(112, 20);
             this.label5.TabIndex = 9;
@@ -243,7 +251,8 @@
             // DtpDepart
             // 
             this.DtpDepart.CustomFormat = "";
-            this.DtpDepart.Location = new System.Drawing.Point(257, 280);
+            this.DtpDepart.Location = new System.Drawing.Point(149, 202);
+            this.DtpDepart.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DtpDepart.Name = "DtpDepart";
             this.DtpDepart.Size = new System.Drawing.Size(292, 26);
             this.DtpDepart.TabIndex = 8;
@@ -251,7 +260,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(94, 284);
+            this.label4.Location = new System.Drawing.Point(19, 206);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(116, 20);
             this.label4.TabIndex = 7;
@@ -260,7 +269,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 238);
+            this.label3.Location = new System.Drawing.Point(5, 167);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(216, 20);
             this.label3.TabIndex = 6;
@@ -269,15 +278,16 @@
             // CboChefMission
             // 
             this.CboChefMission.FormattingEnabled = true;
-            this.CboChefMission.Location = new System.Drawing.Point(246, 167);
+            this.CboChefMission.Location = new System.Drawing.Point(180, 96);
+            this.CboChefMission.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CboChefMission.Name = "CboChefMission";
-            this.CboChefMission.Size = new System.Drawing.Size(346, 28);
+            this.CboChefMission.Size = new System.Drawing.Size(218, 28);
             this.CboChefMission.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 170);
+            this.label2.Location = new System.Drawing.Point(5, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(214, 20);
             this.label2.TabIndex = 4;
@@ -287,17 +297,19 @@
             // 
             this.LblAfficherPlanete.AutoSize = true;
             this.LblAfficherPlanete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.LblAfficherPlanete.Location = new System.Drawing.Point(38, 86);
+            this.LblAfficherPlanete.Location = new System.Drawing.Point(18, 55);
             this.LblAfficherPlanete.Name = "LblAfficherPlanete";
             this.LblAfficherPlanete.Size = new System.Drawing.Size(19, 29);
             this.LblAfficherPlanete.TabIndex = 3;
             this.LblAfficherPlanete.Text = " ";
+            this.LblAfficherPlanete.Click += new System.EventHandler(this.LblAfficherPlanete_Click);
             // 
             // BtnPlanete
             // 
-            this.BtnPlanete.Location = new System.Drawing.Point(561, 33);
+            this.BtnPlanete.Location = new System.Drawing.Point(440, 19);
+            this.BtnPlanete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnPlanete.Name = "BtnPlanete";
-            this.BtnPlanete.Size = new System.Drawing.Size(165, 36);
+            this.BtnPlanete.Size = new System.Drawing.Size(124, 27);
             this.BtnPlanete.TabIndex = 2;
             this.BtnPlanete.Text = "Valider la planète";
             this.BtnPlanete.UseVisualStyleBackColor = true;
@@ -306,15 +318,16 @@
             // CboChoisirPlanete
             // 
             this.CboChoisirPlanete.FormattingEnabled = true;
-            this.CboChoisirPlanete.Location = new System.Drawing.Point(246, 33);
+            this.CboChoisirPlanete.Location = new System.Drawing.Point(180, 20);
+            this.CboChoisirPlanete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CboChoisirPlanete.Name = "CboChoisirPlanete";
-            this.CboChoisirPlanete.Size = new System.Drawing.Size(270, 28);
+            this.CboChoisirPlanete.Size = new System.Drawing.Size(218, 28);
             this.CboChoisirPlanete.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 36);
+            this.label1.Location = new System.Drawing.Point(5, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(173, 20);
             this.label1.TabIndex = 0;
@@ -340,16 +353,20 @@
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.CboChoisirMembre);
             this.groupBox2.Enabled = false;
-            this.groupBox2.Location = new System.Drawing.Point(805, 12);
+            this.groupBox2.Location = new System.Drawing.Point(603, 12);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Size = new System.Drawing.Size(758, 711);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Affectation et objectif(s) de captures";
+            this.groupBox2.Visible = false;
             // 
             // BtnFinirMission
             // 
             this.BtnFinirMission.Location = new System.Drawing.Point(561, 667);
+            this.BtnFinirMission.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnFinirMission.Name = "BtnFinirMission";
             this.BtnFinirMission.Size = new System.Drawing.Size(183, 38);
             this.BtnFinirMission.TabIndex = 2;
@@ -369,6 +386,7 @@
             // TxtNombreCapture
             // 
             this.TxtNombreCapture.Location = new System.Drawing.Point(456, 407);
+            this.TxtNombreCapture.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TxtNombreCapture.Name = "TxtNombreCapture";
             this.TxtNombreCapture.Size = new System.Drawing.Size(68, 26);
             this.TxtNombreCapture.TabIndex = 10;
@@ -377,6 +395,7 @@
             // BtnValiderObjectifs
             // 
             this.BtnValiderObjectifs.Location = new System.Drawing.Point(574, 609);
+            this.BtnValiderObjectifs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnValiderObjectifs.Name = "BtnValiderObjectifs";
             this.BtnValiderObjectifs.Size = new System.Drawing.Size(170, 40);
             this.BtnValiderObjectifs.TabIndex = 9;
@@ -390,6 +409,7 @@
             this.LstAfficherAliens.HorizontalScrollbar = true;
             this.LstAfficherAliens.ItemHeight = 20;
             this.LstAfficherAliens.Location = new System.Drawing.Point(80, 479);
+            this.LstAfficherAliens.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LstAfficherAliens.Name = "LstAfficherAliens";
             this.LstAfficherAliens.Size = new System.Drawing.Size(664, 124);
             this.LstAfficherAliens.TabIndex = 8;
@@ -397,6 +417,7 @@
             // BtnAjouterAliens
             // 
             this.BtnAjouterAliens.Location = new System.Drawing.Point(590, 407);
+            this.BtnAjouterAliens.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnAjouterAliens.Name = "BtnAjouterAliens";
             this.BtnAjouterAliens.Size = new System.Drawing.Size(154, 40);
             this.BtnAjouterAliens.TabIndex = 7;
@@ -417,6 +438,7 @@
             // 
             this.CboAliens.FormattingEnabled = true;
             this.CboAliens.Location = new System.Drawing.Point(80, 407);
+            this.CboAliens.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CboAliens.Name = "CboAliens";
             this.CboAliens.Size = new System.Drawing.Size(343, 28);
             this.CboAliens.TabIndex = 5;
@@ -424,7 +446,8 @@
             // BtnValiderMembre
             // 
             this.BtnValiderMembre.Enabled = false;
-            this.BtnValiderMembre.Location = new System.Drawing.Point(574, 288);
+            this.BtnValiderMembre.Location = new System.Drawing.Point(253, 290);
+            this.BtnValiderMembre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnValiderMembre.Name = "BtnValiderMembre";
             this.BtnValiderMembre.Size = new System.Drawing.Size(170, 40);
             this.BtnValiderMembre.TabIndex = 4;
@@ -437,16 +460,18 @@
             this.LstAfficherMembre.FormattingEnabled = true;
             this.LstAfficherMembre.HorizontalScrollbar = true;
             this.LstAfficherMembre.ItemHeight = 20;
-            this.LstAfficherMembre.Location = new System.Drawing.Point(80, 158);
+            this.LstAfficherMembre.Location = new System.Drawing.Point(33, 158);
+            this.LstAfficherMembre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LstAfficherMembre.Name = "LstAfficherMembre";
-            this.LstAfficherMembre.Size = new System.Drawing.Size(664, 124);
+            this.LstAfficherMembre.Size = new System.Drawing.Size(390, 124);
             this.LstAfficherMembre.TabIndex = 3;
             // 
             // BtnAjouterMembre
             // 
-            this.BtnAjouterMembre.Location = new System.Drawing.Point(590, 86);
+            this.BtnAjouterMembre.Location = new System.Drawing.Point(409, 86);
+            this.BtnAjouterMembre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnAjouterMembre.Name = "BtnAjouterMembre";
-            this.BtnAjouterMembre.Size = new System.Drawing.Size(154, 40);
+            this.BtnAjouterMembre.Size = new System.Drawing.Size(116, 27);
             this.BtnAjouterMembre.TabIndex = 2;
             this.BtnAjouterMembre.Text = "Ajouter le membre";
             this.BtnAjouterMembre.UseVisualStyleBackColor = true;
@@ -464,18 +489,21 @@
             // CboChoisirMembre
             // 
             this.CboChoisirMembre.FormattingEnabled = true;
-            this.CboChoisirMembre.Location = new System.Drawing.Point(80, 86);
+            this.CboChoisirMembre.Location = new System.Drawing.Point(33, 86);
+            this.CboChoisirMembre.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CboChoisirMembre.Name = "CboChoisirMembre";
-            this.CboChoisirMembre.Size = new System.Drawing.Size(444, 28);
+            this.CboChoisirMembre.Size = new System.Drawing.Size(267, 28);
             this.CboChoisirMembre.TabIndex = 0;
             // 
             // CreationMission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1583, 737);
+            this.ClientSize = new System.Drawing.Size(1365, 736);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "CreationMission";
             this.Text = "Création d\'une nouvelle mission";
             this.Load += new System.EventHandler(this.CreationMission_Load);
