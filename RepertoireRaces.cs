@@ -17,7 +17,6 @@ namespace SAE24
     {
         private SQLiteDataAdapter da;
         private DataTable dt;
-        private DataSet ds;
         public RepertoireRaces()
         {
             InitializeComponent();
