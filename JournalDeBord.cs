@@ -155,7 +155,13 @@ namespace SAE24
                 ligne["NbCaptures"] = dr["nombre"];
 
                 int objectif = Convert.ToInt32(dr["objectif"]);
-                int captures = Convert.ToInt32(dr["nombre"]);
+
+                object resultat = dr["nombre"];
+                int captures = 0;
+                if (resultat != DBNull.Value && resultat != null)
+                {
+                    captures = Convert.ToInt32(dr["nombre"]);
+                }
 
                 taux = 0;
 
@@ -165,27 +171,21 @@ namespace SAE24
                 ligne["TauxReussite"] = taux;
 
                 bilan.Rows.Add(ligne);
+
             }
-            dataGridView2.DataSource = bilan;
+            afficherBilan(bilan);
+        }
 
-            foreach (DataGridViewRow row in dataGridView2.Rows)
+        private void afficherBilan(DataTable bilan)
+        {
+            FlpCaptures.Controls.Clear();
+            foreach(DataRow dr in bilan.Rows)
             {
-                if (row.IsNewRow) continue;
+                AfficherCaptureAlien capture = new AfficherCaptureAlien();
 
-                double taux = Convert.ToDouble(row.Cells["TauxReussite"].Value);
+                capture.chargerDonnees(dr);
 
-                if (taux < 50)
-                {
-                    row.Cells["TauxReussite"].Style.BackColor = Color.LightCoral;
-                }
-                else if (taux < 80)
-                {
-                    row.Cells["TauxReussite"].Style.BackColor = Color.Orange;
-                }
-                else
-                {
-                    row.Cells["TauxReussite"].Style.BackColor = Color.Green;
-                }
+                FlpCaptures.Controls.Add(capture);
             }
         }
 

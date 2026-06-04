@@ -47,7 +47,7 @@
             this.LblTotalDepense = new System.Windows.Forms.Label();
             this.BtnQuitter = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.FlpCaptures = new System.Windows.Forms.FlowLayoutPanel();
             this.GrpJournal.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.GrpContactRendu.SuspendLayout();
@@ -55,7 +55,6 @@
             this.GrpDepenses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvDepenses)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // GrpJournal
@@ -205,7 +204,7 @@
             // BtnEditerPdf
             // 
             this.BtnEditerPdf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.BtnEditerPdf.Location = new System.Drawing.Point(489, 596);
+            this.BtnEditerPdf.Location = new System.Drawing.Point(471, 557);
             this.BtnEditerPdf.Name = "BtnEditerPdf";
             this.BtnEditerPdf.Size = new System.Drawing.Size(151, 46);
             this.BtnEditerPdf.TabIndex = 3;
@@ -233,7 +232,7 @@
             // 
             // BtnQuitter
             // 
-            this.BtnQuitter.Location = new System.Drawing.Point(981, 607);
+            this.BtnQuitter.Location = new System.Drawing.Point(974, 568);
             this.BtnQuitter.Name = "BtnQuitter";
             this.BtnQuitter.Size = new System.Drawing.Size(104, 35);
             this.BtnQuitter.TabIndex = 6;
@@ -243,29 +242,28 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dataGridView2);
+            this.groupBox1.Controls.Add(this.FlpCaptures);
             this.groupBox1.Location = new System.Drawing.Point(651, 328);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(433, 273);
+            this.groupBox1.Size = new System.Drawing.Size(439, 193);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bilan des captures";
             // 
-            // dataGridView2
+            // FlpCaptures
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(7, 29);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 62;
-            this.dataGridView2.RowTemplate.Height = 28;
-            this.dataGridView2.Size = new System.Drawing.Size(420, 238);
-            this.dataGridView2.TabIndex = 8;
+            this.FlpCaptures.AutoScroll = true;
+            this.FlpCaptures.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FlpCaptures.Location = new System.Drawing.Point(3, 26);
+            this.FlpCaptures.Name = "FlpCaptures";
+            this.FlpCaptures.Size = new System.Drawing.Size(433, 164);
+            this.FlpCaptures.TabIndex = 0;
             // 
             // GrpContact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 654);
+            this.ClientSize = new System.Drawing.Size(1097, 609);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BtnQuitter);
             this.Controls.Add(this.LblTotalDepense);
@@ -288,7 +286,6 @@
             this.GrpDepenses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvDepenses)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -315,6 +312,6 @@
         private System.Windows.Forms.Label LblTotalDepense;
         private System.Windows.Forms.Button BtnQuitter;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.FlowLayoutPanel FlpCaptures;
     }
 }
