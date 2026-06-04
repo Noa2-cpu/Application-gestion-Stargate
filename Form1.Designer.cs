@@ -35,15 +35,15 @@
             this.btnStats = new System.Windows.Forms.Button();
             this.btnQuitter = new System.Windows.Forms.Button();
             this.grpFiltre = new System.Windows.Forms.GroupBox();
+            this.chkbAVenir = new System.Windows.Forms.CheckBox();
+            this.chkbTerminer = new System.Windows.Forms.CheckBox();
+            this.chkbEnCours = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pcbGris = new System.Windows.Forms.PictureBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.rdbAVenir = new System.Windows.Forms.RadioButton();
-            this.rdbEnCours = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.btnReinitialiser = new System.Windows.Forms.Button();
             this.btnAppliquer = new System.Windows.Forms.Button();
@@ -60,34 +60,34 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(50, 43);
+            this.button2.Location = new System.Drawing.Point(65, 43);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(138, 35);
+            this.button2.Size = new System.Drawing.Size(232, 35);
             this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
+            this.button2.Text = "Créer une mission";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(319, 43);
+            this.button3.Location = new System.Drawing.Point(368, 43);
             this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(138, 35);
+            this.button3.Size = new System.Drawing.Size(232, 35);
             this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
+            this.button3.Text = "Répertoire des Races";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(709, 43);
+            this.button4.Location = new System.Drawing.Point(752, 43);
             this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(138, 35);
+            this.button4.Size = new System.Drawing.Size(232, 35);
             this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
+            this.button4.Text = "Répertoire des planètes";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -103,12 +103,12 @@
             // 
             // btnStats
             // 
-            this.btnStats.Location = new System.Drawing.Point(974, 43);
+            this.btnStats.Location = new System.Drawing.Point(1057, 43);
             this.btnStats.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStats.Name = "btnStats";
-            this.btnStats.Size = new System.Drawing.Size(138, 35);
+            this.btnStats.Size = new System.Drawing.Size(228, 35);
             this.btnStats.TabIndex = 5;
-            this.btnStats.Text = "button5";
+            this.btnStats.Text = "Statistiques";
             this.btnStats.UseVisualStyleBackColor = true;
             this.btnStats.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -125,15 +125,15 @@
             // grpFiltre
             // 
             this.grpFiltre.BackColor = System.Drawing.Color.Transparent;
+            this.grpFiltre.Controls.Add(this.chkbAVenir);
+            this.grpFiltre.Controls.Add(this.chkbTerminer);
+            this.grpFiltre.Controls.Add(this.chkbEnCours);
             this.grpFiltre.Controls.Add(this.label4);
             this.grpFiltre.Controls.Add(this.label3);
             this.grpFiltre.Controls.Add(this.pictureBox2);
             this.grpFiltre.Controls.Add(this.pictureBox1);
             this.grpFiltre.Controls.Add(this.label1);
             this.grpFiltre.Controls.Add(this.pcbGris);
-            this.grpFiltre.Controls.Add(this.radioButton1);
-            this.grpFiltre.Controls.Add(this.rdbAVenir);
-            this.grpFiltre.Controls.Add(this.rdbEnCours);
             this.grpFiltre.Controls.Add(this.label2);
             this.grpFiltre.Controls.Add(this.btnReinitialiser);
             this.grpFiltre.Controls.Add(this.btnAppliquer);
@@ -144,6 +144,36 @@
             this.grpFiltre.TabIndex = 8;
             this.grpFiltre.TabStop = false;
             this.grpFiltre.Text = "Filtres des missions";
+            // 
+            // chkbAVenir
+            // 
+            this.chkbAVenir.AutoSize = true;
+            this.chkbAVenir.Location = new System.Drawing.Point(270, 189);
+            this.chkbAVenir.Name = "chkbAVenir";
+            this.chkbAVenir.Size = new System.Drawing.Size(95, 29);
+            this.chkbAVenir.TabIndex = 14;
+            this.chkbAVenir.Text = "A venir";
+            this.chkbAVenir.UseVisualStyleBackColor = true;
+            // 
+            // chkbTerminer
+            // 
+            this.chkbTerminer.AutoSize = true;
+            this.chkbTerminer.Location = new System.Drawing.Point(68, 238);
+            this.chkbTerminer.Name = "chkbTerminer";
+            this.chkbTerminer.Size = new System.Drawing.Size(117, 29);
+            this.chkbTerminer.TabIndex = 13;
+            this.chkbTerminer.Text = "Terminée";
+            this.chkbTerminer.UseVisualStyleBackColor = true;
+            // 
+            // chkbEnCours
+            // 
+            this.chkbEnCours.AutoSize = true;
+            this.chkbEnCours.Location = new System.Drawing.Point(68, 189);
+            this.chkbEnCours.Name = "chkbEnCours";
+            this.chkbEnCours.Size = new System.Drawing.Size(111, 29);
+            this.chkbEnCours.TabIndex = 12;
+            this.chkbEnCours.Text = "En cours";
+            this.chkbEnCours.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -202,39 +232,6 @@
             this.pcbGris.TabIndex = 5;
             this.pcbGris.TabStop = false;
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(268, 178);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(116, 29);
-            this.radioButton1.TabIndex = 6;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Terminée";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // rdbAVenir
-            // 
-            this.rdbAVenir.AutoSize = true;
-            this.rdbAVenir.Location = new System.Drawing.Point(68, 235);
-            this.rdbAVenir.Name = "rdbAVenir";
-            this.rdbAVenir.Size = new System.Drawing.Size(94, 29);
-            this.rdbAVenir.TabIndex = 5;
-            this.rdbAVenir.TabStop = true;
-            this.rdbAVenir.Text = "A venir";
-            this.rdbAVenir.UseVisualStyleBackColor = true;
-            // 
-            // rdbEnCours
-            // 
-            this.rdbEnCours.AutoSize = true;
-            this.rdbEnCours.Location = new System.Drawing.Point(68, 178);
-            this.rdbEnCours.Name = "rdbEnCours";
-            this.rdbEnCours.Size = new System.Drawing.Size(110, 29);
-            this.rdbEnCours.TabIndex = 4;
-            this.rdbEnCours.TabStop = true;
-            this.rdbEnCours.Text = "En cours";
-            this.rdbEnCours.UseVisualStyleBackColor = true;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -252,6 +249,7 @@
             this.btnReinitialiser.TabIndex = 2;
             this.btnReinitialiser.Text = "Réinitialiser";
             this.btnReinitialiser.UseVisualStyleBackColor = true;
+            this.btnReinitialiser.Click += new System.EventHandler(this.btnReinitialiser_Click);
             // 
             // btnAppliquer
             // 
@@ -261,6 +259,8 @@
             this.btnAppliquer.TabIndex = 1;
             this.btnAppliquer.Text = "Appliquer";
             this.btnAppliquer.UseVisualStyleBackColor = true;
+            this.btnAppliquer.Click += new System.EventHandler(this.btnAppliquer_Click);
+            this.btnAppliquer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.btnAppliquer_KeyPress);
             // 
             // txtbFiltre
             // 
@@ -268,6 +268,7 @@
             this.txtbFiltre.Name = "txtbFiltre";
             this.txtbFiltre.Size = new System.Drawing.Size(233, 30);
             this.txtbFiltre.TabIndex = 0;
+            this.txtbFiltre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbFiltre_KeyPress);
             // 
             // grpMenu
             // 
@@ -334,9 +335,6 @@
         private System.Windows.Forms.Button btnAppliquer;
         private System.Windows.Forms.GroupBox grpMenu;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton rdbAVenir;
-        private System.Windows.Forms.RadioButton rdbEnCours;
         private System.Windows.Forms.GroupBox grpMission;
         private System.Windows.Forms.PictureBox pcbGris;
         private System.Windows.Forms.Label label1;
@@ -344,6 +342,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox chkbAVenir;
+        private System.Windows.Forms.CheckBox chkbTerminer;
+        private System.Windows.Forms.CheckBox chkbEnCours;
     }
 }
 

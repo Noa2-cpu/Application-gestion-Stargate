@@ -216,12 +216,9 @@ namespace SAE24
 
             da.Fill(MesDatas.DsGlobal, "DepensesImportantes");
 
-            // Debug : combien de lignes ?
-            MessageBox.Show("Nombre de lignes : " + MesDatas.DsGlobal.Tables["DepensesImportantes"].Rows.Count);
 
             foreach (DataRow row in MesDatas.DsGlobal.Tables["DepensesImportantes"].Rows)
             {
-                MessageBox.Show(row["Mission"].ToString()); // Affiche chaque mission
 
                 string planete = @"..\..\img\" + row["Planete"].ToString() + ".jpg";
                 string mission = row["Mission"].ToString();

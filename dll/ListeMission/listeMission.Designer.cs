@@ -34,7 +34,6 @@
             this.lblRetour = new System.Windows.Forms.Label();
             this.lblBudget = new System.Windows.Forms.Label();
             this.pcbPlanete = new System.Windows.Forms.PictureBox();
-            this.btnDetail = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pcbPlanete)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +77,7 @@
             // lblBudget
             // 
             this.lblBudget.AutoSize = true;
-            this.lblBudget.Location = new System.Drawing.Point(250, 94);
+            this.lblBudget.Location = new System.Drawing.Point(81, 126);
             this.lblBudget.Name = "lblBudget";
             this.lblBudget.Size = new System.Drawing.Size(56, 16);
             this.lblBudget.TabIndex = 4;
@@ -92,21 +91,11 @@
             this.pcbPlanete.TabIndex = 5;
             this.pcbPlanete.TabStop = false;
             // 
-            // btnDetail
-            // 
-            this.btnDetail.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDetail.Location = new System.Drawing.Point(409, 63);
-            this.btnDetail.Name = "btnDetail";
-            this.btnDetail.Size = new System.Drawing.Size(37, 37);
-            this.btnDetail.TabIndex = 0;
-            this.btnDetail.Click += new System.EventHandler(this.btnDetail_Click);
-            // 
             // listeMission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Controls.Add(this.btnDetail);
             this.Controls.Add(this.pcbPlanete);
             this.Controls.Add(this.lblBudget);
             this.Controls.Add(this.lblRetour);
@@ -115,7 +104,7 @@
             this.Controls.Add(this.lbNom);
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Name = "listeMission";
-            this.Size = new System.Drawing.Size(460, 140);
+            this.Size = new System.Drawing.Size(414, 156);
             ((System.ComponentModel.ISupportInitialize)(this.pcbPlanete)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -130,6 +119,5 @@
         private System.Windows.Forms.Label lblRetour;
         private System.Windows.Forms.Label lblBudget;
         private System.Windows.Forms.PictureBox pcbPlanete;
-        private System.Windows.Forms.Button btnDetail;
     }
 }

@@ -43,13 +43,12 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.flpInformateur = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnRetour = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.flpDepenses = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.pcbLogo = new System.Windows.Forms.PictureBox();
+            this.flpInformateur = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnRetour = new System.Windows.Forms.Button();
             this.tbcStats.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -59,10 +58,9 @@
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.tabPage5.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // cboMilitaire
@@ -241,37 +239,6 @@
             this.tabPage4.Text = "Liste de dépense les plus élevé";
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
-            // tabPage5
-            // 
-            this.tabPage5.BackColor = System.Drawing.Color.Black;
-            this.tabPage5.Controls.Add(this.groupBox4);
-            this.tabPage5.ForeColor = System.Drawing.Color.Black;
-            this.tabPage5.Location = new System.Drawing.Point(4, 34);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1337, 583);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Liste des informateurs les moins payés";
-            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
-            // 
-            // flpInformateur
-            // 
-            this.flpInformateur.Location = new System.Drawing.Point(35, 45);
-            this.flpInformateur.Name = "flpInformateur";
-            this.flpInformateur.Size = new System.Drawing.Size(1168, 434);
-            this.flpInformateur.TabIndex = 0;
-            this.flpInformateur.Paint += new System.Windows.Forms.PaintEventHandler(this.flpInformateur_Paint);
-            // 
-            // btnRetour
-            // 
-            this.btnRetour.Location = new System.Drawing.Point(1106, 671);
-            this.btnRetour.Name = "btnRetour";
-            this.btnRetour.Size = new System.Drawing.Size(190, 45);
-            this.btnRetour.TabIndex = 5;
-            this.btnRetour.Text = "Retour";
-            this.btnRetour.UseVisualStyleBackColor = true;
-            this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.flpDepenses);
@@ -292,6 +259,19 @@
             this.flpDepenses.TabIndex = 0;
             this.flpDepenses.Paint += new System.Windows.Forms.PaintEventHandler(this.flpDepenses_Paint);
             // 
+            // tabPage5
+            // 
+            this.tabPage5.BackColor = System.Drawing.Color.Black;
+            this.tabPage5.Controls.Add(this.groupBox4);
+            this.tabPage5.ForeColor = System.Drawing.Color.Black;
+            this.tabPage5.Location = new System.Drawing.Point(4, 34);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(1337, 583);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Liste des informateurs les moins payés";
+            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.flpInformateur);
@@ -303,16 +283,23 @@
             this.groupBox4.Text = "Informateur";
             this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
-            // pcbLogo
+            // flpInformateur
             // 
-            this.pcbLogo.Image = global::SAE24.Properties.Resources.Logo;
-            this.pcbLogo.Location = new System.Drawing.Point(82, 659);
-            this.pcbLogo.Name = "pcbLogo";
-            this.pcbLogo.Size = new System.Drawing.Size(88, 88);
-            this.pcbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pcbLogo.TabIndex = 6;
-            this.pcbLogo.TabStop = false;
-            this.pcbLogo.Click += new System.EventHandler(this.pcbLogo_Click);
+            this.flpInformateur.Location = new System.Drawing.Point(35, 45);
+            this.flpInformateur.Name = "flpInformateur";
+            this.flpInformateur.Size = new System.Drawing.Size(1168, 434);
+            this.flpInformateur.TabIndex = 0;
+            this.flpInformateur.Paint += new System.Windows.Forms.PaintEventHandler(this.flpInformateur_Paint);
+            // 
+            // btnRetour
+            // 
+            this.btnRetour.Location = new System.Drawing.Point(1106, 671);
+            this.btnRetour.Name = "btnRetour";
+            this.btnRetour.Size = new System.Drawing.Size(190, 45);
+            this.btnRetour.TabIndex = 5;
+            this.btnRetour.Text = "Retour";
+            this.btnRetour.UseVisualStyleBackColor = true;
+            this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
             // frmStatistiques
             // 
@@ -321,14 +308,13 @@
             this.BackColor = System.Drawing.SystemColors.MenuText;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1407, 750);
-            this.Controls.Add(this.pcbLogo);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.tbcStats);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmStatistiques";
-            this.Text = "frmStatistiques";
+            this.Text = "Statistiques";
             this.Load += new System.EventHandler(this.frmStatistiques_Load);
             this.tbcStats.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -339,10 +325,9 @@
             this.tabPage3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pcbLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -369,6 +354,5 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.FlowLayoutPanel flpDepenses;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.PictureBox pcbLogo;
     }
 }

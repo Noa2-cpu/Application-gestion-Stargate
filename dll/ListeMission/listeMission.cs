@@ -10,6 +10,7 @@ namespace ListeMission
         //attributs
         private string budget, nomPlanete, depart, retour, chef, nomImage;
         private Color couleur;
+        private bool estSurvole = false;
 
         //Constructeur de base
         public listeMission()
@@ -35,8 +36,32 @@ namespace ListeMission
 
             chargerInterface();
 
-            
+            this.Click += ListeMission_Click;
+            foreach (Control ctrl in this.Controls)
+            {
+                ctrl.Click += ListeMission_Click;
+            }
+
+            this.MouseEnter += (s, e) => { estSurvole = true; this.Invalidate(); };
+            this.MouseLeave += (s, e) => { estSurvole = false; this.Invalidate(); };
+            foreach (Control ctrl in this.Controls)
+            {
+                ctrl.MouseEnter += (s, e) => { estSurvole = true; this.Invalidate(); };
+                ctrl.MouseLeave += (s, e) => { estSurvole = false; this.Invalidate(); };
+            }
+
         }
+
+
+        private void ListeMission_Click(object sender, System.EventArgs e)
+        {
+            if (this.afficheur != null)
+            {
+                this.afficheur(this, e);
+            }
+        }
+
+
 
         public string Budget { get => budget; set => budget = value; }
         public string NomPlanete { get => nomPlanete; set => nomPlanete = value; }
@@ -73,7 +98,18 @@ namespace ListeMission
             }
         }
 
-
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if (estSurvole)
+            {
+                ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle,
+                    Color.LightGoldenrodYellow, 3, ButtonBorderStyle.Solid,
+                    Color.LightGoldenrodYellow, 3, ButtonBorderStyle.Solid,
+                    Color.LightGoldenrodYellow, 3, ButtonBorderStyle.Solid,
+                    Color.LightGoldenrodYellow, 3, ButtonBorderStyle.Solid);
+            }
+        }
 
     }
 
