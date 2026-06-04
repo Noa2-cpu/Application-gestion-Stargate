@@ -107,7 +107,7 @@ namespace SAE24
                 if (bordGauche + ucPageInfo.Width > pnlRepertoir.Width)
                 {
                     bordGauche = 20;
-                    bordHaut += ucPageInfo.Height + 20;
+                    bordHaut += ucPageInfo.Height;
                 }
 
                 ucPageInfo.Top = bordHaut;
@@ -173,6 +173,10 @@ namespace SAE24
             cmbCouleurs.SelectedIndex = 0;
             cbAlliees.Checked = false;
             cbEnnemies.Checked = false;
+        }
+        private void btnRetour_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
