@@ -119,7 +119,14 @@ namespace SAE24
             bilan.Columns.Add("NbCaptures", typeof(int));
             bilan.Columns.Add("TauxReussite", typeof(string));
 
-            MesDatas.DsGlobal.Tables.Add(bilan);
+            try
+            {
+                MesDatas.DsGlobal.Tables.Add(bilan);
+            } 
+            catch(Exception ex) 
+            { 
+                MessageBox.Show(ex.Message);
+            }
 
             string captureTout = @"SELECT
                               es.nom,
@@ -155,7 +162,13 @@ namespace SAE24
                 ligne["NbCaptures"] = dr["nombre"];
 
                 int objectif = Convert.ToInt32(dr["objectif"]);
-                int captures = Convert.ToInt32(dr["nombre"]);
+
+                object resultat = dr["nombre"];
+                int captures = 0;
+                if (resultat != DBNull.Value && resultat != null)
+                {
+                    captures = Convert.ToInt32(dr["nombre"]);
+                }
 
                 taux = 0;
 
@@ -165,27 +178,26 @@ namespace SAE24
                 ligne["TauxReussite"] = taux;
 
                 bilan.Rows.Add(ligne);
+
             }
-            dataGridView2.DataSource = bilan;
+            afficherBilan(bilan);
 
-            foreach (DataGridViewRow row in dataGridView2.Rows)
+            if(dt6.Rows.Count == 0)
             {
-                if (row.IsNewRow) continue;
+                LblInfo.Text = "Aucun alien n'est capturable sur cette mission.";
+            }
+        }
 
-                double taux = Convert.ToDouble(row.Cells["TauxReussite"].Value);
+        private void afficherBilan(DataTable bilan)
+        {
+            FlpCaptures.Controls.Clear();
+            foreach(DataRow dr in bilan.Rows)
+            {
+                AfficherCaptureAlien capture = new AfficherCaptureAlien();
 
-                if (taux < 50)
-                {
-                    row.Cells["TauxReussite"].Style.BackColor = Color.LightCoral;
-                }
-                else if (taux < 80)
-                {
-                    row.Cells["TauxReussite"].Style.BackColor = Color.Orange;
-                }
-                else
-                {
-                    row.Cells["TauxReussite"].Style.BackColor = Color.Green;
-                }
+                capture.chargerDonnees(dr);
+
+                FlpCaptures.Controls.Add(capture);
             }
         }
 

@@ -555,8 +555,17 @@ namespace SAE24
             {
                 DataRow ligne;
                 ligne = MesDatas.DsGlobal.Tables["Depense"].NewRow();
-                ligne[0] = LblTitre.Text.Split(' ')[1];
-                ligne[1] = Convert.ToInt64(LblTitre.Text.Split(' ')[2]);
+
+                if (nomPlanete == "La 9ème planète")
+                {
+                    ligne[0] = LblTitre.Text.Split(' ')[1] + " " + LblTitre.Text.Split(' ')[2] + " " + LblTitre.Text.Split(' ')[3];
+                    ligne[1] = Convert.ToInt64(LblTitre.Text.Split(' ')[4]);
+                }
+                else
+                {
+                    ligne[0] = LblTitre.Text.Split(' ')[1];
+                    ligne[1] = Convert.ToInt64(LblTitre.Text.Split(' ')[2]);
+                }
                 ligne[2] = compteur;
                 ligne[3] = DtpDepense.Value.ToString("yyyy-MM-dd");
                 ligne[4] = TxtMontant.Text.ToString();
@@ -671,6 +680,7 @@ namespace SAE24
                     {
                         DataRow ligne = dt.NewRow();
                         ligne = MesDatas.DsGlobal.Tables["Capturer"].NewRow();
+
                         ligne["nomPlanete"] = LblTitre.Text.Split(' ')[1];
                         ligne["numeroMission"] = Convert.ToInt64(LblTitre.Text.Split(' ')[2]);
                         ligne["idEspeceEnnemi"] = CboCapturer.SelectedValue.ToString();
@@ -744,8 +754,17 @@ namespace SAE24
             {
                 DataRow ligne;
                 ligne = MesDatas.DsGlobal.Tables["JournalDeBord"].NewRow();
-                ligne[0] = LblTitre.Text.Split(' ')[1];
-                ligne[1] = Convert.ToInt64(LblTitre.Text.Split(' ')[2]);
+
+                if (nomPlanete == "La 9ème planète")
+                {
+                    ligne[0] = LblTitre.Text.Split(' ')[1] + " " + LblTitre.Text.Split(' ')[2] + " " + LblTitre.Text.Split(' ')[3];
+                    ligne[1] = Convert.ToInt64(LblTitre.Text.Split(' ')[4]);
+                }
+                else
+                {
+                    ligne[0] = LblTitre.Text.Split(' ')[1];
+                    ligne[1] = Convert.ToInt64(LblTitre.Text.Split(' ')[2]);
+                }
                 ligne[2] = DtpEvenement.Value.ToString("yyyy-MM-dd");
                 ligne[3] = RtbCommentaire.Text;
 

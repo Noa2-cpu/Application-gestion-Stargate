@@ -79,6 +79,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfficherCaptureAlien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AfficherCaptureAlien.Designer.cs">
+      <DependentUpon>AfficherCaptureAlien.cs</DependentUpon>
+    </Compile>
     <Compile Include="CaracteristiquesPlanete.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,6 +156,9 @@
     <Compile Include="RepertoireRaces.Designer.cs">
       <DependentUpon>RepertoireRaces.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AfficherCaptureAlien.resx">
+      <DependentUpon>AfficherCaptureAlien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CaracteristiquesPlanete.resx">
       <DependentUpon>CaracteristiquesPlanete.cs</DependentUpon>
     </EmbeddedResource>
