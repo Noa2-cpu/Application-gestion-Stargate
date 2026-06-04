@@ -61,8 +61,9 @@ namespace SAE24
                                              WHERE m.matricule NOT IN (SELECT co.matriculeMembre
 						                                               FROM Composer co
 						                                               JOIN Mission mi ON co.numeroMission = mi.numero
-						                                               WHERE '@dateDepart' <= mi.dateRetour
-						                                               AND '@dateRetour' >= mi.dateDepart);";
+                                                                       AND co.nomPlanete = mi.nomPlanete
+						                                               WHERE @dateDepart <= mi.dateRetour
+						                                               AND @dateRetour >= mi.dateDepart);";
             try
             {
                 SQLiteCommand cmd = new SQLiteCommand(remplirMilitaires1, Connexion.Connec);
@@ -91,6 +92,7 @@ namespace SAE24
                                          WHERE m.matricule NOT IN (SELECT co.matriculeMembre
 						                                           FROM Composer co
 						                                           JOIN Mission mi ON  co.numeroMission = mi.numero
+                                                                   AND co.nomPlanete = mi.nomPlanete
 						                                           WHERE @dateDepart <= mi.dateRetour
 						                                           AND @dateRetour >= mi.dateDepart);";
 
@@ -100,6 +102,7 @@ namespace SAE24
                                              WHERE m.matricule NOT IN (SELECT co.matriculeMembre
 						                                               FROM Composer co
 						                                               JOIN Mission mi ON co.numeroMission = mi.numero
+                                                                       AND co.nomPlanete = mi.nomPlanete
 						                                               WHERE @dateDepart <= mi.dateRetour
 						                                               AND @dateRetour >= mi.dateDepart);";
 
@@ -197,14 +200,17 @@ namespace SAE24
                             CboAliens.DisplayMember = "nomcomplet";
                             CboAliens.ValueMember = "ID";
                             CboAliens.Enabled = true;
+                            TxtNombreCapture.Enabled = true;
+                            LstAfficherAliens.Enabled = true;
                             BtnAjouterAliens.Enabled = true;
+                            BtnValiderObjectifs.Enabled = true;
                         }
                     }
                     catch (SQLiteException err)
                     {
                         MessageBox.Show(err.Message);
                     }
-
+                    BtnValider.Enabled = true;
                     errorProvider1.Clear();
                 }
             }
@@ -422,54 +428,67 @@ namespace SAE24
 
             errorProvider1.Clear();
 
-            if (!LstAfficherMembre.Items.Contains(membre))
+            string matriculeChef = CboChefMission.SelectedValue?.ToString();
+            string matriculeMembre = CboChoisirMembre.SelectedValue?.ToString();
+
+            if (matriculeMembre == matriculeChef)
             {
-                LstAfficherMembre.Items.Add(membre);
-
-                // Récupérer le matricule depuis l'élément sélectionné
-                string matricule = CboChoisirMembre.SelectedValue?.ToString();
-                if (!string.IsNullOrEmpty(matricule))
+                errorProvider1.SetError(CboChoisirMembre, "Le chef de mission ne peut pas être ajouté comme membre.");
+            }
+            else
+            {
+                if (!LstAfficherMembre.Items.Contains(membre))
                 {
-                    selectedMatricules.Add(matricule);
-                }
+                    LstAfficherMembre.Items.Add(membre);
 
-                // Supprimer la ligne correspondante du DataTable lié pour mettre à jour la ComboBox
-                if (dtMembres != null && CboChoisirMembre.SelectedItem is DataRowView drv)
-                {
-                    dtMembres.Rows.Remove(drv.Row);
-                }
-
-                int nbMaximum;
-
-                if (int.TryParse(TxtNbPersonne.Text, out nbMaximum))
-                {
-                    int nbActuel = LstAfficherMembre.Items.Count;
-
-                    int restant = nbMaximum - nbActuel;
-
-                    LblNbPersonnes.Text = "" + restant;
-
-                    if (restant <= 0)
+                    // Récupérer le matricule depuis l'élément sélectionné
+                    string matricule = CboChoisirMembre.SelectedValue?.ToString();
+                    if (!string.IsNullOrEmpty(matricule))
                     {
-                        CboChoisirMembre.Enabled = false;
-                        BtnAjouterMembre.Enabled = false;
-                        BtnValiderMembre.Enabled = true;
+                        selectedMatricules.Add(matricule);
+                    }
+
+                    foreach (DataRow row in dtMembres.Rows)
+                    {
+                        if (row["matricule"].ToString() == matricule)
+                        {
+                            dtMembres.Rows.Remove(row);
+                            break;
+                        }
+                    }
+
+                    int nbMaximum;
+
+                    if (int.TryParse(TxtNbPersonne.Text, out nbMaximum))
+                    {
+                        int nbActuel = LstAfficherMembre.Items.Count;
+
+                        int restant = nbMaximum - nbActuel;
+
+                        LblNbPersonnes.Text = "" + restant;
+
+                        if (restant <= 0)
+                        {
+                            CboChoisirMembre.Enabled = false;
+                            BtnAjouterMembre.Enabled = false;
+                            BtnValiderMembre.Enabled = true;
+                        }
+                        else
+                        {
+                            CboChoisirMembre.Enabled = true;
+                            BtnAjouterMembre.Enabled = true;
+                            BtnValiderMembre.Enabled = false;
+                        }
                     }
                     else
                     {
-                        CboChoisirMembre.Enabled = true;
-                        BtnAjouterMembre.Enabled = true;
-                        BtnValiderMembre.Enabled = false;
+                        LblNbPersonnes.Text = "Veuillez saisir un nombre valide.";
                     }
                 }
                 else
                 {
-                    LblNbPersonnes.Text = "Veuillez saisir un nombre valide.";
+                    errorProvider1.SetError(LstAfficherMembre, "Le membre est déjà sélectionné.");
                 }
-            }
-            else
-            {
-                errorProvider1.SetError(LstAfficherMembre, "Le membre est déjà sélectionné.");
             }
         }
 
@@ -516,7 +535,7 @@ namespace SAE24
                     return;
                 }
 
-                // Ajouter l'affichage
+                
                 LstAfficherAliens.Items.Add(affichage);
 
                 // Récupérer l'ID de l'alien et le stocker
@@ -531,7 +550,7 @@ namespace SAE24
                 {
                     dtAliens.Rows.Remove(drv.Row);
 
-                    // Si plus d'aliens disponibles, désactiver les contrôles liés
+                    
                     if (dtAliens.Rows.Count == 0)
                     {
                         CboAliens.DataSource = null;
@@ -555,6 +574,8 @@ namespace SAE24
 
         private void BtnFinirMission_Click(object sender, EventArgs e)
         {
+            bool valide = true;
+
             string ajouterMembreSQL = @"INSERT INTO Composer 
                                 (nomPlanete, numeroMission, matriculeMembre)
                                 VALUES
@@ -565,68 +586,88 @@ namespace SAE24
                                 VALUES
                                 (@planete, @numero, @idEspece, @objectif)";
 
-            SQLiteTransaction transaction = null;
-            try
+
+            if (BtnValiderObjectifs.Enabled == true && BtnValiderMembre.Enabled == true)
             {
-                transaction = Connexion.Connec.BeginTransaction();
+                MessageBox.Show("Veuillez finir de valider les membres de la mission ainsi que les objectifs de capture d'alien.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                valide = false;
+            }
+            else if(BtnValiderObjectifs.Enabled == true)
+            { 
+                MessageBox.Show("Veuillez finir de valider les objectifs de capture d'alien.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                valide = false;
+            }
+            else if (BtnValiderMembre.Enabled == true)
+            {
+                MessageBox.Show("Veuillez finir de valider les membres de la mission.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                valide = false;
 
-                // Insérer chaque matricule sélectionné précédemment
-                foreach (var matricule in selectedMatricules)
+            }
+
+            if (valide)
+            {
+                SQLiteTransaction transaction = null;
+                try
                 {
-                    SQLiteCommand cmdAjouterMembre = null;
-                    try
-                    {
-                        cmdAjouterMembre = new SQLiteCommand(ajouterMembreSQL, Connexion.Connec, transaction);
-                        cmdAjouterMembre.Parameters.AddWithValue("@planete", CboChoisirPlanete.Text);
-                        cmdAjouterMembre.Parameters.AddWithValue("@numero", currentNumeroMission.ToString());
-                        cmdAjouterMembre.Parameters.AddWithValue("@matricule", matricule);
-                        cmdAjouterMembre.ExecuteNonQuery();
-                    }
-                    finally
-                    {
-                        if (cmdAjouterMembre != null)
-                        {
-                            cmdAjouterMembre.Dispose();
-                        }
-                    }
-                }
+                    transaction = Connexion.Connec.BeginTransaction();
 
-                // Insérer les objectifs d'aliens
-                foreach (var idEspece in selectedAliens)
-                {
-                    // Récupérer la quantité de capture pour cette espèce depuis la liste d'affichage
-                    string quantite = "0";
-                    foreach (var item in LstAfficherAliens.Items)
+                    // Insérer chaque matricule sélectionné précédemment
+                    foreach (var matricule in selectedMatricules)
                     {
-                        // on compare sur l'affichage stocké ; adapter si nécessaire
-                        if (item.ToString().Contains(idEspece) || item.ToString().StartsWith(CboAliens.Text))
+                        SQLiteCommand cmdAjouterMembre = null;
+                        try
                         {
-                            var parts = item.ToString().Split(new string[] { " --> Objectif de captures : " }, StringSplitOptions.None);
-                            if (parts.Length > 1) quantite = parts[1];
-                            break;
+                            cmdAjouterMembre = new SQLiteCommand(ajouterMembreSQL, Connexion.Connec, transaction);
+                            cmdAjouterMembre.Parameters.AddWithValue("@planete", CboChoisirPlanete.Text);
+                            cmdAjouterMembre.Parameters.AddWithValue("@numero", currentNumeroMission.ToString());
+                            cmdAjouterMembre.Parameters.AddWithValue("@matricule", matricule);
+                            cmdAjouterMembre.ExecuteNonQuery();
+                        }
+                        finally
+                        {
+                            if (cmdAjouterMembre != null)
+                            {
+                                cmdAjouterMembre.Dispose();
+                            }
                         }
                     }
 
-                    SQLiteCommand cmdAjouterAlien = null;
-                    try
+                    // Insérer les objectifs d'aliens
+                    foreach (var idEspece in selectedAliens)
                     {
-                        cmdAjouterAlien = new SQLiteCommand(ajouterAliensSQL, Connexion.Connec, transaction);
-                        cmdAjouterAlien.Parameters.AddWithValue("@planete", CboChoisirPlanete.Text);
-                        cmdAjouterAlien.Parameters.AddWithValue("@numero", currentNumeroMission.ToString());
-                        cmdAjouterAlien.Parameters.AddWithValue("@idEspece", idEspece);
-                        cmdAjouterAlien.Parameters.AddWithValue("@objectif", quantite);
-                        cmdAjouterAlien.ExecuteNonQuery();
-                    }
-                    finally
-                    {
-                        if (cmdAjouterAlien != null)
+                        
+                        string quantite = "0";
+                        foreach (var item in LstAfficherAliens.Items)
                         {
-                            cmdAjouterAlien.Dispose();
+                            
+                            if (item.ToString().Contains(idEspece) || item.ToString().StartsWith(CboAliens.Text))
+                            {
+                                var parts = item.ToString().Split(new string[] { " --> Objectif de captures : " }, StringSplitOptions.None);
+                                if (parts.Length > 1) quantite = parts[1];
+                                break;
+                            }
+                        }
+
+                        SQLiteCommand cmdAjouterAlien = null;
+                        try
+                        {
+                            cmdAjouterAlien = new SQLiteCommand(ajouterAliensSQL, Connexion.Connec, transaction);
+                            cmdAjouterAlien.Parameters.AddWithValue("@planete", CboChoisirPlanete.Text);
+                            cmdAjouterAlien.Parameters.AddWithValue("@numero", currentNumeroMission.ToString());
+                            cmdAjouterAlien.Parameters.AddWithValue("@idEspece", idEspece);
+                            cmdAjouterAlien.Parameters.AddWithValue("@objectif", quantite);
+                            cmdAjouterAlien.ExecuteNonQuery();
+                        }
+                        finally
+                        {
+                            if (cmdAjouterAlien != null)
+                            {
+                                cmdAjouterAlien.Dispose();
+                            }
                         }
                     }
-                }
 
-                transaction.Commit();
+                    transaction.Commit();
                     MessageBox.Show("Mission finalisée et données insérées avec succès.");
 
                     // Demander à Form1 de se rafraîchir si présent
@@ -642,25 +683,26 @@ namespace SAE24
 
                     // Fermer ce formulaire pour revenir à l'application principale
                     this.Close();
-            }
-            catch (Exception ex)
-            {
-                if (transaction != null)
-                {
-                    try 
-                    { 
-                        transaction.Rollback(); 
-                    } 
-                    catch 
-                    { }
                 }
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                if (transaction != null)
+                catch (Exception ex)
                 {
-                    transaction.Dispose();
+                    if (transaction != null)
+                    {
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch
+                        { }
+                    }
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    if (transaction != null)
+                    {
+                        transaction.Dispose();
+                    }
                 }
             }
         }
@@ -668,6 +710,365 @@ namespace SAE24
         private void LblAfficherPlanete_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnAnnuler_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ChkMilitaire_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ChkMilitaire.Checked || ChkMilitaire.Checked && ChkCivil.Checked) 
+            {
+                
+                //remplir la combobox pour choisir les membres de la mission en deux temps : d'abord avec les civils puis avec les militaires.
+                string remplirCivils = @"SELECT m.nom || ' ' || m.prenom || ' - Civil : ' || c.Specialite AS nomcomplet, m.matricule AS matricule
+                                         FROM Membre m
+                                         JOIN Civil c ON m.matricule = c.matriculeMembre
+                                         WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                           FROM Composer co
+						                                           JOIN Mission mi ON  co.numeroMission = mi.numero
+                                                                   AND co.nomPlanete = mi.nomPlanete
+						                                           WHERE @dateDepart <= mi.dateRetour
+						                                           AND @dateRetour >= mi.dateDepart);";
+
+                string remplirMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - Militaire : ' || mi.grade AS nomcomplet, m.matricule as matricule
+                                             FROM Membre m
+                                             JOIN Militaire mi ON m.matricule = mi.matriculeMembre
+                                             WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                               FROM Composer co
+						                                               JOIN Mission mi ON co.numeroMission = mi.numero
+                                                                       AND co.nomPlanete = mi.nomPlanete
+						                                               WHERE @dateDepart <= mi.dateRetour
+						                                               AND @dateRetour >= mi.dateDepart);";
+
+                try
+                {
+                    SQLiteCommand cmd = new SQLiteCommand(remplirCivils, Connexion.Connec);
+                    SQLiteCommand cmd2 = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
+
+                    cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+                    cmd2.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                    cmd2.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
+                    dtMembres = new DataTable();
+
+                    dtMembres.Load(cmd.ExecuteReader());
+                    dtMembres.Load(cmd2.ExecuteReader());
+
+                    CboChoisirMembre.DataSource = dtMembres;
+                    CboChoisirMembre.DisplayMember = "nomcomplet";
+                    CboChoisirMembre.ValueMember = "matricule";
+
+                }
+                catch (SQLiteException err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
+            else
+            { 
+                string chargerMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - Militaire : ' || mi.grade AS nomcomplet, m.matricule as matricule
+                                           FROM Membre m                                           
+                                           JOIN Militaire mi ON m.matricule = mi.matriculeMembre
+                                           WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+                                                                     FROM Composer co
+                                                                     JOIN Mission mi ON co.numeroMission = mi.numero
+                                                                     AND co.nomPlanete = mi.nomPlanete
+                                                                     WHERE @dateDepart <= mi.dateRetour
+                                                                     AND @dateRetour >= mi.dateDepart) 
+                                                                     AND matricule LIKE 'M%'";
+
+                try
+                {
+                    SQLiteCommand cmd = new SQLiteCommand(chargerMilitaires, Connexion.Connec);
+
+                    cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
+                    dtMembres = new DataTable();
+
+                    dtMembres.Load(cmd.ExecuteReader());
+
+                    CboChoisirMembre.DataSource = dtMembres;
+                    CboChoisirMembre.DisplayMember = "nomcomplet";
+                    CboChoisirMembre.ValueMember = "matricule";
+
+                }
+                catch (SQLiteException err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
+        }
+
+        private void ChkCivil_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ChkCivil.Checked || ChkMilitaire.Checked && ChkCivil.Checked)
+            {
+
+                //remplir la combobox pour choisir les membres de la mission en deux temps : d'abord avec les civils puis avec les militaires.
+                string remplirCivils = @"SELECT m.nom || ' ' || m.prenom || ' - Civil : ' || c.Specialite AS nomcomplet, m.matricule AS matricule
+                                         FROM Membre m
+                                         JOIN Civil c ON m.matricule = c.matriculeMembre
+                                         WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                           FROM Composer co
+						                                           JOIN Mission mi ON  co.numeroMission = mi.numero
+                                                                   AND co.nomPlanete = mi.nomPlanete
+						                                           WHERE @dateDepart <= mi.dateRetour
+						                                           AND @dateRetour >= mi.dateDepart);";
+
+                string remplirMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - Militaire : ' || mi.grade AS nomcomplet, m.matricule as matricule
+                                             FROM Membre m
+                                             JOIN Militaire mi ON m.matricule = mi.matriculeMembre
+                                             WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                               FROM Composer co
+						                                               JOIN Mission mi ON co.numeroMission = mi.numero
+                                                                       AND co.nomPlanete = mi.nomPlanete
+						                                               WHERE @dateDepart <= mi.dateRetour
+						                                               AND @dateRetour >= mi.dateDepart);";
+
+                try
+                {
+                    SQLiteCommand cmd = new SQLiteCommand(remplirCivils, Connexion.Connec);
+                    SQLiteCommand cmd2 = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
+
+                    cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+                    cmd2.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                    cmd2.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
+                    dtMembres = new DataTable();
+
+                    dtMembres.Load(cmd.ExecuteReader());
+                    dtMembres.Load(cmd2.ExecuteReader());
+
+                    CboChoisirMembre.DataSource = dtMembres;
+                    CboChoisirMembre.DisplayMember = "nomcomplet";
+                    CboChoisirMembre.ValueMember = "matricule";
+
+                }
+                catch (SQLiteException err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
+            else 
+            {
+                string chargerCivils = @"SELECT m.nom || ' ' || m.prenom || ' - Civil : ' || c.Specialite AS nomcomplet, m.matricule AS matricule
+                                         FROM Membre m
+                                         JOIN Civil c ON m.matricule = c.matriculeMembre
+                                         WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                           FROM Composer co
+						                                           JOIN Mission mi ON  co.numeroMission = mi.numero
+                                                                   AND co.nomPlanete = mi.nomPlanete
+						                                           WHERE @dateDepart <= mi.dateRetour
+						                                           AND @dateRetour >= mi.dateDepart)
+                                                                   AND matricule LIKE 'C%'";
+
+                try
+                {
+                    SQLiteCommand cmd = new SQLiteCommand(chargerCivils, Connexion.Connec);
+
+                    cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
+                    dtMembres = new DataTable();
+
+                    dtMembres.Load(cmd.ExecuteReader());
+
+                    CboChoisirMembre.DataSource = dtMembres;
+                    CboChoisirMembre.DisplayMember = "nomcomplet";
+                    CboChoisirMembre.ValueMember = "matricule";
+
+                }
+                catch (SQLiteException err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
+        }
+
+        private void RdbCapitaine_CheckedChanged(object sender, EventArgs e)
+        {
+            string remplirMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - ' || mi.grade AS nomcomplet, m.matricule as matricule
+                                             FROM Membre m
+                                             JOIN Militaire mi ON m.matricule = mi.matriculeMembre
+                                             WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                               FROM Composer co
+						                                               JOIN Mission mi ON co.numeroMission = mi.numero
+                                                                       AND co.nomPlanete = mi.nomPlanete
+						                                               WHERE @dateDepart <= mi.dateRetour
+						                                               AND @dateRetour >= mi.dateDepart)
+                                                                       AND mi.grade = 'Capitaine';";
+
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
+
+                cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
+                dtMembres = new DataTable();
+
+                dtMembres.Load(cmd.ExecuteReader());
+
+                CboChefMission.DataSource = dtMembres;
+                CboChefMission.DisplayMember = "nomcomplet";
+                CboChefMission.ValueMember = "matricule";
+
+            }
+            catch (SQLiteException err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        private void RdbCommandant_CheckedChanged(object sender, EventArgs e)
+        {
+            string remplirMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - ' || mi.grade AS nomcomplet, m.matricule as matricule
+                                             FROM Membre m
+                                             JOIN Militaire mi ON m.matricule = mi.matriculeMembre
+                                             WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                               FROM Composer co
+						                                               JOIN Mission mi ON co.numeroMission = mi.numero
+                                                                       AND co.nomPlanete = mi.nomPlanete
+						                                               WHERE @dateDepart <= mi.dateRetour
+						                                               AND @dateRetour >= mi.dateDepart)
+                                                                       AND mi.grade = 'Commandant';";
+
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
+
+                cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
+                dtMembres = new DataTable();
+
+                dtMembres.Load(cmd.ExecuteReader());
+
+                CboChefMission.DataSource = dtMembres;
+                CboChefMission.DisplayMember = "nomcomplet";
+                CboChefMission.ValueMember = "matricule";
+
+            }
+            catch (SQLiteException err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        private void RdbLieutenant_CheckedChanged(object sender, EventArgs e)
+        {
+            string remplirMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - ' || mi.grade AS nomcomplet, m.matricule as matricule
+                                             FROM Membre m
+                                             JOIN Militaire mi ON m.matricule = mi.matriculeMembre
+                                             WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                               FROM Composer co
+						                                               JOIN Mission mi ON co.numeroMission = mi.numero
+                                                                       AND co.nomPlanete = mi.nomPlanete
+						                                               WHERE @dateDepart <= mi.dateRetour
+						                                               AND @dateRetour >= mi.dateDepart)
+                                                                       AND mi.grade = 'Lieutenant';";
+
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
+
+                cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
+                dtMembres = new DataTable();
+
+                dtMembres.Load(cmd.ExecuteReader());
+
+                CboChefMission.DataSource = dtMembres;
+                CboChefMission.DisplayMember = "nomcomplet";
+                CboChefMission.ValueMember = "matricule";
+
+            }
+            catch (SQLiteException err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        private void RdbLieuCol_CheckedChanged(object sender, EventArgs e)
+        {
+            string remplirMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - ' || mi.grade AS nomcomplet, m.matricule as matricule
+                                             FROM Membre m
+                                             JOIN Militaire mi ON m.matricule = mi.matriculeMembre
+                                             WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                               FROM Composer co
+						                                               JOIN Mission mi ON co.numeroMission = mi.numero
+                                                                       AND co.nomPlanete = mi.nomPlanete
+						                                               WHERE @dateDepart <= mi.dateRetour
+						                                               AND @dateRetour >= mi.dateDepart)
+                                                                       AND mi.grade = 'Lieutenant-colonel';";
+
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
+
+                cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
+                dtMembres = new DataTable();
+
+                dtMembres.Load(cmd.ExecuteReader());
+
+                CboChefMission.DataSource = dtMembres;
+                CboChefMission.DisplayMember = "nomcomplet";
+                CboChefMission.ValueMember = "matricule";
+
+            }
+            catch (SQLiteException err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        private void RdbColonel_CheckedChanged(object sender, EventArgs e)
+        {
+            string remplirMilitaires = @"SELECT m.nom || ' ' || m.prenom || ' - ' || mi.grade AS nomcomplet, m.matricule as matricule
+                                             FROM Membre m
+                                             JOIN Militaire mi ON m.matricule = mi.matriculeMembre
+                                             WHERE m.matricule NOT IN (SELECT co.matriculeMembre
+						                                               FROM Composer co
+						                                               JOIN Mission mi ON co.numeroMission = mi.numero
+                                                                       AND co.nomPlanete = mi.nomPlanete
+						                                               WHERE @dateDepart <= mi.dateRetour
+						                                               AND @dateRetour >= mi.dateDepart)
+                                                                       AND mi.grade = 'Colonel';";
+
+            try
+            {
+                SQLiteCommand cmd = new SQLiteCommand(remplirMilitaires, Connexion.Connec);
+
+                cmd.Parameters.AddWithValue("@dateDepart", DtpDepart.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@dateRetour", DtpRetour.Value.ToString("yyyy-MM-dd"));
+
+                dtMembres = new DataTable();
+
+                dtMembres.Load(cmd.ExecuteReader());
+
+                CboChefMission.DataSource = dtMembres;
+                CboChefMission.DisplayMember = "nomcomplet";
+                CboChefMission.ValueMember = "matricule";
+
+            }
+            catch (SQLiteException err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        private void BtnRetour_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -184,8 +184,8 @@ namespace SAE24
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Form RepertoirePlanete = new RepertoirePlanete();
-            RepertoirePlanete.ShowDialog();
+            Form repertoirePlanetes = new RepertoirePlanetes();
+            repertoirePlanetes.ShowDialog();
         }
     }
 }

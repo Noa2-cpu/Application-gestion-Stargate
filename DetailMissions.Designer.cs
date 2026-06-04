@@ -79,6 +79,12 @@
             this.DtpEvenement = new System.Windows.Forms.DateTimePicker();
             this.label16 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.LblResultat = new System.Windows.Forms.Label();
+            this.BtnMenu = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.BtnCapturer = new System.Windows.Forms.Button();
+            this.CboCapturer = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.GrpEscouade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbAfficherPlanete)).BeginInit();
@@ -199,7 +205,7 @@
             // PcbJournal
             // 
             this.PcbJournal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PcbJournal.Location = new System.Drawing.Point(554, 616);
+            this.PcbJournal.Location = new System.Drawing.Point(538, 616);
             this.PcbJournal.Name = "PcbJournal";
             this.PcbJournal.Size = new System.Drawing.Size(50, 48);
             this.PcbJournal.TabIndex = 9;
@@ -472,6 +478,7 @@
             this.BtnAnnulerDepense.TabIndex = 6;
             this.BtnAnnulerDepense.Text = "Annuler";
             this.BtnAnnulerDepense.UseVisualStyleBackColor = true;
+            this.BtnAnnulerDepense.Click += new System.EventHandler(this.BtnAnnulerDepense_Click);
             // 
             // TxtMontant
             // 
@@ -542,6 +549,7 @@
             this.BtnAnnulerEvenement.TabIndex = 6;
             this.BtnAnnulerEvenement.Text = "Annuler";
             this.BtnAnnulerEvenement.UseVisualStyleBackColor = true;
+            this.BtnAnnulerEvenement.Click += new System.EventHandler(this.BtnAnnulerEvenement_Click);
             // 
             // RtbCommentaire
             // 
@@ -582,12 +590,71 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // LblResultat
+            // 
+            this.LblResultat.AutoSize = true;
+            this.LblResultat.Location = new System.Drawing.Point(549, 186);
+            this.LblResultat.Name = "LblResultat";
+            this.LblResultat.Size = new System.Drawing.Size(0, 25);
+            this.LblResultat.TabIndex = 14;
+            // 
+            // BtnMenu
+            // 
+            this.BtnMenu.Location = new System.Drawing.Point(1161, 677);
+            this.BtnMenu.Name = "BtnMenu";
+            this.BtnMenu.Size = new System.Drawing.Size(92, 42);
+            this.BtnMenu.TabIndex = 15;
+            this.BtnMenu.Text = "Menu";
+            this.BtnMenu.UseVisualStyleBackColor = true;
+            this.BtnMenu.Click += new System.EventHandler(this.BtnMenu_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(221, 697);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(83, 30);
+            this.textBox1.TabIndex = 16;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // BtnCapturer
+            // 
+            this.BtnCapturer.Location = new System.Drawing.Point(448, 697);
+            this.BtnCapturer.Name = "BtnCapturer";
+            this.BtnCapturer.Size = new System.Drawing.Size(165, 23);
+            this.BtnCapturer.TabIndex = 17;
+            this.BtnCapturer.Text = "Ajouter une capture";
+            this.BtnCapturer.UseVisualStyleBackColor = true;
+            this.BtnCapturer.Click += new System.EventHandler(this.BtnCapturer_Click);
+            // 
+            // CboCapturer
+            // 
+            this.CboCapturer.FormattingEnabled = true;
+            this.CboCapturer.Location = new System.Drawing.Point(11, 697);
+            this.CboCapturer.Name = "CboCapturer";
+            this.CboCapturer.Size = new System.Drawing.Size(204, 33);
+            this.CboCapturer.TabIndex = 18;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(332, 702);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(95, 25);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "(Nombre)";
+            // 
             // DetailMissions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1267, 750);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.CboCapturer);
+            this.Controls.Add(this.BtnCapturer);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.BtnMenu);
+            this.Controls.Add(this.LblResultat);
             this.Controls.Add(this.GrpDepense);
             this.Controls.Add(this.GrpEvenement);
             this.Controls.Add(this.GrpContact);
@@ -681,5 +748,11 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox RtbExplication;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label LblResultat;
+        private System.Windows.Forms.Button BtnMenu;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button BtnCapturer;
+        private System.Windows.Forms.ComboBox CboCapturer;
+        private System.Windows.Forms.Label label13;
     }
 }

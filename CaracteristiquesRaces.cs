@@ -85,9 +85,12 @@ namespace SAE24
                 lblBienveilAgress.Text = type;
                 lblInfoSpecifique.Visible = false;
             }
-            
-            picRaceImage.Image = UniformiserTaille(Image.FromFile(cheminImage), picRaceImage.Size);
-            picRaceImage.SizeMode = PictureBoxSizeMode.CenterImage;
+            try
+            {
+                picRaceImage.Image = UniformiserTaille(Image.FromFile(cheminImage), picRaceImage.Size);
+                picRaceImage.SizeMode = PictureBoxSizeMode.CenterImage;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private Image UniformiserTaille(Image imageOriginale, Size tailleCarre)
         {
