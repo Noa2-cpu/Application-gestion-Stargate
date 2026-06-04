@@ -258,9 +258,9 @@
             // flpDepenses
             // 
             this.flpDepenses.AutoScroll = true;
-            this.flpDepenses.Location = new System.Drawing.Point(52, 45);
+            this.flpDepenses.Location = new System.Drawing.Point(52, 80);
             this.flpDepenses.Name = "flpDepenses";
-            this.flpDepenses.Size = new System.Drawing.Size(1134, 414);
+            this.flpDepenses.Size = new System.Drawing.Size(1134, 379);
             this.flpDepenses.TabIndex = 0;
             this.flpDepenses.Paint += new System.Windows.Forms.PaintEventHandler(this.flpDepenses_Paint);
             // 

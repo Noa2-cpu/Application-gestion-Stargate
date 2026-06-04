@@ -22,12 +22,12 @@ namespace MissionStats
         {
             InitializeComponent();
 
-            this.BudgetInitial = "Budget initial : " + budgetInitial;
+            this.BudgetInitial = "Budget initial : " + budgetInitial + " €";
             this.nomPlanete = nomPlanete;
-            this.BudgetActuel = "Budget actuel : " + budgetActuel;
+            this.BudgetActuel = "Budget actuel : " + budgetActuel + " €";
             this.nomImage = nomImage;
 
-            chargerInterface();
+            this.Load += (s, e) => chargerInterface();
 
 
         }
@@ -42,19 +42,35 @@ namespace MissionStats
 
         public void chargerInterface()
         {
-            lblBudgetActu.Text = this.budgetActuel;
+            // Nom de la mission centré avec retour à la ligne
+            lbNom.AutoSize = false;
+            lbNom.Width = this.Width - 10;
+            lbNom.Left = 5;
+            lbNom.Height = 50; // ← Hauteur fixe pour 2 lignes
+            lbNom.TextAlign = ContentAlignment.MiddleCenter;
+            lbNom.ForeColor = Color.White;
             lbNom.Text = this.nomPlanete;
+
+            // Budget initial avec retour à la ligne
+            lblBudgetIni.AutoSize = false;
+            lblBudgetIni.Width = this.Width - 10;
+            lblBudgetIni.MaximumSize = new Size(this.Width - 10, 0);
+            lblBudgetIni.AutoSize = true;
             lblBudgetIni.Text = this.budgetInitial;
-            this.lbNom.ForeColor = Color.White;
-            this.lbNom.AutoSize = false;
-            this.lbNom.TextAlign = ContentAlignment.MiddleCenter;
+
+            // Budget actuel avec retour à la ligne
+            lblBudgetActu.AutoSize = false;
+            lblBudgetActu.Width = this.Width - 10;
+            lblBudgetActu.MaximumSize = new Size(this.Width - 10, 0);
+            lblBudgetActu.AutoSize = true;
+            lblBudgetActu.Text = this.budgetActuel;
             this.Paint += MissionsStats_Paint;
-            if (img != string.Empty && System.IO.File.Exists(img))
+            if (nomImage != string.Empty && System.IO.File.Exists(NomImage))
             {
                 try
                 {
                     pcbPlanete.SizeMode = PictureBoxSizeMode.Zoom;
-                    pcbPlanete.Image = Image.FromFile(img);
+                    pcbPlanete.Image = Image.FromFile(NomImage);
                 }
                 catch
                 {

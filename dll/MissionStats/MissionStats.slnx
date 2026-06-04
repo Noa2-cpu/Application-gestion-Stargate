@@ -1,3 +1,8 @@
 <Solution>
-  <Project Path="../../../../../../OneDrive/Documents/Cours/S2/D21/SAE24/sae24 - Copie/dll/MissionStats/MissionStats.csproj" Id="697ff87d-3d59-4f22-a036-34de3b088304" />
+  <Folder Name="/Éléments de solution/">
+    <File Path="MissionStats.cs" />
+    <File Path="MissionStats.Designer.cs" />
+    <File Path="MissionStats.resx" />
+  </Folder>
+  <Project Path="MissionStats.csproj" Id="697ff87d-3d59-4f22-a036-34de3b088304" />
 </Solution>
