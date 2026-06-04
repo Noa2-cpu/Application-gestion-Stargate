@@ -42,21 +42,43 @@ namespace DepenseMission
         public void chargerInterface()
         {
             lblChef.Text = this.nomChef;
+
+            // Label nom mission centré avec retour à la ligne
+            lblNomMission.AutoSize = false;
+            lblNomMission.Height = 50;
+            lblNomMission.TextAlign = ContentAlignment.MiddleCenter;
             lblNomMission.Text = this.nomMission;
-            lblCommentaire.Text = this.commentaire;
-            this.lblNomMission.AutoSize = false;
-            this.lblNomMission.TextAlign = ContentAlignment.MiddleCenter;
+
+            // Label commentaire
             lblCommentaire.AutoSize = false;
-            lblCommentaire.Dock = DockStyle.Fill;  // ← Prend toute la place dans le GroupBox
+            lblCommentaire.Dock = DockStyle.Fill;
             lblCommentaire.MaximumSize = new Size(grpDepense.Width - 10, 0);
             lblCommentaire.AutoSize = true;
-            grpDepense.ForeColor = Color.White;
-            if (nomImage != string.Empty)
+            lblCommentaire.Text = this.commentaire;
+
+            this.Paint += DepenseMission_Paint;
+
+            if (nomImage != string.Empty && System.IO.File.Exists(nomImage))
             {
-                pcbImage.SizeMode = PictureBoxSizeMode.CenterImage;
-                pcbImage.SizeMode = PictureBoxSizeMode.Zoom;
-                pcbImage.Image = Image.FromFile(this.nomImage);
+                try
+                {
+                    pcbImage.SizeMode = PictureBoxSizeMode.Zoom;
+                    pcbImage.Image = Image.FromFile(this.nomImage);
+                }
+                catch
+                {
+                    pcbImage.Image = null;
+                }
             }
+        }
+
+        private void DepenseMission_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle,
+            Color.LightGoldenrodYellow, 2, ButtonBorderStyle.Solid,
+            Color.LightGoldenrodYellow, 2, ButtonBorderStyle.Solid,
+            Color.LightGoldenrodYellow, 2, ButtonBorderStyle.Solid,
+            Color.LightGoldenrodYellow, 2, ButtonBorderStyle.Solid);
         }
     }
 }

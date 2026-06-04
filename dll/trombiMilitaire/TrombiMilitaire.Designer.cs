@@ -36,28 +36,32 @@
             // lblNom
             // 
             this.lblNom.AutoSize = true;
-            this.lblNom.Location = new System.Drawing.Point(27, 99);
+            this.lblNom.Location = new System.Drawing.Point(47, 179);
+            this.lblNom.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblNom.Name = "lblNom";
-            this.lblNom.Size = new System.Drawing.Size(44, 16);
+            this.lblNom.Size = new System.Drawing.Size(79, 29);
             this.lblNom.TabIndex = 3;
             this.lblNom.Text = "label1";
             // 
             // pcbDuNom
             // 
-            this.pcbDuNom.Location = new System.Drawing.Point(19, 26);
+            this.pcbDuNom.Location = new System.Drawing.Point(33, 47);
+            this.pcbDuNom.Margin = new System.Windows.Forms.Padding(5);
             this.pcbDuNom.Name = "pcbDuNom";
-            this.pcbDuNom.Size = new System.Drawing.Size(63, 63);
+            this.pcbDuNom.Size = new System.Drawing.Size(110, 114);
             this.pcbDuNom.TabIndex = 2;
             this.pcbDuNom.TabStop = false;
             // 
             // TrombiMilitaire
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lblNom);
             this.Controls.Add(this.pcbDuNom);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "TrombiMilitaire";
-            this.Size = new System.Drawing.Size(101, 141);
+            this.Size = new System.Drawing.Size(177, 290);
             ((System.ComponentModel.ISupportInitialize)(this.pcbDuNom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

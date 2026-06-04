@@ -49,6 +49,10 @@ namespace SAE24
             tbcStats.DrawMode = TabDrawMode.OwnerDrawFixed;
             tbcStats.DrawItem += tabControl1_DrawItem;
 
+
+
+            //chargement cboMilitaire
+
             string sql = @"SELECT DISTINCT m.matricule, m.nom || ' ' || m.prenom as NomPrenom
                    FROM Membre m
                    JOIN Mission mis ON m.matricule = mis.matriculeChef";
@@ -61,6 +65,25 @@ namespace SAE24
             {
                 cboMilitaire.Items.Add(dr.GetString(1));
             }
+
+            //chargement cboMission
+
+            string sql2 = "SELECT nomPlanete, numero, " +
+                 "nomPlanete || numero AS NomMission " +
+                 "FROM Mission ORDER BY nomPlanete";
+
+            SQLiteDataAdapter da = new SQLiteDataAdapter(sql2, Connexion.Connec);
+
+            if (MesDatas.DsGlobal.Tables.Contains("MissionsCombo"))
+            {
+                MesDatas.DsGlobal.Tables["MissionsCombo"].Clear();
+            }
+
+            da.Fill(MesDatas.DsGlobal, "MissionsCombo");
+
+            cboMissions.DataSource = MesDatas.DsGlobal.Tables["MissionsCombo"];
+            cboMissions.DisplayMember = "NomMission";
+            cboMissions.ValueMember = "numero";
 
             listeMissionPlanete();
             ListeDepense();
@@ -308,6 +331,63 @@ namespace SAE24
 
         private void ListeInformateur()
         {
+            DataRowView rowSelected = (DataRowView)cboMissions.SelectedItem;
+            string nomPlanete = rowSelected["nomPlanete"].ToString();
+            int numeroMission = Convert.ToInt32(rowSelected["numero"]);
+
+            string sql = "SELECT i.nomCode AS NomCode, " +
+                         "e.nom AS Espece, " +
+                         "e.couleur AS Couleur, " +
+                         "SUM(c.sommeVersee) AS SommeTotale " +
+                         "FROM Informateur i " +
+                         "JOIN Contact c ON i.nomCode = c.nomCodeInformateur " +
+                         "JOIN Ennemi en ON i.idEspeceEnnemi = en.idEspece " +
+                         "JOIN Espece e ON en.idEspece = e.id " +
+                         "WHERE c.nomPlanete = @nomPlanete AND c.numeroMission = @numeroMission " +
+                         "GROUP BY i.nomCode, e.nom, e.couleur " +
+                         "HAVING SUM(c.sommeVersee) = ( " +
+                         "    SELECT MIN(total) " +
+                         "    FROM ( " +
+                         "        SELECT SUM(sommeVersee) AS total " +
+                         "        FROM Contact " +
+                         "        WHERE nomPlanete = @nomPlanete AND numeroMission = @numeroMission " +
+                         "        GROUP BY nomCodeInformateur " +
+                         "    ) " +
+                         ") " +
+                         "ORDER BY i.nomCode";
+
+            SQLiteCommand cmd = new SQLiteCommand(sql, Connexion.Connec);
+            cmd.Parameters.AddWithValue("@nomPlanete", nomPlanete);
+            cmd.Parameters.AddWithValue("@numeroMission", numeroMission);
+
+            SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
+
+            if (MesDatas.DsGlobal.Tables.Contains("StatInformateurs"))
+                MesDatas.DsGlobal.Tables["StatInformateurs"].Clear();
+
+            da.Fill(MesDatas.DsGlobal, "StatInformateurs");
+
+            if (MesDatas.DsGlobal.Tables["StatInformateurs"].Rows.Count == 0)
+            {
+                MessageBox.Show("Aucun informateur pour cette mission !");
+                return;
+            }
+
+            flpInformateur.Controls.Clear();
+
+            foreach (DataRow row in MesDatas.DsGlobal.Tables["StatInformateurs"].Rows)
+            {
+                string nomCode = row["NomCode"].ToString();
+                string espece = row["Espece"].ToString();
+                string somme = row["SommeTotale"].ToString();
+                string couleur = row["Couleur"].ToString(); 
+                string img = @"..\..\img\alien\" + couleur + ".jpg";
+
+                InformateurStats.InformateurStats uc = new InformateurStats.InformateurStats(nomCode, espece, somme, img);
+                UIStyle.Apply(uc);
+                flpInformateur.Controls.Add(uc);
+                
+            }
 
         }
 
@@ -404,6 +484,11 @@ namespace SAE24
         private void pcbLogo_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnValiderMission_Click(object sender, EventArgs e)
+        {
+            ListeInformateur();
         }
     }
 }

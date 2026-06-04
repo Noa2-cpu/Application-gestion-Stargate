@@ -48,16 +48,30 @@ namespace MissionStats
             this.lbNom.ForeColor = Color.White;
             this.lbNom.AutoSize = false;
             this.lbNom.TextAlign = ContentAlignment.MiddleCenter;
-            if (nomImage != string.Empty)
+            this.Paint += MissionsStats_Paint;
+            if (img != string.Empty && System.IO.File.Exists(img))
             {
-                pcbPlanete.SizeMode = PictureBoxSizeMode.CenterImage;
-                pcbPlanete.SizeMode = PictureBoxSizeMode.Zoom;
-                pcbPlanete.Image = Image.FromFile(this.nomImage);
+                try
+                {
+                    pcbPlanete.SizeMode = PictureBoxSizeMode.Zoom;
+                    pcbPlanete.Image = Image.FromFile(img);
+                }
+                catch
+                {
+                    pcbPlanete.Image = null;
+                }
             }
         }
 
+        private void MissionsStats_Paint(object sender, PaintEventArgs e)
+        {
+                ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle,
+                Color.LightGoldenrodYellow, 2, ButtonBorderStyle.Solid,
+                Color.LightGoldenrodYellow, 2, ButtonBorderStyle.Solid,
+                Color.LightGoldenrodYellow, 2, ButtonBorderStyle.Solid,
+                Color.LightGoldenrodYellow, 2, ButtonBorderStyle.Solid);
+        }
 
 
-    
     }
 }

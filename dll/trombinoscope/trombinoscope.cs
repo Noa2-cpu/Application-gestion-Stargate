@@ -67,7 +67,7 @@ namespace Trombinoscope
             this.lblNom.Width = this.Width - 10;
             this.lblNom.Height = 30;
             this.lblNom.Left = 5;
-            this.lblNom.Top = this.Height - 35;
+            this.lblNom.Top = this.Height - 25;
             this.lblNom.TextAlign = ContentAlignment.MiddleCenter;
             if (img != string.Empty)
             {

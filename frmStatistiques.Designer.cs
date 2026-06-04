@@ -46,6 +46,10 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.flpDepenses = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cboMissions = new System.Windows.Forms.ComboBox();
+            this.btnReinitialiserMission = new System.Windows.Forms.Button();
+            this.btnValiderMission = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.flpInformateur = new System.Windows.Forms.FlowLayoutPanel();
             this.btnRetour = new System.Windows.Forms.Button();
@@ -60,6 +64,7 @@
             this.tabPage4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,7 +116,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1337, 583);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Liste Militaire";
+            this.tabPage1.Text = "  Liste Militaire  ";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // groupBox1
@@ -180,7 +185,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1337, 583);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Budget Initiaux/Actuels";
+            this.tabPage2.Text = "   Budget Initiaux/Actuels   ";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // grpMission
@@ -213,7 +218,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(1337, 583);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Nombre De Missions / Planète";
+            this.tabPage3.Text = "   Nombre De Missions / Planète   ";
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
             // groupBox2
@@ -236,7 +241,7 @@
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(1337, 583);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Liste de dépense les plus élevé";
+            this.tabPage4.Text = "   Liste de dépense les plus élevé   ";
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
             // groupBox3
@@ -262,6 +267,7 @@
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.Black;
+            this.tabPage5.Controls.Add(this.groupBox5);
             this.tabPage5.Controls.Add(this.groupBox4);
             this.tabPage5.ForeColor = System.Drawing.Color.Black;
             this.tabPage5.Location = new System.Drawing.Point(4, 34);
@@ -269,15 +275,59 @@
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(1337, 583);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Liste des informateurs les moins payés";
+            this.tabPage5.Text = "   Liste des informateurs les moins payés   ";
             this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.cboMissions);
+            this.groupBox5.Controls.Add(this.btnReinitialiserMission);
+            this.groupBox5.Controls.Add(this.btnValiderMission);
+            this.groupBox5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox5.Location = new System.Drawing.Point(25, 20);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(1289, 121);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Liste des missions";
+            // 
+            // cboMissions
+            // 
+            this.cboMissions.FormattingEnabled = true;
+            this.cboMissions.Location = new System.Drawing.Point(45, 55);
+            this.cboMissions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cboMissions.Name = "cboMissions";
+            this.cboMissions.Size = new System.Drawing.Size(598, 33);
+            this.cboMissions.TabIndex = 1;
+            this.cboMissions.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboMilitaire_KeyPress);
+            // 
+            // btnReinitialiserMission
+            // 
+            this.btnReinitialiserMission.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnReinitialiserMission.Location = new System.Drawing.Point(1008, 38);
+            this.btnReinitialiserMission.Name = "btnReinitialiserMission";
+            this.btnReinitialiserMission.Size = new System.Drawing.Size(210, 40);
+            this.btnReinitialiserMission.TabIndex = 3;
+            this.btnReinitialiserMission.Text = "Réinitialiser";
+            this.btnReinitialiserMission.UseVisualStyleBackColor = true;
+            // 
+            // btnValiderMission
+            // 
+            this.btnValiderMission.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnValiderMission.Location = new System.Drawing.Point(746, 38);
+            this.btnValiderMission.Name = "btnValiderMission";
+            this.btnValiderMission.Size = new System.Drawing.Size(210, 40);
+            this.btnValiderMission.TabIndex = 2;
+            this.btnValiderMission.Text = "Valider";
+            this.btnValiderMission.UseVisualStyleBackColor = true;
+            this.btnValiderMission.Click += new System.EventHandler(this.btnValiderMission_Click);
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.flpInformateur);
-            this.groupBox4.Location = new System.Drawing.Point(53, 40);
+            this.groupBox4.Location = new System.Drawing.Point(25, 169);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1236, 506);
+            this.groupBox4.Size = new System.Drawing.Size(1289, 377);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Informateur";
@@ -285,9 +335,9 @@
             // 
             // flpInformateur
             // 
-            this.flpInformateur.Location = new System.Drawing.Point(35, 45);
+            this.flpInformateur.Location = new System.Drawing.Point(18, 74);
             this.flpInformateur.Name = "flpInformateur";
-            this.flpInformateur.Size = new System.Drawing.Size(1168, 434);
+            this.flpInformateur.Size = new System.Drawing.Size(1244, 270);
             this.flpInformateur.TabIndex = 0;
             this.flpInformateur.Paint += new System.Windows.Forms.PaintEventHandler(this.flpInformateur_Paint);
             // 
@@ -327,6 +377,7 @@
             this.tabPage4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -354,5 +405,9 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.FlowLayoutPanel flpDepenses;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ComboBox cboMissions;
+        private System.Windows.Forms.Button btnReinitialiserMission;
+        private System.Windows.Forms.Button btnValiderMission;
     }
 }
