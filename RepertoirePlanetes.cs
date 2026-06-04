@@ -86,5 +86,10 @@ namespace SAE24
                 bordGauche += ucPageInfo.Width + 30;
             }
         }
+
+        private void btnRetour_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
