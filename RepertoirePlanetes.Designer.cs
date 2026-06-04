@@ -30,13 +30,14 @@
         {
             this.grpRepertoirePlanete = new System.Windows.Forms.GroupBox();
             this.pnlAffichagePlanete = new System.Windows.Forms.Panel();
+            this.btnRetour = new System.Windows.Forms.Button();
             this.grpRepertoirePlanete.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpRepertoirePlanete
             // 
             this.grpRepertoirePlanete.Controls.Add(this.pnlAffichagePlanete);
-            this.grpRepertoirePlanete.Location = new System.Drawing.Point(32, 23);
+            this.grpRepertoirePlanete.Location = new System.Drawing.Point(26, 12);
             this.grpRepertoirePlanete.Name = "grpRepertoirePlanete";
             this.grpRepertoirePlanete.Size = new System.Drawing.Size(750, 404);
             this.grpRepertoirePlanete.TabIndex = 0;
@@ -51,11 +52,22 @@
             this.pnlAffichagePlanete.Size = new System.Drawing.Size(744, 385);
             this.pnlAffichagePlanete.TabIndex = 0;
             // 
+            // btnRetour
+            // 
+            this.btnRetour.Location = new System.Drawing.Point(701, 422);
+            this.btnRetour.Name = "btnRetour";
+            this.btnRetour.Size = new System.Drawing.Size(75, 23);
+            this.btnRetour.TabIndex = 1;
+            this.btnRetour.Text = "Retour";
+            this.btnRetour.UseVisualStyleBackColor = true;
+            this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
+            // 
             // RepertoirePlanetes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.grpRepertoirePlanete);
             this.Name = "RepertoirePlanetes";
             this.Text = "Répertoire des planetes";
@@ -69,5 +81,6 @@
 
         private System.Windows.Forms.GroupBox grpRepertoirePlanete;
         private System.Windows.Forms.Panel pnlAffichagePlanete;
+        private System.Windows.Forms.Button btnRetour;
     }
 }
