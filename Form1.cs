@@ -23,117 +23,90 @@ namespace SAE24
             try
             {            
                 RefreshMissions();
+                
             }
             catch (SQLiteException err)
             {
                 MessageBox.Show(err.Message);
             }
-                string sql = @"SELECT m.nomPlanete, mi.nom || ' ' || mi.prenom AS chef, m.dateDepart, m.dateRetour, m.budget, m.numero
-                               FROM Mission m
-                               JOIN Membre mi ON mi.matricule = m.matriculeChef
-                               ORDER BY m.nomPlanete";
-                RefreshMissions();
-            }
-            catch (SQLiteException err)
-            {
-                MessageBox.Show(err.Message);
-            }
+                
+             RefreshMissions();
+            
         }
 
         // Méthode publique pour recharger l'affichage des missions
         public void RefreshMissions()
         {
-            string sql = @"SELECT m.nomPlanete, mi.nom || ' ' || mi.prenom, dateDepart, dateRetour, budget, m.numero FROM Mission m
-                                JOIN Composer c ON m.numero = c.numeroMission
-                                JOIN Membre mi ON mi.matricule = c.matriculeMembre 
-                                WHERE m.matriculeChef = matricule
-                                ORDER BY 1;";
-
+            string sql = @"SELECT m.nomPlanete, mi.nom || ' ' || mi.prenom AS chef, m.dateDepart, m.dateRetour, m.budget, m.numero
+                               FROM Mission m
+                               JOIN Membre mi ON mi.matricule = m.matriculeChef
+                               ORDER BY m.nomPlanete";
             SQLiteDataReader dr;
             SQLiteCommand cmd = new SQLiteCommand(sql, Connexion.Connec);
             dr = cmd.ExecuteReader();
-                SQLiteDataReader dr;
-                    SQLiteCommand cmd = new SQLiteCommand(sql, Connexion.Connec);
-                    dr = cmd.ExecuteReader();
-
-            flowLayoutPanel1.Controls.Clear();
 
             int x = 337;
             int y = 26;
+            int i = 0;
             while (dr.Read())
             {
                 string nom = dr.GetString(0);
+                string nomMission = dr.GetString(0) + dr.GetInt16(5);
                 string chef = dr.GetString(1);
-                string depart = dr.GetString(2);
-                string retour = dr.GetString(3);
-                string budget = dr.GetInt32(4).ToString();
-                int numero = dr.GetInt32(5);
+                string departBrut = dr[2].ToString();
+                string depart;
+                string retourBrut = dr[3].ToString();
+                int numero = dr.GetInt16(5);
+                string retour;
                 string img = @"..\..\img\" + nom + ".jpg";
-                int x = 337;
-                int y = 26;
-                int i = 0;
-                while (dr.Read())
+                
+
+                if (DateTime.TryParse(departBrut, out DateTime dep))
                 {
+                    depart = dep.ToString("dd/MM/yyyy");
+                }
+                else
+                {
+                    depart = departBrut;
+                }
 
-                    string nom = dr.GetString(0) + dr.GetInt16(5);
-                    string chef = dr.GetString(1);
-                    string departBrut = dr[2].ToString();
-                    string depart;
-                    string retourBrut = dr[3].ToString();
-                    string retour;
+                if (DateTime.TryParse(retourBrut, out DateTime reto))
+                {
+                    retour = reto.ToString("dd/MM/yyyy");
+                }
+                else
+                {
+                    retour = retourBrut;
+                }
 
-                    if (DateTime.TryParse(departBrut, out DateTime dep))
-                    {
-                        depart = dep.ToString("dd/MM/yyyy");
-                    }
-                    else
-                    {
-                        depart = departBrut;
-                    }
+                string budget = dr.GetInt32(4).ToString();
 
-                    if (DateTime.TryParse(retourBrut, out DateTime reto))
-                    {
-                        retour = reto.ToString("dd/MM/yyyy");
-                    }
-                    else
-                    {
-                        retour = retourBrut;
-                    }
-
-                    string budget = dr.GetInt32(4).ToString();
-                    string img = @"..\..\img\" + dr.GetString(0) +".jpg";
-
-                    DateTime dateRetour = Convert.ToDateTime(retourBrut);
-                    DateTime dateDepart = Convert.ToDateTime(departBrut);
-                    DateTime aujourdHui = DateTime.Today;
-                    Color color;
-                    if (dateRetour > aujourdHui && dateDepart < aujourdHui)
-                    {
-                        color = Color.DarkGreen;
-                    }
-                    else if (dateRetour < aujourdHui)
-                    {
-                        color = Color.DarkGray;
-                    }
-                    else
-                    {
-                        color = Color.DarkBlue;
-                    }
-
-
-
-                listeMission lstMission = new listeMission(budget, nom, depart, retour, chef, img);
+                DateTime dateRetour = Convert.ToDateTime(retourBrut);
+                DateTime dateDepart = Convert.ToDateTime(departBrut);
+                DateTime aujourdHui = DateTime.Today;
+                Color color;
+                if (dateRetour > aujourdHui && dateDepart < aujourdHui)
+                {
+                    color = Color.FromArgb(0, 3, 63);
+                }
+                else if (dateRetour < aujourdHui)
+                {
+                    color = Color.FromArgb(50, 50, 50); 
+                }
+                else
+                {
+                    color = Color.FromArgb(0, 60, 39); 
+                }
+                listeMission lstMission = new listeMission(budget, nomMission, depart, retour, chef, img, color);
                 lstMission.Location = new System.Drawing.Point(x, y);
-                // stocker les informations essentielles dans le Tag pour pouvoir les récupérer
                 lstMission.Tag = Tuple.Create(nom, numero);
-                flowLayoutPanel1.Controls.Add(lstMission);
+                flpMissions.Controls.Add(lstMission);
                 lstMission.afficheur = detailMission;
-                    listeMission lstMission = new listeMission(budget, nom, depart, retour, chef, img, color);
-                    lstMission.Location = new System.Drawing.Point(x, y);
-                    flowLayoutPanel1.Controls.Add(lstMission);
-                    lstMission.afficheur = detailMission;
+                UIStyle.ApplySansBackground(lstMission);
 
                 y += 100;
+                i++;
+
             }
 
             InitialiserDataSet();
@@ -144,6 +117,9 @@ namespace SAE24
 
             da.Fill(MesDatas.DsGlobal, "Mission");
         }
+
+
+
 
         private void InitialiserDataSet()
         {
