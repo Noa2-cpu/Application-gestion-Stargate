@@ -37,7 +37,7 @@
             // grpRepertoirePlanete
             // 
             this.grpRepertoirePlanete.Controls.Add(this.pnlAffichagePlanete);
-            this.grpRepertoirePlanete.Location = new System.Drawing.Point(26, 12);
+            this.grpRepertoirePlanete.Location = new System.Drawing.Point(25, 12);
             this.grpRepertoirePlanete.Name = "grpRepertoirePlanete";
             this.grpRepertoirePlanete.Size = new System.Drawing.Size(750, 404);
             this.grpRepertoirePlanete.TabIndex = 0;
@@ -54,7 +54,7 @@
             // 
             // btnRetour
             // 
-            this.btnRetour.Location = new System.Drawing.Point(701, 422);
+            this.btnRetour.Location = new System.Drawing.Point(697, 422);
             this.btnRetour.Name = "btnRetour";
             this.btnRetour.Size = new System.Drawing.Size(75, 23);
             this.btnRetour.TabIndex = 1;
