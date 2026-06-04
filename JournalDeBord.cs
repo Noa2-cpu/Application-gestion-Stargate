@@ -119,7 +119,14 @@ namespace SAE24
             bilan.Columns.Add("NbCaptures", typeof(int));
             bilan.Columns.Add("TauxReussite", typeof(string));
 
-            MesDatas.DsGlobal.Tables.Add(bilan);
+            try
+            {
+                MesDatas.DsGlobal.Tables.Add(bilan);
+            } 
+            catch(Exception ex) 
+            { 
+                MessageBox.Show(ex.Message);
+            }
 
             string captureTout = @"SELECT
                               es.nom,
@@ -174,6 +181,11 @@ namespace SAE24
 
             }
             afficherBilan(bilan);
+
+            if(dt6.Rows.Count == 0)
+            {
+                LblInfo.Text = "Aucun alien n'est capturable sur cette mission.";
+            }
         }
 
         private void afficherBilan(DataTable bilan)

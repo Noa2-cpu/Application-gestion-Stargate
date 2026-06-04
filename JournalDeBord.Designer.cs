@@ -48,6 +48,7 @@
             this.BtnQuitter = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.FlpCaptures = new System.Windows.Forms.FlowLayoutPanel();
+            this.LblInfo = new System.Windows.Forms.Label();
             this.GrpJournal.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.GrpContactRendu.SuspendLayout();
@@ -55,6 +56,7 @@
             this.GrpDepenses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvDepenses)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.FlpCaptures.SuspendLayout();
             this.SuspendLayout();
             // 
             // GrpJournal
@@ -253,11 +255,21 @@
             // FlpCaptures
             // 
             this.FlpCaptures.AutoScroll = true;
+            this.FlpCaptures.Controls.Add(this.LblInfo);
             this.FlpCaptures.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FlpCaptures.Location = new System.Drawing.Point(3, 26);
             this.FlpCaptures.Name = "FlpCaptures";
             this.FlpCaptures.Size = new System.Drawing.Size(433, 164);
             this.FlpCaptures.TabIndex = 0;
+            // 
+            // LblInfo
+            // 
+            this.LblInfo.AutoSize = true;
+            this.LblInfo.Location = new System.Drawing.Point(3, 0);
+            this.LblInfo.Name = "LblInfo";
+            this.LblInfo.Size = new System.Drawing.Size(17, 25);
+            this.LblInfo.TabIndex = 0;
+            this.LblInfo.Text = " ";
             // 
             // GrpContact
             // 
@@ -286,6 +298,8 @@
             this.GrpDepenses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvDepenses)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.FlpCaptures.ResumeLayout(false);
+            this.FlpCaptures.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,5 +327,6 @@
         private System.Windows.Forms.Button BtnQuitter;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.FlowLayoutPanel FlpCaptures;
+        private System.Windows.Forms.Label LblInfo;
     }
 }
