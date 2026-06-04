@@ -83,13 +83,8 @@ namespace SAE24
 
                 pnlAffichagePlanete.Controls.Add(ucPageInfo);
 
-                bordGauche += ucPageInfo.Width;
+                bordGauche += ucPageInfo.Width + 30;
             }
-        }
-
-        private void btnRetour_Click(object sender, EventArgs e)
-        {
-           this.Close();
         }
     }
 }
