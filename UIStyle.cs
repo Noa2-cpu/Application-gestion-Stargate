@@ -100,6 +100,23 @@ namespace SAE24
             ApplyToControls(form.Controls);
         }
 
+        public static void ApplySansBackground(Control control)
+        {
+            control.ForeColor = ForeColor;
+            control.Font = MainFont;
+
+            ApplyToControls(control.Controls);
+        }
+
+        public static void Apply(Control control)
+        {
+            control.BackColor = BackgroundColor;
+            control.ForeColor = ForeColor;
+            control.Font = MainFont;
+
+            ApplyToControls(control.Controls);
+        }
+
         private static void ApplyToControls(Control.ControlCollection controls)
         {
             foreach (Control c in controls)
